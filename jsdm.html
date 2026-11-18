@@ -1,0 +1,4786 @@
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>JSDMCRM – All-in-One CRM for Modern Business</title>
+    <meta name="description" content="JSDMCRM combines lead management, invoicing, GPS tracking, helpdesk and more. The ultimate CRM for growing businesses.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ═══════════════════════════════════════
+   ROOT TOKENS
+═══════════════════════════════════════ */
+        :root {
+            --white: #ffffff;
+            --off-white: #f9f8f5;
+            --cream: #f4f1ea;
+            --page-bg: #fafaf8;
+            --ink: #0d0d0d;
+            --ink-2: #2a2a2a;
+            --ink-3: #4a4a4a;
+            --muted: #8a8a8a;
+            --muted-lt: #c4c4c4;
+            --border: #e8e5de;
+            --border-dk: #d0cbc0;
+
+            --blue: #1855f4;
+            --blue-lt: #e8effe;
+            --blue-mid: #c5d3fb;
+            --blue-dk: #1240d4;
+            --cyan: #00bfad;
+            --cyan-lt: #e0f7f4;
+            --orange: #f5521a;
+            --orange-lt: #fef0ea;
+            --orange-dk: #d93e08;
+            --green: #16a34a;
+            --green-lt: #dcfce7;
+            --gold: #e8a014;
+            --gold-lt: #fef7e0;
+            --purple: #7c3aed;
+            --purple-lt: #f3f0fe;
+            --pink: #db2777;
+            --pink-lt: #fde9f4;
+            --red: #dc2626;
+            --red-lt: #fee2e2;
+
+            --shadow-xs: 0 1px 3px rgba(0, 0, 0, .06), 0 1px 2px rgba(0, 0, 0, .04);
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, .06), 0 2px 4px rgba(0, 0, 0, .04);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, .08), 0 4px 8px rgba(0, 0, 0, .04);
+            --shadow-lg: 0 24px 60px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .05);
+            --shadow-xl: 0 40px 100px rgba(0, 0, 0, .12), 0 16px 32px rgba(0, 0, 0, .06);
+            --shadow-blue: 0 16px 48px rgba(24, 85, 244, .2);
+            --shadow-orange: 0 16px 48px rgba(245, 82, 26, .2);
+
+            --r-sm: 8px;
+            --r-md: 14px;
+            --r-lg: 20px;
+            --r-xl: 28px;
+            --r-2xl: 40px;
+        }
+
+        /* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px
+        }
+
+        body {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            background: var(--page-bg);
+            color: var(--ink);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            line-height: 1.1;
+            color: var(--ink)
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block
+        }
+
+        ul {
+            list-style: none
+        }
+
+        button {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            cursor: pointer
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--off-white)
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--blue);
+            border-radius: 10px
+        }
+
+        /* ═══════════════════════════════════════
+   LAYOUT UTILITIES
+═══════════════════════════════════════ */
+        .wrap {
+            width: 92%;
+            max-width: 1240px;
+            margin: 0 auto
+        }
+
+        .section {
+            padding: 110px 0
+        }
+
+        .section-sm {
+            padding: 70px 0
+        }
+
+        .tc {
+            text-align: center
+        }
+
+        .flex {
+            display: flex
+        }
+
+        .fc {
+            flex-direction: column
+        }
+
+        .ac {
+            align-items: center
+        }
+
+        .jc {
+            justify-content: center
+        }
+
+        .gap-1 {
+            gap: .5rem
+        }
+
+        .gap-2 {
+            gap: 1rem
+        }
+
+        .gap-3 {
+            gap: 1.5rem
+        }
+
+        .gap-4 {
+            gap: 2rem
+        }
+
+        /* ═══════════════════════════════════════
+   TYPOGRAPHY SYSTEM
+═══════════════════════════════════════ */
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--blue);
+            background: var(--blue-lt);
+            padding: 5px 15px;
+            border-radius: 50px;
+            margin-bottom: 1.2rem;
+        }
+
+        .eyebrow i {
+            font-size: .65rem
+        }
+
+        .eyebrow.orange {
+            color: var(--orange);
+            background: var(--orange-lt)
+        }
+
+        .eyebrow.cyan {
+            color: var(--cyan);
+            background: var(--cyan-lt)
+        }
+
+        .eyebrow.green {
+            color: var(--green);
+            background: var(--green-lt)
+        }
+
+        .eyebrow.purple {
+            color: var(--purple);
+            background: var(--purple-lt)
+        }
+
+        .eyebrow.gold {
+            color: var(--gold);
+            background: var(--gold-lt)
+        }
+
+        .display {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 900;
+            letter-spacing: -.03em;
+            line-height: 1
+        }
+
+        .h1 {
+            font-size: clamp(2.4rem, 5vw, 4.5rem);
+            font-weight: 900;
+            letter-spacing: -.025em;
+            line-height: 1.05
+        }
+
+        .h2 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            letter-spacing: -.02em;
+            line-height: 1.1
+        }
+
+        .h3 {
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            font-weight: 700;
+            letter-spacing: -.01em
+        }
+
+        .h4 {
+            font-size: 1.2rem;
+            font-weight: 700
+        }
+
+        .lead {
+            font-size: 1.15rem;
+            color: var(--ink-3);
+            line-height: 1.75;
+            font-weight: 400
+        }
+
+        .sub {
+            font-size: .95rem;
+            color: var(--muted);
+            line-height: 1.7
+        }
+
+        .ink-grad {
+            background: linear-gradient(135deg, var(--ink) 0%, var(--ink-3) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .blue-grad {
+            background: linear-gradient(135deg, var(--blue) 0%, #4d7ef7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .orange-grad {
+            background: linear-gradient(135deg, var(--orange) 0%, #ff8a50 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cyan-grad {
+            background: linear-gradient(135deg, #008c7e 0%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ═══════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 28px;
+            border-radius: 50px;
+            font-size: .9rem;
+            font-weight: 700;
+            border: none;
+            transition: all .28s cubic-bezier(.34, 1.56, .64, 1);
+            cursor: pointer;
+            white-space: nowrap;
+            font-family: 'Inter', 'Poppins', sans-serif;
+        }
+
+        .btn-blue {
+            background: var(--blue);
+            color: #fff;
+            box-shadow: var(--shadow-blue)
+        }
+
+        .btn-blue:hover {
+            background: var(--blue-dk);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 60px rgba(24, 85, 244, .3)
+        }
+
+        .btn-orange {
+            background: var(--orange);
+            color: #fff;
+            box-shadow: var(--shadow-orange)
+        }
+
+        .btn-orange:hover {
+            background: var(--orange-dk);
+            transform: translateY(-2px)
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--ink);
+            border: 1.5px solid var(--border-dk)
+        }
+
+        .btn-outline:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+            background: var(--blue-lt)
+        }
+
+        .btn-white {
+            background: #fff;
+            color: var(--ink);
+            box-shadow: var(--shadow-sm)
+        }
+
+        .btn-white:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px)
+        }
+
+        .btn-ink {
+            background: var(--ink);
+            color: #fff
+        }
+
+        .btn-ink:hover {
+            background: var(--ink-2);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md)
+        }
+
+        .btn-lg {
+            padding: 16px 38px;
+            font-size: 1rem;
+            border-radius: 50px
+        }
+
+        .btn-sm {
+            padding: 9px 20px;
+            font-size: .82rem
+        }
+
+        .btn i {
+            font-size: .8em
+        }
+
+        /* ═══════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════ */
+        #nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 0;
+            transition: all .4s ease;
+        }
+
+        #nav.scrolled {
+            background: rgba(255, 255, 255, .96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+            width: 92%;
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 900;
+            letter-spacing: -.03em;
+            color: var(--ink)
+        }
+
+        .nav-logo span {
+            color: var(--blue)
+        }
+
+        .nav-logo em {
+            color: var(--orange);
+            font-style: normal
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center
+        }
+
+        .nav-links a {
+            font-size: .88rem;
+            font-weight: 600;
+            color: var(--ink-3);
+            transition: color .2s;
+            position: relative
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--blue);
+            border-radius: 1px;
+            transition: width .3s
+        }
+
+        .nav-links a:hover {
+            color: var(--blue)
+        }
+
+        .nav-links a:hover::after {
+            width: 100%
+        }
+
+        .nav-right {
+            display: flex;
+            gap: .8rem;
+            align-items: center
+        }
+
+        .nav-login {
+            font-size: .88rem;
+            font-weight: 700;
+            color: var(--ink-3);
+            padding: 9px 18px;
+            border-radius: 50px;
+            transition: all .2s;
+            border: 1.5px solid transparent
+        }
+
+        .nav-login:hover {
+            border-color: var(--border-dk);
+            color: var(--blue)
+        }
+
+        .ham {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 5px;
+            border: none;
+            background: none
+        }
+
+        .ham span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--ink);
+            border-radius: 2px;
+            transition: all .3s
+        }
+
+        .mob-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #fff;
+            z-index: 999;
+            padding: 100px 6% 40px;
+            flex-direction: column;
+            gap: 0
+        }
+
+        .mob-menu.open {
+            display: flex
+        }
+
+        .mob-menu a {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--ink-3);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            transition: color .2s
+        }
+
+        .mob-menu a:hover {
+            color: var(--blue)
+        }
+
+        /* ═══════════════════════════════════════
+   TOP STRIP
+═══════════════════════════════════════ */
+        /* .top-strip{
+  background:var(--ink);color:#fff;
+  text-align:center;padding:10px 5%;
+  font-size:.82rem;font-weight:600;letter-spacing:.2px;
+}
+.top-strip a{color:var(--gold);text-decoration:underline}
+.top-strip span{margin:0 12px;opacity:.4} */
+
+        /* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+        .hero {
+            padding: 80px 0px;
+            position: relative;
+            overflow: hidden;
+            background: var(--white);
+        }
+
+        .hero-noise {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+            pointer-events: none;
+            opacity: .4;
+        }
+
+        .hero-circle-1 {
+            position: absolute;
+            top: -200px;
+            right: -150px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(24, 85, 244, .07) 0%, transparent 65%);
+            border-radius: 50%;
+            pointer-events: none
+        }
+
+        .hero-circle-2 {
+            position: absolute;
+            bottom: -150px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(245, 82, 26, .06) 0%, transparent 65%);
+            border-radius: 50%;
+            pointer-events: none
+        }
+
+        .hero-dots {
+            position: absolute;
+            top: 80px;
+            right: 8%;
+            width: 180px;
+            height: 180px;
+            background-image: radial-gradient(var(--muted-lt) 1.5px, transparent 1.5px);
+            background-size: 18px 18px;
+            opacity: .5;
+            pointer-events: none;
+        }
+
+        .hero-grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 80px 80px;
+            opacity: .3;
+            mask-image: radial-gradient(ellipse at 50% 0%, black 20%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at 50% 0%, black 20%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-left {
+            max-width: 600px
+        }
+
+        .hero-announce {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px 6px 6px;
+            background: var(--off-white);
+            border: 1.5px solid var(--border);
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            animation: slideUp .7s ease forwards;
+        }
+
+        .hero-announce .badge {
+            background: var(--blue);
+            color: #fff;
+            font-size: .68rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: .5px
+        }
+
+        .hero-announce span {
+            font-size: .83rem;
+            font-weight: 600;
+            color: var(--ink-3);
+            padding-right: 6px
+        }
+
+        .hero-h1 {
+            font-size: clamp(3rem, 6vw, 5.2rem);
+            font-weight: 900;
+            letter-spacing: -.04em;
+            line-height: .98;
+            margin-bottom: 1.8rem;
+            animation: slideUp .8s ease .1s both
+        }
+
+        .hero-h1 .line-2 {
+            display: block;
+            font-style: italic;
+            color: var(--blue)
+        }
+
+        .hero-h1 .line-3 {
+            display: block;
+            color: var(--orange)
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--ink-3);
+            line-height: 1.8;
+            margin-bottom: 2.2rem;
+            max-width: 500px;
+            animation: slideUp .9s ease .2s both
+        }
+
+        .hero-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .6rem;
+            margin-bottom: 2.5rem;
+            animation: slideUp .9s ease .3s both
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: .8rem;
+            font-weight: 600;
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            color: var(--ink-3)
+        }
+
+        .pill i {
+            color: var(--green);
+            font-size: .65rem;
+            background: var(--green-lt);
+            padding: 3px;
+            border-radius: 50%
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: slideUp 1s ease .4s both
+        }
+
+        .hero-trust {
+            margin-top: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: slideUp 1s ease .5s both
+        }
+
+        .trust-avatars {
+            display: flex
+        }
+
+        .trust-avatars .av {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            margin-left: -8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .68rem;
+            font-weight: 700;
+            box-shadow: var(--shadow-xs)
+        }
+
+        .trust-avatars .av:first-child {
+            margin-left: 0
+        }
+
+        .trust-txt {
+            font-size: .82rem;
+            color: var(--muted)
+        }
+
+        .trust-txt strong {
+            color: var(--ink);
+            font-weight: 700
+        }
+
+        .trust-stars {
+            color: var(--gold);
+            font-size: .75rem;
+            display: flex;
+            gap: 1px
+        }
+
+        /* Hero Right – Dashboard Card */
+        .hero-right {
+            position: relative;
+            top: -50px;
+            animation: slideUp 1.1s ease .3s both
+        }
+
+        .hero-dash {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--r-xl);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+        }
+
+        .dash-topbar {
+            background: var(--off-white);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .dash-dots {
+            display: flex;
+            gap: 6px
+        }
+
+        .dash-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%
+        }
+
+        .dash-dot.r {
+            background: #ff5f56
+        }
+
+        .dash-dot.y {
+            background: #ffbd2e
+        }
+
+        .dash-dot.g {
+            background: #27c93f
+        }
+
+        .dash-title-bar {
+            font-size: .8rem;
+            font-weight: 700;
+            color: var(--ink-3);
+            margin-left: 4px
+        }
+
+        .dash-body {
+            padding: 24px
+        }
+
+        .dash-kpi-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px
+        }
+
+        .kpi {
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            border-radius: var(--r-md);
+            padding: 14px
+        }
+
+        .kpi-val {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: -.03em
+        }
+
+        .kpi-lbl {
+            font-size: .72rem;
+            color: var(--muted);
+            margin-top: 2px;
+            font-weight: 600
+        }
+
+        .kpi-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            font-size: .65rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 4px;
+            margin-top: 6px
+        }
+
+        .kpi-badge.up {
+            background: var(--green-lt);
+            color: var(--green)
+        }
+
+        .kpi-badge.dn {
+            background: var(--red-lt);
+            color: var(--red)
+        }
+
+        .dash-chart-lbl {
+            font-size: .75rem;
+            font-weight: 700;
+            color: var(--muted);
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            margin-bottom: 12px
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 90px
+        }
+
+        .cb {
+            border-radius: 4px 4px 0 0;
+            flex: 1;
+            transition: height .3s ease
+        }
+
+        .cb.blue {
+            background: linear-gradient(0deg, var(--blue-dk), var(--blue-lt) 80%);
+            opacity: .85
+        }
+
+        .cb.orange {
+            background: linear-gradient(0deg, var(--orange-dk), #ffb899 80%);
+            opacity: .85
+        }
+
+        .cb.blue-active {
+            background: linear-gradient(0deg, var(--blue-dk), var(--blue));
+            opacity: 1
+        }
+
+        .dash-row2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 16px
+        }
+
+        .mini-card {
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            border-radius: var(--r-md);
+            padding: 14px
+        }
+
+        .mc-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px
+        }
+
+        .mc-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .8rem
+        }
+
+        .mc-status {
+            font-size: .65rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px
+        }
+
+        .status-live {
+            background: var(--green-lt);
+            color: var(--green)
+        }
+
+        .status-pend {
+            background: var(--gold-lt);
+            color: var(--gold)
+        }
+
+        .mc-val {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -.02em
+        }
+
+        .mc-lbl {
+            font-size: .72rem;
+            color: var(--muted);
+            margin-top: 2px
+        }
+
+        .hero-float-1 {
+            position: absolute;
+            top: -20px;
+            right: -30px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 12px 16px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: float 4s ease-in-out infinite
+        }
+
+        .hero-float-2 {
+            position: absolute;
+            bottom: 20px;
+            left: -40px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 12px 16px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: float 5s ease-in-out 1s infinite
+        }
+
+        .float-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0
+        }
+
+        .float-val {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700
+        }
+
+        .float-sub {
+            font-size: .68rem;
+            color: var(--muted)
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-8px)
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        /* ═══════════════════════════════════════
+   CLIENTS STRIP
+═══════════════════════════════════════ */
+        .clients {
+            padding: 50px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--off-white);
+            overflow: hidden
+        }
+
+        .clients-label {
+            text-align: center;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 2rem
+        }
+
+        .ticker-wrap {
+            overflow: hidden;
+            position: relative
+        }
+
+        .ticker-wrap::before,
+        .ticker-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 120px;
+            z-index: 2
+        }
+
+        .ticker-wrap::before {
+            left: 0;
+            background: linear-gradient(90deg, var(--off-white), transparent)
+        }
+
+        .ticker-wrap::after {
+            right: 0;
+            background: linear-gradient(-90deg, var(--off-white), transparent)
+        }
+
+        .ticker {
+            display: flex;
+            gap: 0;
+            animation: ticker 28s linear infinite;
+            width: max-content
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 40px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--muted-lt);
+            letter-spacing: -.3px;
+            white-space: nowrap;
+            transition: color .3s
+        }
+
+        .ticker-item i {
+            font-size: .9rem
+        }
+
+        .ticker-item:hover {
+            color: var(--ink-3)
+        }
+
+        @keyframes ticker {
+            0% {
+                transform: translateX(0)
+            }
+
+            100% {
+                transform: translateX(-50%)
+            }
+        }
+
+        /* ═══════════════════════════════════════
+   PROBLEM SECTION
+═══════════════════════════════════════ */
+        .problem {
+            background: var(--ink);
+            color: #fff;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden
+        }
+
+        .problem::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(24, 85, 244, .2), transparent 65%);
+            border-radius: 50%;
+            pointer-events: none
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center
+        }
+
+        .problem-left .eyebrow {
+            background: rgba(24, 85, 244, .15);
+            color: #7fa8ff
+        }
+
+        .problem-left h2 {
+            color: #fff;
+            font-size: clamp(2rem, 4vw, 3rem)
+        }
+
+        .problem-left .lead {
+            color: rgba(255, 255, 255, .7)
+        }
+
+        .chaos-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem
+        }
+
+        .chaos-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: var(--r-md);
+            padding: 16px
+        }
+
+        .chaos-card.crossed {
+            position: relative
+        }
+
+        .chaos-card.crossed::after {
+            content: '';
+            position: absolute;
+            left: 14px;
+            right: 14px;
+            top: 50%;
+            height: 1.5px;
+            background: rgba(220, 38, 38, .6);
+            transform: rotate(-1deg)
+        }
+
+        .chaos-ico {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .9rem;
+            flex-shrink: 0
+        }
+
+        .chaos-txt h5 {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: .9rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, .9);
+            margin-bottom: 2px
+        }
+
+        .chaos-txt p {
+            font-size: .78rem;
+            color: rgba(255, 255, 255, .4)
+        }
+
+        .solve-card {
+            background: rgba(24, 85, 244, .1);
+            border: 1.5px solid rgba(24, 85, 244, .3);
+            border-radius: var(--r-lg);
+            padding: 28px;
+            text-align: center
+        }
+
+        .solve-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--blue);
+            border-radius: var(--r-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: #fff;
+            margin: 0 auto 1.2rem
+        }
+
+        .solve-card h3 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: .8rem
+        }
+
+        .solve-card p {
+            color: rgba(255, 255, 255, .65);
+            font-size: .92rem;
+            line-height: 1.75
+        }
+
+        .solve-features {
+            display: flex;
+            flex-direction: column;
+            gap: .6rem;
+            margin-top: 1.5rem;
+            text-align: left
+        }
+
+        .sf-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: .85rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, .8)
+        }
+
+        .sf-item i {
+            color: #4ade80;
+            font-size: .7rem
+        }
+
+        /* ═══════════════════════════════════════
+   FEATURES TABBED
+═══════════════════════════════════════ */
+        .features {
+            background: var(--white)
+        }
+
+        .feat-wrap {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2.5rem;
+            margin-top: 4rem;
+            align-items: start
+        }
+
+        .feat-nav-sticky {
+            position: sticky;
+            top: 88px
+        }
+
+        .feat-nav-list {
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            border-radius: var(--r-xl);
+            padding: 8px;
+            overflow: hidden
+        }
+
+        .fn-btn {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            width: 100%;
+            padding: 14px 16px;
+            border: none;
+            background: transparent;
+            border-radius: var(--r-lg);
+            cursor: pointer;
+            text-align: left;
+            transition: all .22s ease;
+        }
+
+        .fn-btn:hover {
+            background: rgba(24, 85, 244, .06)
+        }
+
+        .fn-btn.active {
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border)
+        }
+
+        .fn-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .88rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+            transition: all .22s
+        }
+
+        .fn-ttl {
+            font-size: .9rem;
+            font-weight: 700;
+            color: var(--muted);
+            display: block;
+            transition: color .22s
+        }
+
+        .fn-btn.active .fn-ttl,
+        .fn-btn:hover .fn-ttl {
+            color: var(--ink)
+        }
+
+        .fn-sub {
+            font-size: .75rem;
+            color: var(--muted-lt);
+            display: block;
+            margin-top: 1px
+        }
+
+        .fn-arr {
+            margin-left: auto;
+            align-self: center;
+            font-size: .7rem;
+            color: var(--muted-lt);
+            transition: transform .22s, color .22s
+        }
+
+        .fn-btn.active .fn-arr {
+            transform: rotate(90deg);
+            color: var(--blue)
+        }
+
+        .feat-pane {
+            display: none;
+            animation: fadeInUp .35s ease
+        }
+
+        .feat-pane.active {
+            display: block
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .feat-pane-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--r-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md)
+        }
+
+        .fpc-header {
+            padding: 32px 32px 24px;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .fpc-chips {
+            display: flex;
+            gap: .5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.2rem
+        }
+
+        .fchip {
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: .72rem;
+            font-weight: 700;
+            background: var(--blue-lt);
+            color: var(--blue);
+            border: 1px solid var(--blue-mid)
+        }
+
+        .fpc-header h3 {
+            font-size: 2rem;
+            margin-bottom: .6rem;
+            letter-spacing: -.03em
+        }
+
+        .fpc-header p {
+            color: var(--ink-3);
+            font-size: .95rem;
+            line-height: 1.75;
+            max-width: 520px
+        }
+
+        .fpc-actions {
+            display: flex;
+            gap: .7rem;
+            flex-wrap: wrap;
+            margin-top: 1.4rem
+        }
+
+        .fpc-body {
+            padding: 24px 32px 32px
+        }
+
+        .bene-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem
+        }
+
+        .bene-card {
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            border-radius: var(--r-md);
+            padding: 18px;
+            transition: all .25s
+        }
+
+        .bene-card:hover {
+            border-color: var(--blue-mid);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-2px)
+        }
+
+        .bene-ico {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .82rem;
+            margin-bottom: .8rem
+        }
+
+        .bene-ttl {
+            font-size: .88rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: .3rem
+        }
+
+        .bene-txt {
+            font-size: .78rem;
+            color: var(--muted);
+            line-height: 1.65
+        }
+
+        /* ═══════════════════════════════════════
+   STATS BAND
+═══════════════════════════════════════ */
+        .stats-band {
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dk) 100%);
+            padding: 70px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-band::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, .1), transparent 65%);
+            border-radius: 50%
+        }
+
+        .stats-band::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 0, 0, .1), transparent 65%);
+            border-radius: 50%
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            position: relative;
+            z-index: 1
+        }
+
+        .stat-cell {
+            text-align: center;
+            padding: 30px;
+            border-right: 1px solid rgba(255, 255, 255, .12)
+        }
+
+        .stat-cell:last-child {
+            border-right: none
+        }
+
+        .stat-num {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -.04em;
+            line-height: 1;
+            display: block
+        }
+
+        .stat-suffix {
+            font-size: 2rem;
+            vertical-align: super
+        }
+
+        .stat-lbl {
+            font-size: .85rem;
+            color: rgba(255, 255, 255, .65);
+            margin-top: .4rem;
+            font-weight: 600
+        }
+
+        /* ═══════════════════════════════════════
+   WHY CHOOSE GRID
+═══════════════════════════════════════ */
+        .why {
+            background: var(--cream)
+        }
+
+        .why-bento {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+            margin-top: 4rem
+        }
+
+        .wc {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--r-xl);
+            padding: 2rem;
+            transition: all .3s;
+            position: relative;
+            overflow: hidden
+        }
+
+        .wc:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md)
+        }
+
+        .wc.w4 {
+            grid-column: span 4
+        }
+
+        .wc.w3 {
+            grid-column: span 3
+        }
+
+        .wc.w6 {
+            grid-column: span 6
+        }
+
+        .wc.accent-blue {
+            background: var(--blue);
+            border-color: var(--blue)
+        }
+
+        .wc.accent-blue h4,
+        .wc.accent-blue p {
+            color: #fff
+        }
+
+        .wc.accent-blue .wc-icon {
+            background: rgba(255, 255, 255, .15);
+            color: #fff
+        }
+
+        .wc-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 1.4rem
+        }
+
+        .wc h4 {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 800;
+            margin-bottom: .5rem;
+            color: var(--ink)
+        }
+
+        .wc p {
+            font-size: .85rem;
+            color: var(--muted);
+            line-height: 1.7
+        }
+
+        .wc-num {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--border);
+            line-height: 1
+        }
+
+        /* ═══════════════════════════════════════
+   INDUSTRIES
+═══════════════════════════════════════ */
+        .industries {
+            background: var(--white)
+        }
+
+        .ind-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem
+        }
+
+        .ind-card {
+            background: var(--off-white);
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-xl);
+            padding: 2.5rem;
+            transition: all .35s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ind-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue), var(--cyan));
+            opacity: 0;
+            transition: opacity .3s
+        }
+
+        .ind-card:hover {
+            border-color: var(--blue-mid);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-6px)
+        }
+
+        .ind-card:hover::before {
+            opacity: 1
+        }
+
+        .ind-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--r-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem
+        }
+
+        .ind-card h3 {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: .6rem
+        }
+
+        .ind-card p {
+            font-size: .85rem;
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 1.2rem
+        }
+
+        .ind-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .4rem
+        }
+
+        .ind-tag {
+            font-size: .7rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            background: var(--blue-lt);
+            color: var(--blue)
+        }
+
+        /* ═══════════════════════════════════════
+   FIELD FORCE
+═══════════════════════════════════════ */
+        .fieldforce {
+            background: var(--off-white)
+        }
+
+        .ff-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem
+        }
+
+        .ff-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--r-xl);
+            padding: 2.5rem;
+            transition: all .35s
+        }
+
+        .ff-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+            border-color: var(--border-dk)
+        }
+
+        .ff-card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--r-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem
+        }
+
+        .ff-card h3 {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: .6rem
+        }
+
+        .ff-card p {
+            font-size: .85rem;
+            color: var(--muted);
+            line-height: 1.7
+        }
+
+        .ff-visual {
+            margin-top: 1.5rem;
+            height: 80px;
+            border-radius: var(--r-sm);
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            padding: 0 4px;
+            background: var(--off-white);
+            border: 1px solid var(--border)
+        }
+
+        .ff-bar {
+            border-radius: 4px 4px 0 0;
+            width: 18%;
+            animation: growBar 1.2s cubic-bezier(.34, 1.56, .64, 1) both
+        }
+
+        @keyframes growBar {
+            from {
+                height: 0
+            }
+
+            to {
+                height: var(--h)
+            }
+        }
+
+        .ff-bar-b {
+            background: linear-gradient(0deg, var(--blue-dk), var(--blue-lt))
+        }
+
+        .ff-bar-o {
+            background: linear-gradient(0deg, var(--orange-dk), #ffb89a)
+        }
+
+        .map-visual {
+            margin-top: 1.5rem;
+            height: 80px;
+            border-radius: var(--r-sm);
+            background: linear-gradient(135deg, var(--cyan-lt), var(--blue-lt));
+            border: 1px solid var(--blue-mid);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .map-dot-outer {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(0, 191, 173, .3);
+            animation: pingMap 2s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .map-dot-inner {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--cyan)
+        }
+
+        @keyframes pingMap {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 191, 173, .5)
+            }
+
+            50% {
+                box-shadow: 0 0 0 14px rgba(0, 191, 173, 0)
+            }
+        }
+
+        .hr-visual {
+            margin-top: 1.5rem;
+            height: 80px;
+            border-radius: var(--r-sm);
+            background: var(--purple-lt);
+            border: 1px solid rgba(124, 58, 237, .15);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0 16px
+        }
+
+        .hr-av {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(124, 58, 237, .2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .75rem;
+            font-weight: 800;
+            color: var(--purple);
+            flex-shrink: 0
+        }
+
+        .hr-info {
+            flex: 1
+        }
+
+        .hr-bar {
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(124, 58, 237, .2);
+            margin-bottom: 5px
+        }
+
+        .hr-bar .fill {
+            height: 100%;
+            border-radius: 3px;
+            background: var(--purple)
+        }
+
+        /* ═══════════════════════════════════════
+   HOW IT WORKS
+═══════════════════════════════════════ */
+        .hiw {
+            background: var(--white)
+        }
+
+        .hiw-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            margin-top: 5rem;
+            position: relative
+        }
+
+        .hiw-steps::before {
+            content: '';
+            position: absolute;
+            top: 36px;
+            left: calc(100%/8);
+            right: calc(100%/8);
+            height: 1px;
+            background: linear-gradient(90deg, var(--border), var(--blue-mid), var(--border));
+            z-index: 0
+        }
+
+        .step {
+            text-align: center;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1
+        }
+
+        .step-num {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--blue);
+            box-shadow: var(--shadow-sm);
+            transition: all .3s;
+            position: relative;
+        }
+
+        .step:hover .step-num {
+            background: var(--blue);
+            color: #fff;
+            border-color: var(--blue);
+            box-shadow: var(--shadow-blue)
+        }
+
+        .step-icon {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 28px;
+            height: 28px;
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .65rem;
+            color: var(--blue)
+        }
+
+        .step h4 {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: .5rem
+        }
+
+        .step p {
+            font-size: .83rem;
+            color: var(--muted);
+            line-height: 1.7
+        }
+
+        /* ═══════════════════════════════════════
+   INTEGRATIONS
+═══════════════════════════════════════ */
+        .integrations {
+            background: var(--off-white)
+        }
+
+        .int-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1rem;
+            margin-top: 3.5rem
+        }
+
+        .int-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: all .3s;
+            cursor: pointer;
+        }
+
+        .int-card:hover {
+            border-color: var(--blue-mid);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px)
+        }
+
+        .int-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--r-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin: 0 auto .8rem
+        }
+
+        .int-name {
+            font-size: .78rem;
+            font-weight: 700;
+            color: var(--ink-3)
+        }
+
+        .int-cta {
+            text-align: center;
+            margin-top: 3rem
+        }
+
+        .int-cta p {
+            color: var(--muted);
+            font-size: .92rem;
+            margin-bottom: 1rem
+        }
+
+        /* ═══════════════════════════════════════
+   PRICING
+═══════════════════════════════════════ */
+        .pricing {
+            background: var(--white)
+        }
+
+        .price-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem
+        }
+
+        .toggle-lbl {
+            font-size: .88rem;
+            font-weight: 700;
+            color: var(--muted)
+        }
+
+        .toggle-lbl.active {
+            color: var(--ink)
+        }
+
+        .toggle-track {
+            width: 52px;
+            height: 28px;
+            border-radius: 14px;
+            background: var(--blue);
+            cursor: pointer;
+            position: relative;
+            transition: background .3s;
+            flex-shrink: 0
+        }
+
+        .toggle-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #fff;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            transition: transform .3s;
+            box-shadow: var(--shadow-xs)
+        }
+
+        .toggle-track.annual .toggle-thumb {
+            transform: translateX(24px)
+        }
+
+        .save-badge {
+            background: var(--green-lt);
+            color: var(--green);
+            font-size: .72rem;
+            font-weight: 800;
+            padding: 3px 9px;
+            border-radius: 50px;
+            border: 1px solid rgba(22, 163, 74, .2)
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3.5rem
+        }
+
+        .pc {
+            background: var(--off-white);
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-xl);
+            padding: 2.5rem;
+            position: relative;
+            transition: all .3s
+        }
+
+        .pc:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px)
+        }
+
+        .pc.featured {
+            background: #fff;
+            border-color: var(--blue);
+            box-shadow: var(--shadow-blue)
+        }
+
+        .pc-popular {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--blue);
+            color: #fff;
+            font-size: .68rem;
+            font-weight: 800;
+            padding: 4px 16px;
+            border-radius: 50px;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            white-space: nowrap
+        }
+
+        .pc-plan {
+            font-size: .75rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1rem
+        }
+
+        .pc-price {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin: .8rem 0 .3rem
+        }
+
+        .pc-curr {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--ink-3);
+            margin-top: 4px
+        }
+
+        .pc-amt {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: var(--ink);
+            letter-spacing: -.05em
+        }
+
+        .pc-per {
+            font-size: .82rem;
+            color: var(--muted);
+            font-weight: 600
+        }
+
+        .pc-desc {
+            font-size: .85rem;
+            color: var(--muted);
+            line-height: 1.65;
+            margin-bottom: 1.5rem
+        }
+
+        .pc-div {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 1.5rem 0
+        }
+
+        .pc-feats {
+            display: flex;
+            flex-direction: column;
+            gap: .75rem;
+            margin-bottom: 2rem
+        }
+
+        .pcf {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            font-size: .85rem;
+            color: var(--ink-3)
+        }
+
+        .pcf i.yes {
+            color: var(--green);
+            font-size: .65rem;
+            background: var(--green-lt);
+            padding: 3px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 3px
+        }
+
+        .pcf i.no {
+            color: var(--muted-lt);
+            font-size: .65rem;
+            background: var(--off-white);
+            padding: 3px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 3px
+        }
+
+        .pcf.dim {
+            opacity: .45
+        }
+
+        .btn-pc {
+            width: 100%;
+            padding: 13px;
+            border-radius: 50px;
+            font-size: .88rem;
+            font-weight: 800;
+            font-family: 'Inter', 'Poppins', sans-serif;
+            cursor: pointer;
+            border: none;
+            transition: all .3s;
+            text-align: center
+        }
+
+        .btn-pc-outline {
+            background: transparent;
+            color: var(--ink);
+            border: 1.5px solid var(--border-dk)
+        }
+
+        .btn-pc-outline:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+            background: var(--blue-lt)
+        }
+
+        .btn-pc-solid {
+            background: var(--blue);
+            color: #fff;
+            box-shadow: var(--shadow-blue)
+        }
+
+        .btn-pc-solid:hover {
+            background: var(--blue-dk);
+            transform: translateY(-1px)
+        }
+
+        .btn-pc-gold {
+            background: linear-gradient(135deg, var(--gold), #c47e00);
+            color: #fff
+        }
+
+        .btn-pc-gold:hover {
+            opacity: .9;
+            transform: translateY(-1px)
+        }
+
+        .price-footer {
+            text-align: center;
+            margin-top: 2.5rem;
+            font-size: .85rem;
+            color: var(--muted)
+        }
+
+        .price-footer a {
+            color: var(--blue);
+            font-weight: 700
+        }
+
+        /* ═══════════════════════════════════════
+   COMPARE TABLE
+═══════════════════════════════════════ */
+        .compare {
+            background: var(--off-white)
+        }
+
+        .cmp-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 3.5rem;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--r-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm)
+        }
+
+        .cmp-table thead tr {
+            background: var(--off-white)
+        }
+
+        .cmp-table th {
+            padding: 18px 24px;
+            text-align: center;
+            font-size: .82rem;
+            font-weight: 800;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            color: var(--muted);
+            border-bottom: 1px solid var(--border)
+        }
+
+        .cmp-table th:first-child {
+            text-align: left
+        }
+
+        .cmp-table th.th-blue {
+            background: var(--blue);
+            color: #fff;
+            position: relative
+        }
+
+        .cmp-table td {
+            padding: 16px 24px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            font-size: .88rem;
+            color: var(--ink-3)
+        }
+
+        .cmp-table td:first-child {
+            text-align: left;
+            font-weight: 700;
+            color: var(--ink);
+            border-left: none
+        }
+
+        .cmp-table td.td-blue {
+            background: rgba(24, 85, 244, .03)
+        }
+
+        .cmp-table tr:last-child td {
+            border-bottom: none
+        }
+
+        .cmp-table tr:hover td {
+            background: var(--off-white)
+        }
+
+        .cmp-table tr:hover td.td-blue {
+            background: rgba(24, 85, 244, .06)
+        }
+
+        .cmp-yes {
+            color: var(--green);
+            font-size: 1rem
+        }
+
+        .cmp-no {
+            color: var(--muted-lt);
+            font-size: .9rem
+        }
+
+        .cmp-cat {
+            background: var(--off-white)
+        }
+
+        .cmp-cat td {
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding: 10px 24px;
+            border-bottom: 1px solid var(--border)
+        }
+
+        /* ═══════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════ */
+        .testi {
+            background: var(--white)
+        }
+
+        .testi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem
+        }
+
+        .tc-card {
+            background: var(--off-white);
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-xl);
+            padding: 2rem;
+            transition: all .3s;
+            display: flex;
+            flex-direction: column
+        }
+
+        .tc-card:hover {
+            border-color: var(--blue-mid);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+            background: #fff
+        }
+
+        .tc-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 1.2rem
+        }
+
+        .tc-stars i {
+            color: var(--gold);
+            font-size: .85rem
+        }
+
+        .tc-quote {
+            font-size: .92rem;
+            color: var(--ink-3);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            flex: 1
+        }
+
+        .tc-quote::before {
+            content: '\201C';
+            font-size: 1.5rem;
+            color: var(--blue);
+            font-family: 'Inter', 'Poppins', sans-serif;
+            line-height: 0;
+            position: relative;
+            top: .2rem;
+            margin-right: 2px
+        }
+
+        .tc-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: auto
+        }
+
+        .tc-av {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .88rem;
+            font-weight: 800;
+            flex-shrink: 0;
+            font-family: 'Playfair Display', serif
+        }
+
+        .tc-name {
+            font-size: .9rem;
+            font-weight: 800;
+            color: var(--ink)
+        }
+
+        .tc-role {
+            font-size: .75rem;
+            color: var(--muted)
+        }
+
+        .testi-footer {
+            text-align: center;
+            margin-top: 3rem
+        }
+
+        .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 10px 22px
+        }
+
+        .rb-score {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--ink)
+        }
+
+        .rb-stars {
+            display: flex;
+            flex-direction: column;
+            gap: 3px
+        }
+
+        .rb-stars-row {
+            display: flex;
+            gap: 2px
+        }
+
+        .rb-stars-row i {
+            color: var(--gold);
+            font-size: .72rem
+        }
+
+        .rb-count {
+            font-size: .72rem;
+            color: var(--muted)
+        }
+
+        /* ═══════════════════════════════════════
+   FAQ
+═══════════════════════════════════════ */
+        .faq {
+            background: var(--cream)
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 4rem
+        }
+
+        .faq-item {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            transition: all .25s
+        }
+
+        .faq-item.open {
+            box-shadow: var(--shadow-sm);
+            border-color: var(--blue-mid)
+        }
+
+        .faq-q {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            cursor: pointer;
+            gap: 12px
+        }
+
+        .faq-q-txt {
+            font-size: .95rem;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1.4;
+            font-family: 'Plus Jakarta Sans', sans-serif
+        }
+
+        .faq-arrow {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .65rem;
+            color: var(--muted);
+            flex-shrink: 0;
+            transition: all .25s
+        }
+
+        .faq-item.open .faq-arrow {
+            background: var(--blue);
+            border-color: var(--blue);
+            color: #fff;
+            transform: rotate(45deg)
+        }
+
+        .faq-a {
+            display: none;
+            padding: 0 24px 20px;
+            font-size: .88rem;
+            color: var(--muted);
+            line-height: 1.75
+        }
+
+        .faq-item.open .faq-a {
+            display: block;
+            animation: fadeInUp .25s ease
+        }
+
+        /* ═══════════════════════════════════════
+   CTA SECTION
+═══════════════════════════════════════ */
+        .cta-section {
+            background: var(--ink);
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(24, 85, 244, .25), transparent 65%);
+            border-radius: 50%;
+            pointer-events: none
+        }
+
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(245, 82, 26, .15), transparent 65%);
+            border-radius: 50%;
+            pointer-events: none
+        }
+
+        .cta-inner {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto
+        }
+
+        .cta-inner .eyebrow {
+            background: rgba(24, 85, 244, .15);
+            color: #7fa8ff
+        }
+
+        .cta-inner h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: #fff;
+            margin-bottom: 1.2rem;
+            letter-spacing: -.04em
+        }
+
+        .cta-inner p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, .65);
+            margin-bottom: 3rem;
+            line-height: 1.75
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .cta-trust {
+            margin-top: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap
+        }
+
+        .cta-t-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: .82rem;
+            color: rgba(255, 255, 255, .55);
+            font-weight: 600
+        }
+
+        .cta-t-item i {
+            color: rgba(255, 255, 255, .3)
+        }
+
+        /* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+        footer {
+            background: #fff;
+            border-top: 1px solid var(--border)
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 280px repeat(4, 1fr);
+            gap: 3rem;
+            padding: 80px 0 60px
+        }
+
+        .foot-brand p {
+            font-size: .85rem;
+            color: var(--muted);
+            line-height: 1.75;
+            margin: 1rem 0 1.5rem;
+            max-width: 220px
+        }
+
+        .foot-social {
+            display: flex;
+            gap: .6rem
+        }
+
+        .fs-btn {
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid var(--border);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .85rem;
+            color: var(--muted);
+            transition: all .25s;
+            background: var(--off-white)
+        }
+
+        .fs-btn:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+            background: var(--blue-lt)
+        }
+
+        .foot-col h5 {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--muted-lt);
+            margin-bottom: 1.4rem
+        }
+
+        .foot-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: .65rem
+        }
+
+        .foot-col ul li a {
+            font-size: .85rem;
+            color: var(--muted);
+            transition: color .2s;
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .foot-col ul li a:hover {
+            color: var(--blue)
+        }
+
+        .foot-col ul li a::before {
+            content: '';
+            width: 0;
+            height: 1px;
+            background: var(--blue);
+            transition: width .2s;
+            margin-top: 1px
+        }
+
+        .foot-col ul li a:hover::before {
+            width: 12px
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem
+        }
+
+        .fb-left {
+            font-size: .82rem;
+            color: var(--muted)
+        }
+
+        .fb-right {
+            display: flex;
+            gap: 1.5rem
+        }
+
+        .fb-right a {
+            font-size: .82rem;
+            color: var(--muted);
+            transition: color .2s
+        }
+
+        .fb-right a:hover {
+            color: var(--blue)
+        }
+
+        .foot-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--green-lt);
+            border: 1px solid rgba(22, 163, 74, .2);
+            color: var(--green);
+            font-size: .72rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 50px;
+            margin-top: .5rem
+        }
+
+        /* ═══════════════════════════════════════
+   REVEAL ANIMATIONS
+═══════════════════════════════════════ */
+        .rev {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity .75s cubic-bezier(.22, 1, .36, 1), transform .75s cubic-bezier(.22, 1, .36, 1)
+        }
+
+        .rev.vis {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .rev-d1 {
+            transition-delay: .08s
+        }
+
+        .rev-d2 {
+            transition-delay: .16s
+        }
+
+        .rev-d3 {
+            transition-delay: .24s
+        }
+
+        .rev-d4 {
+            transition-delay: .32s
+        }
+
+        .rev-d5 {
+            transition-delay: .4s
+        }
+
+        .rev-d6 {
+            transition-delay: .48s
+        }
+
+        .rev-l {
+            opacity: 0;
+            transform: translateX(-24px);
+            transition: opacity .75s cubic-bezier(.22, 1, .36, 1), transform .75s cubic-bezier(.22, 1, .36, 1)
+        }
+
+        .rev-r {
+            opacity: 0;
+            transform: translateX(24px);
+            transition: opacity .75s cubic-bezier(.22, 1, .36, 1), transform .75s cubic-bezier(.22, 1, .36, 1)
+        }
+
+        .rev-l.vis,
+        .rev-r.vis {
+            opacity: 1;
+            transform: translateX(0)
+        }
+
+        /* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+        @media(max-width:1080px) {
+            .hero-inner {
+                grid-template-columns: 1fr
+            }
+
+            .hero-right {
+                display: none
+            }
+
+            .feat-wrap {
+                grid-template-columns: 1fr
+            }
+
+            .feat-nav-sticky {
+                position: static
+            }
+
+            .fn-btn .fn-sub,
+            .fn-btn .fn-arr {
+                display: none
+            }
+
+            .feat-nav-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 4px;
+                border-radius: var(--r-lg)
+            }
+
+            .fn-btn {
+                flex: 1;
+                min-width: 120px;
+                padding: 10px 12px
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .stat-cell:nth-child(2) {
+                border-right: none
+            }
+
+            .stat-cell:nth-child(3) {
+                border-top: 1px solid rgba(255, 255, 255, .12)
+            }
+
+            .why-bento {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .wc.w4,
+            .wc.w3,
+            .wc.w6 {
+                grid-column: span 1
+            }
+
+            .hiw-steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem
+            }
+
+            .hiw-steps::before {
+                display: none
+            }
+
+            .int-grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                gap: 2.5rem
+            }
+
+            .foot-brand {
+                grid-column: 1/-1
+            }
+        }
+
+        @media(max-width:768px) {
+            .section {
+                padding: 70px 0
+            }
+
+            .nav-links,
+            .nav-right {
+                display: none
+            }
+
+            .ham {
+                display: flex
+            }
+
+            .hero {
+                padding: 120px 0 70px
+            }
+
+            .problem-grid {
+                grid-template-columns: 1fr
+            }
+
+            .ind-grid,
+            .ff-grid,
+            .testi-grid,
+            .pricing-grid,
+            .faq-grid {
+                grid-template-columns: 1fr
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .hiw-steps {
+                grid-template-columns: 1fr
+            }
+
+            .int-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .stat-num {
+                font-size: 2.5rem;
+            }
+
+            .why-bento {
+                display: flex;
+                flex-direction: column
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                padding: 50px 0 40px
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center
+            }
+
+            .fb-right {
+                flex-wrap: wrap;
+                justify-content: center
+            }
+
+            .cmp-table {
+                display: block;
+                overflow-x: auto
+            }
+
+            .bene-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media(max-width:480px) {
+            .hero-actions {
+                flex-direction: column
+            }
+
+            .btn-lg {
+                width: 100%;
+                justify-content: center
+            }
+
+            .cta-actions {
+                flex-direction: column;
+                align-items: center
+            }
+
+            .int-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+    </style>
+    <!-- Code injected by Five-server -->
+    <script async data-id="five-server" data-file="d:\CRM\CRM 1\crm_new2.html" type="application/javascript" src="/fiveserver.js"></script>
+</head>
+<body>
+
+    <!-- TOP STRIP -->
+    <!-- <div class="top-strip">
+  🎉 New: WhatsApp Automation is now live! <a href="#">Start free →</a>
+  <span>|</span>
+  7-day free trial, no credit card required
+</div> -->
+
+    <!-- NAVBAR -->
+    <nav id="nav">
+        <div class="nav-inner">
+            <div class="nav-logo">JSDM<span>C</span><em>R</em>M</div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#industries">Industries</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#compare">Compare</a>
+                <a href="#faq">FAQ</a>
+            </div>
+            <div class="nav-right">
+                <a href="https://edzhi.com/login" class="nav-login">Log In</a>
+                
+                <a href="#trial" class="btn btn-ink btn-sm">
+                    <i class="fa-solid fa-rocket"></i> Free Trial
+                </a>
+            </div>
+
+            
+
+            <div id="ft-modal" class="ft-modal">
+                <div class="ft-card">
+
+                    <button class="ft-close" id="ft-close">&times;</button>
+
+                    <h2>Start your free trial</h2>
+                    <p>No credit card required</p>
+
+                    <form>
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="email" placeholder="Email Address" required>
+                        <input type="number" placeholder="Contact Number" required>
+                        <input type="text" placeholder="Company Name" required>
+                        <input type="password" placeholder="Password" required>
+                        <button type="submit">Get Started</button>
+                    </form>
+
+                </div>
+            </div>
+
+            <style>
+                .ft-modal {
+                    position: fixed;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  height: 100vh;
+                    inset: 0;
+                    display: none;
+                    background: rgba(0, 0, 0, 0.55);
+                    backdrop-filter: blur(4px);
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 9999;
+                }
+
+                .ft-card {
+                    width: 360px;
+                    background: #fff;
+                    border-radius: 14px;
+                    padding: 28px;
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+                    position: relative;
+                    transform: translateY(30px);
+                    opacity: 0;
+                    animation: ftFadeUp 0.35s ease forwards;
+                }
+
+                @keyframes ftFadeUp {
+                    to {
+                        transform: translateY(0);
+                        opacity: 1;
+                    }
+                }
+
+                .ft-close {
+                    position: absolute;
+                    right: 18px;
+                    top: 15px;
+                    border: none;
+                    background: none;
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+
+                .ft-card h2 {
+                    margin-bottom: 5px;
+                    font-size: 20px;
+                }
+
+                .ft-card p {
+                    font-size: 13px;
+                    color: #666;
+                    margin-bottom: 20px;
+                }
+
+                .ft-card input {
+                    width: 100%;
+                    padding: 11px;
+                    margin-bottom: 12px;
+                    border-radius: 8px;
+                    border: 1px solid #ddd;
+                    transition: 0.2s;
+                    box-sizing: border-box;
+                }
+
+                .ft-card input:focus {
+                    border-color: #000;
+                    outline: none;
+                }
+
+                .ft-card button[type="submit"] {
+                    width: 100%;
+                    padding: 12px;
+                    border-radius: 8px;
+                    border: none;
+                    background: #000;
+                    color: #fff;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: 0.2s;
+                }
+
+                .ft-card button[type="submit"]:hover {
+                    transform: translateY(-1px);
+                    opacity: 0.9;
+                }
+
+            </style>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+
+                    const ftModal = document.getElementById("ft-modal");
+                    const ftClose = document.getElementById("ft-close");
+
+                    // ✅ Yeh function globally available hai
+                    // Kisi bhi button se call kar sakte ho
+                    window.openFtModal = function(e) {
+                        if (e) e.preventDefault();
+                        ftModal.style.display = "flex";
+                    };
+
+                    window.closeFtModal = function() {
+                        ftModal.style.display = "none";
+                    };
+
+                    // ✅ Class se saare buttons bind karo
+                    document.querySelectorAll(".ft-open").forEach(function(btn) {
+                        btn.addEventListener("click", window.openFtModal);
+                    });
+
+                    // Close button
+                    ftClose.addEventListener("click", window.closeFtModal);
+
+                    // Click outside modal to close
+                    ftModal.addEventListener("click", function(e) {
+                        if (e.target === ftModal) window.closeFtModal();
+                    });
+
+                });
+
+            </script>
+            <!-- *******************************
+*******************************
+*******************************
+******************************* -->
+            <button class="ham" id="ham" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mob-menu" id="mobMenu">
+        <a href="#features" onclick="closeMob()">Features</a>
+        <a href="#industries" onclick="closeMob()">Industries</a>
+        <a href="#pricing" onclick="closeMob()">Pricing</a>
+        <a href="#faq" onclick="closeMob()">FAQ</a>
+        <a href="#" onclick="closeMob()">Log In</a>
+        
+        <a href="#" class="ft-open" style="color:var(--blue)">
+            Start Free Trial →
+        </a>
+    </div>
+
+
+       
+                            
+
+    <!-- ════════ HERO ════════ -->
+    <section class="hero" id="home">
+        <div class="hero-noise"></div>
+        <div class="hero-grid-bg"></div>
+        <div class="hero-circle-1"></div>
+        <div class="hero-circle-2"></div>
+        <div class="hero-dots"></div>
+
+        <div class="wrap">
+            <div class="hero-inner">
+                <div class="hero-left">
+
+
+                    <h1 class="hero-h1">
+                        All-in-One CRM
+                        <span class="line-2">for Growing</span>
+                        <span class="line-3">Businesses.</span>
+                    </h1>
+
+                    <p class="hero-desc">
+                        Stop juggling five apps. <strong>JSDMCRM</strong> unifies lead management, invoicing, GPS field tracking, helpdesk, and AI automation — so you can focus on what actually grows your business.
+                    </p>
+
+
+
+                    <div class="hero-actions">
+                        
+                        <a href="#trial" class="btn btn-blue btn-lg ">
+                            <i class="fa-solid fa-rocket"></i> Start Free Trial
+                        </a>
+                        
+                    </div>
+
+                    <div class="hero-trust">
+                        <div class="trust-avatars">
+                            <div class="av" style="background:#fde8e8;color:#e53e3e">RK</div>
+                            <div class="av" style="background:#e8f4fd;color:#2b7de9">PS</div>
+                            <div class="av" style="background:#e8fdf0;color:#2d9e5c">AM</div>
+                            <div class="av" style="background:#fdf8e8;color:#b7891a">VR</div>
+                        </div>
+                        <div class="trust-txt">
+                            <div class="trust-stars">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <strong>4.9/5</strong> from 12,450+ happy businesses
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <!-- <div class="hero-float-1">
+          <div class="float-icon" style="background:var(--green-lt);color:var(--green)"><i class="fa-solid fa-arrow-trend-up"></i></div>
+          <div><div class="float-val">+38%</div><div class="float-sub">Revenue this month</div></div>
+        </div> -->
+
+                    <div class="hero-dash">
+                        <div class="dash-topbar">
+                            <div class="dash-dots">
+                                <div class="dash-dot r"></div>
+                                <div class="dash-dot y"></div>
+                                <div class="dash-dot g"></div>
+                            </div>
+                            <div class="dash-title-bar">JSDMCRM Dashboard</div>
+                            <div style="margin-left:auto;display:flex;align-items:center;gap:5px;font-size:.7rem;font-weight:700;color:var(--green)"><span style="width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse-green 2s infinite"></span>Live</div>
+                        </div>
+                        <div class="dash-body">
+                            <div class="dash-kpi-row">
+                                <div class="kpi">
+                                    <div class="kpi-val" style="color:var(--blue)">1,247</div>
+                                    <div class="kpi-lbl">Active Leads</div>
+                                    <div class="kpi-badge up"><i class="fa-solid fa-arrow-up"></i> 12%</div>
+                                </div>
+                                <div class="kpi">
+                                    <div class="kpi-val" style="color:var(--orange)">₹4.8L</div>
+                                    <div class="kpi-lbl">Monthly Revenue</div>
+                                    <div class="kpi-badge up"><i class="fa-solid fa-arrow-up"></i> 38%</div>
+                                </div>
+                                <div class="kpi">
+                                    <div class="kpi-val" style="color:var(--green)">98%</div>
+                                    <div class="kpi-lbl">Tickets Resolved</div>
+                                    <div class="kpi-badge up"><i class="fa-solid fa-arrow-up"></i> 5%</div>
+                                </div>
+                            </div>
+                            <div class="dash-chart-lbl">Revenue — Last 7 months</div>
+                            <div class="chart-bars">
+                                <div class="cb blue" style="height:42%"></div>
+                                <div class="cb orange" style="height:58%"></div>
+                                <div class="cb blue" style="height:52%"></div>
+                                <div class="cb orange" style="height:70%"></div>
+                                <div class="cb blue" style="height:65%"></div>
+                                <div class="cb blue-active" style="height:88%"></div>
+                                <div class="cb blue" style="height:76%"></div>
+                            </div>
+                            <div class="dash-row2">
+                                <div class="mini-card">
+                                    <div class="mc-head">
+                                        <div class="mc-icon" style="background:var(--cyan-lt);color:var(--cyan)"><i class="fa-solid fa-location-dot"></i></div>
+                                        <span class="mc-status status-live">Live</span>
+                                    </div>
+                                    <div class="mc-val">38</div>
+                                    <div class="mc-lbl">Field Agents Online</div>
+                                </div>
+                                <div class="mini-card">
+                                    <div class="mc-head">
+                                        <div class="mc-icon" style="background:var(--gold-lt);color:var(--gold)"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                                        <span class="mc-status status-pend">Pending</span>
+                                    </div>
+                                    <div class="mc-val">₹68K</div>
+                                    <div class="mc-lbl">Invoices Due Today</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hero-float-2">
+                        <div class="float-icon" style="background:var(--blue-lt);color:var(--blue)"><i class="fa-solid fa-headset"></i></div>
+                        <div>
+                            <div class="float-val">12 Tickets</div>
+                            <div class="float-sub">Resolved in &lt;2 hrs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ CLIENTS ════════ -->
+    <div class="clients">
+        <div class="clients-label">Trusted by 12,450+ businesses across India</div>
+        <div class="ticker-wrap">
+            <div class="ticker">
+                <div class="ticker-item"><i class="fa-solid fa-building"></i>NovaBuild Co.</div>
+                <div class="ticker-item"><i class="fa-solid fa-plane"></i>TravelBridge</div>
+                <div class="ticker-item"><i class="fa-solid fa-graduation-cap"></i>EduReach India</div>
+                <div class="ticker-item"><i class="fa-solid fa-shield-halved"></i>InsureNow</div>
+                <div class="ticker-item"><i class="fa-solid fa-city"></i>PropSpace Realty</div>
+                <div class="ticker-item"><i class="fa-solid fa-rocket"></i>LaunchPath SaaS</div>
+                <div class="ticker-item"><i class="fa-solid fa-store"></i>TradeWave</div>
+                <div class="ticker-item"><i class="fa-solid fa-hospital"></i>MediCare Plus</div>
+                <div class="ticker-item"><i class="fa-solid fa-truck"></i>LogiTrack</div>
+                <div class="ticker-item"><i class="fa-solid fa-solar-panel"></i>GreenForce Energy</div>
+                <!-- duplicate for loop -->
+                <div class="ticker-item"><i class="fa-solid fa-building"></i>NovaBuild Co.</div>
+                <div class="ticker-item"><i class="fa-solid fa-plane"></i>TravelBridge</div>
+                <div class="ticker-item"><i class="fa-solid fa-graduation-cap"></i>EduReach India</div>
+                <div class="ticker-item"><i class="fa-solid fa-shield-halved"></i>InsureNow</div>
+                <div class="ticker-item"><i class="fa-solid fa-city"></i>PropSpace Realty</div>
+                <div class="ticker-item"><i class="fa-solid fa-rocket"></i>LaunchPath SaaS</div>
+                <div class="ticker-item"><i class="fa-solid fa-store"></i>TradeWave</div>
+                <div class="ticker-item"><i class="fa-solid fa-hospital"></i>MediCare Plus</div>
+                <div class="ticker-item"><i class="fa-solid fa-truck"></i>LogiTrack</div>
+                <div class="ticker-item"><i class="fa-solid fa-solar-panel"></i>GreenForce Energy</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════ PROBLEM / SOLUTION ════════ -->
+    <!-- <section class="problem">
+  <div class="wrap">
+    <div class="problem-grid">
+      <div class="problem-left rev-l">
+        <div class="eyebrow"><i class="fa-solid fa-triangle-exclamation"></i> The Problem</div>
+        <h2 class="h2" style="margin-bottom:1rem">Your Tools Are <br><em>Working Against You</em></h2>
+        <p class="lead" style="margin-bottom:2.5rem">Most businesses juggle 4–6 disconnected apps. Data gets lost, teams get confused, and revenue slips through the cracks.</p>
+        <div class="chaos-cards">
+          <div class="chaos-card crossed">
+            <div class="chaos-ico" style="background:rgba(220,38,38,.15);color:#f87171"><i class="fa-brands fa-salesforce"></i></div>
+            <div class="chaos-txt"><h5>CRM App #1</h5><p>₹3,000/month — only tracks contacts</p></div>
+          </div>
+          <div class="chaos-card crossed">
+            <div class="chaos-ico" style="background:rgba(234,179,8,.15);color:#fbbf24"><i class="fa-solid fa-file-invoice"></i></div>
+            <div class="chaos-txt"><h5>Invoicing App #2</h5><p>₹1,500/month — disconnected from CRM</p></div>
+          </div>
+          <div class="chaos-card crossed">
+            <div class="chaos-ico" style="background:rgba(139,92,246,.15);color:#a78bfa"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="chaos-txt"><h5>GPS Tracker App #3</h5><p>₹2,200/month — no sales integration</p></div>
+          </div>
+          <div class="chaos-card crossed">
+            <div class="chaos-ico" style="background:rgba(16,185,129,.15);color:#34d399"><i class="fa-solid fa-headset"></i></div>
+            <div class="chaos-txt"><h5>Helpdesk App #4</h5><p>₹1,800/month — can't see customer history</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="problem-right rev-r" style="display:flex;flex-direction:column;gap:1.5rem">
+        <div class="solve-card">
+          <div class="solve-icon"><i class="fa-solid fa-layer-group"></i></div>
+          <h3>One Platform. Zero Chaos.</h3>
+          <p>JSDMCRM replaces all your disconnected tools with a single, unified operating system for your business. Pay once, run everything.</p>
+          <div class="solve-features">
+            <div class="sf-item"><i class="fa-solid fa-check"></i> ₹8,500/month saved on app subscriptions</div>
+            <div class="sf-item"><i class="fa-solid fa-check"></i> Single login for your entire team</div>
+            <div class="sf-item"><i class="fa-solid fa-check"></i> Unified data — no manual syncing</div>
+            <div class="sf-item"><i class="fa-solid fa-check"></i> Set up in under 30 minutes</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);padding:20px;display:flex;align-items:center;gap:16px">
+          <div style="width:52px;height:52px;border-radius:50%;background:rgba(22,163,74,.15);border:2px solid rgba(22,163,74,.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#4ade80;flex-shrink:0"><i class="fa-solid fa-trophy"></i></div>
+          <div>
+            <div style="font-size:.9rem;font-weight:700;color:#fff;margin-bottom:3px">Rated #1 Affordable CRM in India</div>
+            <div style="font-size:.78rem;color:rgba(255,255,255,.5)">By 12,450+ business owners in 2024–25</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+    <!-- ════════ FEATURES ════════ -->
+    <section class="features section" id="features">
+        <div class="wrap">
+            <div class="tc rev">
+                <div class="eyebrow cyan"><i class="fa-solid fa-gear"></i> Product Features</div>
+                <h2 class="h2">Everything Your Business Needs,<br><span class="blue-grad">In One Place</span></h2>
+                <p class="lead" style="max-width:560px;margin:.8rem auto 0">10 integrated modules — from the first lead to the final invoice. All connected, all smart.</p>
+            </div>
+
+            <div class="feat-wrap rev">
+                <div class="feat-nav-sticky">
+                    <div class="feat-nav-list" id="fnList">
+                        <button class="fn-btn active" data-tab="leadgen">
+                            <div class="fn-icon" style="background:var(--blue-lt);color:var(--blue)"><i class="fa-solid fa-magnet"></i></div>
+                            <div><span class="fn-ttl">Lead Generation</span><span class="fn-sub">Turn visits into pipeline</span></div>
+                            <i class="fa-solid fa-chevron-right fn-arr"></i>
+                        </button>
+                        <button class="fn-btn" data-tab="leaddist">
+                            <div class="fn-icon" style="background:var(--cyan-lt);color:var(--cyan)"><i class="fa-solid fa-share-nodes"></i></div>
+                            <div><span class="fn-ttl">Lead Distribution</span><span class="fn-sub">Auto-route to agents</span></div>
+                            <i class="fa-solid fa-chevron-right fn-arr"></i>
+                        </button>
+                        <button class="fn-btn" data-tab="crm">
+                            <div class="fn-icon" style="background:var(--purple-lt);color:var(--purple)"><i class="fa-solid fa-users"></i></div>
+                            <div><span class="fn-ttl">CRM Management</span><span class="fn-sub">360° customer view</span></div>
+                            <i class="fa-solid fa-chevron-right fn-arr"></i>
+                        </button>
+                        <button class="fn-btn" data-tab="automation">
+                            <div class="fn-icon" style="background:var(--orange-lt);color:var(--orange)"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                            <div><span class="fn-ttl">Marketing Automation</span><span class="fn-sub">Workflows that never forget</span></div>
+                            <i class="fa-solid fa-chevron-right fn-arr"></i>
+                        </button>
+                        <button class="fn-btn" data-tab="deals">
+                            <div class="fn-icon" style="background:var(--green-lt);color:var(--green)"><i class="fa-solid fa-handshake"></i></div>
+                            <div><span class="fn-ttl">Deal Pipeline</span><span class="fn-sub">Visual sales funnel</span></div>
+                            <i class="fa-solid fa-chevron-right fn-arr"></i>
+                        </button>
+                        <button class="fn-btn" data-tab="invoicing">
+                            <div class="fn-icon" style="background:var(--gold-lt);color:var(--gold)"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                            <div><span class="fn-ttl">Quotes & Invoicing</span><span class="fn-sub">Quote to cash, fast</span></div>
+                            <i class="fa-solid fa-chevron-right fn-arr"></i>
+                        </button>
+                        <button class="fn-btn" data-tab="payments">
+                            <div class="fn-icon" style="background:var(--blue-lt);color:var(--blue)"><i class="fa-regular fa-credit-card"></i></div>
+                            <div><span class="fn-ttl">Payments</span><span class="fn-sub">Collect safer, faster</span></div>
+                            <i class="fa-solid fa-chevron-right fn-arr"></i>
+                        </button>
+                        <button class="fn-btn" data-tab="helpdesk">
+                            <div class="fn-icon" style="background:var(--red-lt);color:var(--red)"><i class="fa-solid fa-headset"></i></div>
+                            <div><span class="fn-ttl">Helpdesk & Ticketing</span><span class="fn-sub">Support that scales</span></div>
+                            <i class="fa-solid fa-chevron-right fn-arr"></i>
+                        </button>
+                        <button class="fn-btn" data-tab="fieldforce">
+                            <div class="fn-icon" style="background:var(--cyan-lt);color:var(--cyan)"><i class="fa-solid fa-location-dot"></i></div>
+                            <div><span class="fn-ttl">Field Force</span><span class="fn-sub">GPS & remote teams</span></div>
+                            <i class="fa-solid fa-chevron-right fn-arr"></i>
+                        </button>
+                        <button class="fn-btn" data-tab="chatbot">
+                            <div class="fn-icon" style="background:var(--pink-lt);color:var(--pink)"><i class="fa-solid fa-comment-dots"></i></div>
+                            <div><span class="fn-ttl">AI Chatbots</span><span class="fn-sub">24×7 conversations</span></div>
+                            <i class="fa-solid fa-chevron-right fn-arr"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="featContent">
+                    <div class="feat-pane active" data-panel="leadgen">
+                        <div class="feat-pane-card">
+                            <div class="fpc-header">
+                                <div class="fpc-chips"><span class="fchip">Capture</span><span class="fchip">Qualify</span><span class="fchip">Convert</span></div>
+                                <h3>Lead Generation</h3>
+                                <p>Capture leads from any source or generate them on your website with dynamic forms, exit-intent popups, and multi-channel campaigns.</p>
+                                <div class="fpc-actions">
+                                    <button class="btn btn-blue btn-sm"><i class="fa-solid fa-arrow-right"></i> Explore Engage Tool</button>
+                                    <button class="btn btn-outline btn-sm">Universal Forms</button>
+                                </div>
+                            </div>
+                            <div class="fpc-body">
+                                <div class="bene-grid">
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--blue-lt);color:var(--blue)"><i class="fa-solid fa-wand-sparkles"></i></div>
+                                        <div class="bene-ttl">Smart Contact Forms</div>
+                                        <p class="bene-txt">Convert visitors with popups, deal bars, and exit-intent flows that capture intent.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--cyan-lt);color:var(--cyan)"><i class="fa-solid fa-satellite-dish"></i></div>
+                                        <div class="bene-ttl">Multi-Source Capture</div>
+                                        <p class="bene-txt">Pull leads from Facebook, Google Ads, Indiamart, Justdial, TradeIndia and more.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--orange-lt);color:var(--orange)"><i class="fa-solid fa-globe"></i></div>
+                                        <div class="bene-ttl">Universal Forms</div>
+                                        <p class="bene-txt">Consistent, fast, trackable lead forms for any channel or platform.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--purple-lt);color:var(--purple)"><i class="fa-solid fa-paper-plane"></i></div>
+                                        <div class="bene-ttl">WhatsApp & SMS Campaigns</div>
+                                        <p class="bene-txt">Boost inbound flow with targeted WhatsApp, email, or SMS blasts.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feat-pane" data-panel="leaddist">
+                        <div class="feat-pane-card">
+                            <div class="fpc-header">
+                                <div class="fpc-chips"><span class="fchip">Receive</span><span class="fchip">Route</span><span class="fchip">Respond</span></div>
+                                <h3>Lead Distribution</h3>
+                                <p>Auto-distribute leads to agents based on conditions — keep response time under 2 minutes and conversion rates high.</p>
+                                <div class="fpc-actions"><button class="btn btn-blue btn-sm"><i class="fa-solid fa-arrow-right"></i> Learn More</button><button class="btn btn-outline btn-sm">Request Demo</button></div>
+                            </div>
+                            <div class="fpc-body">
+                                <div class="bene-grid">
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--cyan-lt);color:var(--cyan)"><i class="fa-solid fa-shuffle"></i></div>
+                                        <div class="bene-ttl">Auto Distribution</div>
+                                        <p class="bene-txt">Balance workload so every lead gets a prompt, personal response.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--blue-lt);color:var(--blue)"><i class="fa-solid fa-sliders"></i></div>
+                                        <div class="bene-ttl">Rule-Based Routing</div>
+                                        <p class="bene-txt">Route by location, product interest, value tier, or custom rules.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--orange-lt);color:var(--orange)"><i class="fa-solid fa-gears"></i></div>
+                                        <div class="bene-ttl">Workflow Triggers</div>
+                                        <p class="bene-txt">Trigger instant first-touch on the lead's preferred communication channel.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--green-lt);color:var(--green)"><i class="fa-solid fa-bell"></i></div>
+                                        <div class="bene-ttl">Structured Follow-ups</div>
+                                        <p class="bene-txt">Never miss an opportunity with disciplined, automated follow-up prompts.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feat-pane" data-panel="crm">
+                        <div class="feat-pane-card">
+                            <div class="fpc-header">
+                                <div class="fpc-chips"><span class="fchip">Organize</span><span class="fchip">Engage</span><span class="fchip">Retain</span></div>
+                                <h3>CRM Management</h3>
+                                <p>Centralize every customer interaction in a 360° view. Stay on top of every touchpoint and build relationships that last.</p>
+                                <div class="fpc-actions"><button class="btn btn-blue btn-sm"><i class="fa-solid fa-arrow-right"></i> Explore CRM</button><button class="btn btn-outline btn-sm">Chat With Us</button></div>
+                            </div>
+                            <div class="fpc-body">
+                                <div class="bene-grid">
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--purple-lt);color:var(--purple)"><i class="fa-solid fa-circle-nodes"></i></div>
+                                        <div class="bene-ttl">360° Customer View</div>
+                                        <p class="bene-txt">Centralize all customer data for tailored interactions and loyalty.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--blue-lt);color:var(--blue)"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                                        <div class="bene-ttl">Interaction Timeline</div>
+                                        <p class="bene-txt">Full history of every call, email, meeting, and purchase.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--cyan-lt);color:var(--cyan)"><i class="fa-solid fa-calendar-check"></i></div>
+                                        <div class="bene-ttl">Smart Reminders</div>
+                                        <p class="bene-ttl">Automated key-date reminders to boost engagement.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--green-lt);color:var(--green)"><i class="fa-solid fa-face-smile"></i></div>
+                                        <div class="bene-ttl">Upsell & Retain</div>
+                                        <p class="bene-txt">Identify upsell moments and reduce churn with data-driven nudges.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feat-pane" data-panel="automation">
+                        <div class="feat-pane-card">
+                            <div class="fpc-header">
+                                <div class="fpc-chips"><span class="fchip">Automate</span><span class="fchip">Sequence</span><span class="fchip">Scale</span></div>
+                                <h3>Marketing Automation</h3>
+                                <p>Automate follow-ups, build drip sequences, and trigger actions across channels — without writing a single line of code.</p>
+                                <div class="fpc-actions"><button class="btn btn-blue btn-sm"><i class="fa-solid fa-arrow-right"></i> Automate Now</button><button class="btn btn-outline btn-sm">See Templates</button></div>
+                            </div>
+                            <div class="fpc-body">
+                                <div class="bene-grid">
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--orange-lt);color:var(--orange)"><i class="fa-solid fa-list-check"></i></div>
+                                        <div class="bene-ttl">Automate Repetitive Tasks</div>
+                                        <p class="bene-txt">Streamline routine communications and keep outreach consistent.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--purple-lt);color:var(--purple)"><i class="fa-regular fa-clone"></i></div>
+                                        <div class="bene-ttl">Pre-built Workflows</div>
+                                        <p class="bene-txt">Launch faster with ready-made templates built for real business scenarios.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--blue-lt);color:var(--blue)"><i class="fa-solid fa-bullseye"></i></div>
+                                        <div class="bene-ttl">Focus on Closing</div>
+                                        <p class="bene-txt">Let automation handle admin so sales teams focus on high-value deals.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--green-lt);color:var(--green)"><i class="fa-solid fa-shield-halved"></i></div>
+                                        <div class="bene-ttl">Reduce Errors</div>
+                                        <p class="bene-txt">Smart, consistent automation minimizes human error and delays.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feat-pane" data-panel="deals">
+                        <div class="feat-pane-card">
+                            <div class="fpc-header">
+                                <div class="fpc-chips"><span class="fchip">Prioritize</span><span class="fchip">Track</span><span class="fchip">Close</span></div>
+                                <h3>Deal Pipeline</h3>
+                                <p>Kanban-style pipeline to visualize, prioritize, and close deals faster. Know exactly where every opportunity stands.</p>
+                                <div class="fpc-actions"><button class="btn btn-blue btn-sm"><i class="fa-solid fa-arrow-right"></i> Build Pipeline</button><button class="btn btn-outline btn-sm">Watch Demo</button></div>
+                            </div>
+                            <div class="fpc-body">
+                                <div class="bene-grid">
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--green-lt);color:var(--green)"><i class="fa-solid fa-star"></i></div>
+                                        <div class="bene-ttl">Lead Scoring</div>
+                                        <p class="bene-txt">Rank opportunities by potential so teams focus on winning chances.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--blue-lt);color:var(--blue)"><i class="fa-solid fa-layer-group"></i></div>
+                                        <div class="bene-ttl">Funnel Visibility</div>
+                                        <p class="bene-txt">Monitor pipeline movement with full clarity across every stage.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--gold-lt);color:var(--gold)"><i class="fa-solid fa-clock"></i></div>
+                                        <div class="bene-ttl">Automated Reminders</div>
+                                        <p class="bene-txt">Never lose momentum — reminders fire before deals go cold.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--orange-lt);color:var(--orange)"><i class="fa-solid fa-fire"></i></div>
+                                        <div class="bene-ttl">Close Faster</div>
+                                        <p class="bene-txt">Complete customer context means better, faster responses every time.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feat-pane" data-panel="invoicing">
+                        <div class="feat-pane-card">
+                            <div class="fpc-header">
+                                <div class="fpc-chips"><span class="fchip">Propose</span><span class="fchip">Invoice</span><span class="fchip">Receipt</span></div>
+                                <h3>Quotes & Invoicing</h3>
+                                <p>Professional proposals and invoices in seconds. One-click conversion, customer self-service portal, and automated receipts.</p>
+                                <div class="fpc-actions"><button class="btn btn-blue btn-sm"><i class="fa-solid fa-arrow-right"></i> Invoicing Module</button><button class="btn btn-outline btn-sm">See Templates</button></div>
+                            </div>
+                            <div class="fpc-body">
+                                <div class="bene-grid">
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--gold-lt);color:var(--gold)"><i class="fa-solid fa-file-pen"></i></div>
+                                        <div class="bene-ttl">Professional Quotes</div>
+                                        <p class="bene-txt">Polished proposals that increase trust and shorten approval times.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--blue-lt);color:var(--blue)"><i class="fa-solid fa-wand-magic"></i></div>
+                                        <div class="bene-ttl">One-Click Invoice</div>
+                                        <p class="bene-txt">Instantly convert approved quotes into invoices with zero rekeying.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--cyan-lt);color:var(--cyan)"><i class="fa-solid fa-user-shield"></i></div>
+                                        <div class="bene-ttl">Customer Portal</div>
+                                        <p class="bene-txt">Self-service portal for clients to view invoices, pay, and download receipts.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--green-lt);color:var(--green)"><i class="fa-solid fa-stamp"></i></div>
+                                        <div class="bene-ttl">Auto Receipts</div>
+                                        <p class="bene-txt">Auto-generate and send branded receipts for every payment instantly.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feat-pane" data-panel="payments">
+                        <div class="feat-pane-card">
+                            <div class="fpc-header">
+                                <div class="fpc-chips"><span class="fchip">Integrate</span><span class="fchip">Collect</span><span class="fchip">Confirm</span></div>
+                                <h3>Payment Collection</h3>
+                                <p>Integrate any payment gateway to collect directly from quotes. One-click payments, real-time confirmations, and full compliance.</p>
+                                <div class="fpc-actions"><button class="btn btn-blue btn-sm"><i class="fa-solid fa-arrow-right"></i> Enable Payments</button><button class="btn btn-outline btn-sm">See Gateways</button></div>
+                            </div>
+                            <div class="fpc-body">
+                                <div class="bene-grid">
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--blue-lt);color:var(--blue)"><i class="fa-solid fa-hand-pointer"></i></div>
+                                        <div class="bene-ttl">One-Click Payment</div>
+                                        <p class="bene-txt">Clients pay directly from quotes — effortless and instant.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--red-lt);color:var(--red)"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                        <div class="bene-ttl">Reduce Errors</div>
+                                        <p class="bene-txt">Eliminate manual processing issues and improve cashflow reliability.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--green-lt);color:var(--green)"><i class="fa-solid fa-shield"></i></div>
+                                        <div class="bene-ttl">Compliance Ready</div>
+                                        <p class="bene-txt">Secure and compliant transactions that protect sensitive data.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--orange-lt);color:var(--orange)"><i class="fa-solid fa-signal"></i></div>
+                                        <div class="bene-ttl">Real-time Updates</div>
+                                        <p class="bene-txt">Instant payment confirmations keep clients informed and workflows moving.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feat-pane" data-panel="helpdesk">
+                        <div class="feat-pane-card">
+                            <div class="fpc-header">
+                                <div class="fpc-chips"><span class="fchip">Ticket</span><span class="fchip">Route</span><span class="fchip">Resolve</span></div>
+                                <h3>Helpdesk & Ticketing</h3>
+                                <p>Structured tickets, automated routing, and a self-service portal. Turn every customer issue into a brand-building moment.</p>
+                                <div class="fpc-actions"><button class="btn btn-blue btn-sm"><i class="fa-solid fa-arrow-right"></i> Helpdesk Module</button><button class="btn btn-outline btn-sm">Chat With Us</button></div>
+                            </div>
+                            <div class="fpc-body">
+                                <div class="bene-grid">
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--red-lt);color:var(--red)"><i class="fa-solid fa-clock"></i></div>
+                                        <div class="bene-ttl">24×7 Service Desk</div>
+                                        <p class="bene-txt">Always-on support infrastructure for faster resolutions and reliability.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--blue-lt);color:var(--blue)"><i class="fa-solid fa-book-open"></i></div>
+                                        <div class="bene-ttl">Self-Service Portal</div>
+                                        <p class="bene-txt">Empower users with a knowledge base to reduce ticket volume by 40%.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--orange-lt);color:var(--orange)"><i class="fa-solid fa-share"></i></div>
+                                        <div class="bene-ttl">Auto Ticket Routing</div>
+                                        <p class="bene-txt">Assign tickets by skill, team, or priority for quick resolution.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--green-lt);color:var(--green)"><i class="fa-solid fa-gears"></i></div>
+                                        <div class="bene-ttl">SLA Management</div>
+                                        <p class="bene-txt">Set response time SLAs and get alerts before they breach.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feat-pane" data-panel="fieldforce">
+                        <div class="feat-pane-card">
+                            <div class="fpc-header">
+                                <div class="fpc-chips"><span class="fchip">Track</span><span class="fchip">Plan</span><span class="fchip">Report</span></div>
+                                <h3>Field Force Automation</h3>
+                                <p>Real-time GPS tracking, beat planning, geo-attendance, and conveyance calculation. Complete visibility for remote teams.</p>
+                                <div class="fpc-actions"><button class="btn btn-blue btn-sm"><i class="fa-solid fa-arrow-right"></i> Field Force Module</button><button class="btn btn-outline btn-sm">Book Demo</button></div>
+                            </div>
+                            <div class="fpc-body">
+                                <div class="bene-grid">
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--cyan-lt);color:var(--cyan)"><i class="fa-solid fa-tower-broadcast"></i></div>
+                                        <div class="bene-ttl">Real-time GPS Tracking</div>
+                                        <p class="bene-txt">Monitor agent locations live on Google Maps with visit verification.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--blue-lt);color:var(--blue)"><i class="fa-solid fa-route"></i></div>
+                                        <div class="bene-ttl">Beat Plan Scheduler</div>
+                                        <p class="bene-txt">Optimize routes and client visit schedules to maximize productivity.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--orange-lt);color:var(--orange)"><i class="fa-solid fa-user-clock"></i></div>
+                                        <div class="bene-ttl">Geo Attendance</div>
+                                        <p class="bene-txt">Selfie + location-based clock-in/out for accurate payroll support.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--green-lt);color:var(--green)"><i class="fa-solid fa-map"></i></div>
+                                        <div class="bene-ttl">Conveyance Calculator</div>
+                                        <p class="bene-txt">Auto-calculate distance traveled using Google Maps API.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feat-pane" data-panel="chatbot">
+                        <div class="feat-pane-card">
+                            <div class="fpc-header">
+                                <div class="fpc-chips"><span class="fchip">Engage</span><span class="fchip">NLP</span><span class="fchip">Support</span></div>
+                                <h3>AI Chatbots</h3>
+                                <p>Deploy intelligent chatbots on your website and WhatsApp. 24×7 personalized conversations powered by NLP, with human handoff.</p>
+                                <div class="fpc-actions"><button class="btn btn-blue btn-sm"><i class="fa-solid fa-arrow-right"></i> Website Chatbot</button><button class="btn btn-outline btn-sm">WhatsApp Bot</button></div>
+                            </div>
+                            <div class="fpc-body">
+                                <div class="bene-grid">
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--pink-lt);color:var(--pink)"><i class="fa-solid fa-bolt"></i></div>
+                                        <div class="bene-ttl">Instant Responses</div>
+                                        <p class="bene-txt">Swift, precise, personalized answers that delight customers instantly.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--blue-lt);color:var(--blue)"><i class="fa-solid fa-moon"></i></div>
+                                        <div class="bene-ttl">24/7 Availability</div>
+                                        <p class="bene-txt">Never miss a lead — your chatbot works even when your team sleeps.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--green-lt);color:var(--green)"><i class="fa-solid fa-piggy-bank"></i></div>
+                                        <div class="bene-ttl">Reduce Support Costs</div>
+                                        <p class="bene-txt">Automate FAQs and routine tasks to cut overhead by up to 40%.</p>
+                                    </div>
+                                    <div class="bene-card">
+                                        <div class="bene-ico" style="background:var(--cyan-lt);color:var(--cyan)"><i class="fa-solid fa-language"></i></div>
+                                        <div class="bene-ttl">Multi-Language NLP</div>
+                                        <p class="bene-txt">Natural language processing in English and 10+ Indian languages.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ STATS BAND ════════ -->
+    <div class="stats-band">
+        <div class="wrap">
+            <div class="stats-grid">
+                <div class="stat-cell rev rev-d1"><span class="stat-num" data-target="12450">0</span>
+                    <div class="stat-lbl">Happy Businesses</div>
+                </div>
+                <div class="stat-cell rev rev-d2"><span class="stat-num" data-target="4.8" data-suffix="M+">0</span>
+                    <div class="stat-lbl">Leads Managed Monthly</div>
+                </div>
+                <div class="stat-cell rev rev-d3"><span class="stat-num" data-target="99" data-suffix="%">0</span>
+                    <div class="stat-lbl">Uptime Guaranteed</div>
+                </div>
+                <div class="stat-cell rev rev-d4"><span class="stat-num" data-target="7" data-suffix="+ Yrs">0</span>
+                    <div class="stat-lbl">Industry Experience</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════ WHY CHOOSE ════════ -->
+    <section class="why section">
+        <div class="wrap">
+            <div class="tc rev">
+                <div class="eyebrow orange"><i class="fa-solid fa-fire"></i> Why JSDMCRM</div>
+                <h2 class="h2">9 Reasons Why <span class="orange-grad">We're Different</span></h2>
+                <p class="lead" style="max-width:500px;margin:.8rem auto 0">Not just another CRM. Here's what makes JSDMCRM the obvious choice.</p>
+            </div>
+            <div class="why-bento rev">
+                <div class="wc w4 accent-blue">
+                    <div class="wc-icon"><i class="fa-solid fa-wallet"></i></div>
+                    <h4>Affordable — No Per-Seat Shock</h4>
+                    <p>Flat-rate plans with unlimited user options. Stop paying per person.</p>
+                </div>
+                <div class="wc w4">
+                    <div class="wc-num">02</div>
+                    <div class="wc-icon" style="background:var(--cyan-lt);color:var(--cyan)"><i class="fa-solid fa-layer-group"></i></div>
+                    <h4>All-in-One Stack</h4>
+                    <p>CRM, invoicing, field tracking, and helpdesk — under one login, one database.</p>
+                </div>
+                <div class="wc w4">
+                    <div class="wc-num">03</div>
+                    <div class="wc-icon" style="background:var(--orange-lt);color:var(--orange)"><i class="fa-solid fa-mobile-screen"></i></div>
+                    <h4>Mobile First</h4>
+                    <p>Full iOS & Android apps. Your team stays productive on any device.</p>
+                </div>
+                <div class="wc w3">
+                    <div class="wc-num">04</div>
+                    <div class="wc-icon" style="background:var(--green-lt);color:var(--green)"><i class="fa-solid fa-bolt"></i></div>
+                    <h4>5-Min Setup</h4>
+                    <p>Go live without IT. Import your data and start immediately.</p>
+                </div>
+                <div class="wc w3">
+                    <div class="wc-num">05</div>
+                    <div class="wc-icon" style="background:var(--purple-lt);color:var(--purple)"><i class="fa-solid fa-plug"></i></div>
+                    <h4>Rich Integrations</h4>
+                    <p>WhatsApp, Facebook, Google Ads, Indiamart, Razorpay & more out of the box.</p>
+                </div>
+                <div class="wc w3">
+                    <div class="wc-num">06</div>
+                    <div class="wc-icon" style="background:var(--gold-lt);color:var(--gold)"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h4>Enterprise Security</h4>
+                    <p>99.9% uptime SLA, data encryption, role-based access, and audit logs.</p>
+                </div>
+                <div class="wc w3">
+                    <div class="wc-num">07</div>
+                    <div class="wc-icon" style="background:var(--pink-lt);color:var(--pink)"><i class="fa-solid fa-sliders"></i></div>
+                    <h4>Fully Customisable</h4>
+                    <p>Custom fields, pipelines, workflows, and reports tailored to your process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ HOW IT WORKS ════════ -->
+    <!-- <section class="hiw section" id="how">
+  <div class="wrap">
+    <div class="tc rev">
+      <div class="eyebrow green"><i class="fa-solid fa-route"></i> How It Works</div>
+      <h2 class="h2">Up and Running in <span class="cyan-grad">4 Simple Steps</span></h2>
+      <p class="lead" style="max-width:500px;margin:.8rem auto 0">No complex onboarding. No IT team needed. Just results.</p>
+    </div>
+    <div class="hiw-steps rev">
+      <div class="step rev-d1">
+        <div class="step-num">01<div class="step-icon"><i class="fa-solid fa-arrow-right"></i></div></div>
+        <h4>Sign Up Free</h4>
+        <p>Create your account in 60 seconds. No credit card required. 7-day full access.</p>
+      </div>
+      <div class="step rev-d2">
+        <div class="step-num">02<div class="step-icon"><i class="fa-solid fa-arrow-right"></i></div></div>
+        <h4>Import Your Data</h4>
+        <p>Upload your leads, contacts, and products from Excel or connect via integrations.</p>
+      </div>
+      <div class="step rev-d3">
+        <div class="step-num">03<div class="step-icon"><i class="fa-solid fa-arrow-right"></i></div></div>
+        <h4>Set Up Your Team</h4>
+        <p>Add team members, assign roles, and configure your first automation workflow.</p>
+      </div>
+      <div class="step rev-d4">
+        <div class="step-num">04</div>
+        <h4>Grow & Scale</h4>
+        <p>Watch your leads convert, invoices flow, and team performance improve — in real time.</p>
+      </div>
+    </div>
+  </div>
+</section>  -->
+
+    <!-- ════════ INDUSTRIES ════════ -->
+    <section class="industries section" id="industries">
+        <div class="wrap">
+            <div class="tc rev">
+                <div class="eyebrow purple"><i class="fa-solid fa-building"></i> Industries</div>
+                <h2 class="h2">Built for Your <span class="blue-grad">Industry</span></h2>
+                <p class="lead" style="max-width:540px;margin:.8rem auto 0">JSDMCRM adapts to how your industry works — not the other way around.</p>
+            </div>
+            <div class="ind-grid rev">
+                <div class="ind-card rev-d1">
+                    <div class="ind-icon" style="background:var(--blue-lt);color:var(--blue)"><i class="fa-solid fa-rocket"></i></div>
+                    <h3>SaaS & Startups</h3>
+                    <p>Lightning-fast lead pipeline, trial-to-paid automation, and MRR tracking built for growth-stage companies.</p>
+                    <div class="ind-tags"><span class="ind-tag">Trial Management</span><span class="ind-tag">MRR Tracking</span><span class="ind-tag">Onboarding Flows</span></div>
+                </div>
+                <div class="ind-card rev-d2">
+                    <div class="ind-icon" style="background:var(--orange-lt);color:var(--orange)"><i class="fa-solid fa-city"></i></div>
+                    <h3>Real Estate</h3>
+                    <p>Manage property listings, agent pipelines, site visit scheduling, and broker commissions in one place.</p>
+                    <div class="ind-tags"><span class="ind-tag">Site Visits</span><span class="ind-tag">Agent Tracking</span><span class="ind-tag">Commission Mgmt</span></div>
+                </div>
+                <div class="ind-card rev-d3">
+                    <div class="ind-icon" style="background:var(--cyan-lt);color:var(--cyan)"><i class="fa-solid fa-plane-departure"></i></div>
+                    <h3>Travel Agency</h3>
+                    <p>Capture inquiries from multiple portals, auto-quote packages, and manage bookings with automated follow-ups.</p>
+                    <div class="ind-tags"><span class="ind-tag">Auto Quotes</span><span class="ind-tag">Booking CRM</span><span class="ind-tag">Portal Leads</span></div>
+                </div>
+                <div class="ind-card rev-d4">
+                    <div class="ind-icon" style="background:var(--green-lt);color:var(--green)"><i class="fa-solid fa-user-shield"></i></div>
+                    <h3>Insurance Agency</h3>
+                    <p>Policy renewal reminders, claim tracking, agent performance dashboards, and compliant documentation.</p>
+                    <div class="ind-tags"><span class="ind-tag">Renewal Alerts</span><span class="ind-tag">Claim Tracking</span><span class="ind-tag">Compliance</span></div>
+                </div>
+                <div class="ind-card rev-d5">
+                    <div class="ind-icon" style="background:var(--purple-lt);color:var(--purple)"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <h3>Education & Coaching</h3>
+                    <p>Student enrollment CRM, fee collection, attendance tracking, and parent communication workflows.</p>
+                    <div class="ind-tags"><span class="ind-tag">Enrollment CRM</span><span class="ind-tag">Fee Collection</span><span class="ind-tag">Parent Comm.</span></div>
+                </div>
+                <div class="ind-card rev-d6">
+                    <div class="ind-icon" style="background:var(--red-lt);color:var(--red)"><i class="fa-solid fa-truck"></i></div>
+                    <h3>Logistics & Distribution</h3>
+                    <p>Route optimization, delivery agent tracking, order management, and customer notification automation.</p>
+                    <div class="ind-tags"><span class="ind-tag">Route Optimize</span><span class="ind-tag">Order Mgmt</span><span class="ind-tag">Agent Tracking</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ FIELD FORCE ════════ -->
+    <section class="fieldforce section">
+        <div class="wrap">
+            <div class="tc rev">
+                <div class="eyebrow cyan"><i class="fa-solid fa-location-dot"></i> Field Force</div>
+                <h2 class="h2">Manage Your <span class="cyan-grad">Field Staff Too</span></h2>
+                <p class="lead" style="max-width:540px;margin:.8rem auto 0">Not just leads — track your field employees in real time and manage payroll-ready timesheets.</p>
+            </div>
+            <div class="ff-grid rev">
+                <div class="ff-card rev-d1">
+                    <div class="ff-card-icon" style="background:var(--blue-lt);color:var(--blue)"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>Sales Automation</h3>
+                    <p>Analyze and automate your sales pipeline. Auto-assign leads and track every rep's performance in real time.</p>
+                    <div class="ff-visual">
+                        <div class="ff-bar ff-bar-b" style="--h:42%"></div>
+                        <div class="ff-bar ff-bar-o" style="--h:68%"></div>
+                        <div class="ff-bar ff-bar-b" style="--h:53%"></div>
+                        <div class="ff-bar ff-bar-b" style="--h:86%"></div>
+                        <div class="ff-bar ff-bar-o" style="--h:71%"></div>
+                    </div>
+                </div>
+                <div class="ff-card rev-d2">
+                    <div class="ff-card-icon" style="background:var(--cyan-lt);color:var(--cyan)"><i class="fa-solid fa-map-location-dot"></i></div>
+                    <h3>Field Force Management</h3>
+                    <p>Live GPS tracking, dispatch management, and selfie-based visit verification for your entire field team.</p>
+                    <div class="map-visual">
+                        <div class="map-dot-outer">
+                            <div class="map-dot-inner"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ff-card rev-d3">
+                    <div class="ff-card-icon" style="background:var(--purple-lt);color:var(--purple)"><i class="fa-solid fa-users-gear"></i></div>
+                    <h3>HRMS & Payroll</h3>
+                    <p>GPS attendance, expense management, leave requests, and automated payroll calculations — all in one module.</p>
+                    <div class="hr-visual">
+                        <div class="hr-av">AK</div>
+                        <div class="hr-info">
+                            <div class="hr-bar">
+                                <div class="fill" style="width:78%"></div>
+                            </div>
+                            <div class="hr-bar">
+                                <div class="fill" style="width:62%;background:var(--orange)"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ INTEGRATIONS ════════ -->
+    <section class="integrations section">
+        <div class="wrap">
+            <div class="tc rev">
+                <div class="eyebrow"><i class="fa-solid fa-plug"></i> Integrations</div>
+                <h2 class="h2">Connects With <span class="blue-grad">Your Favourite Tools</span></h2>
+                <p class="lead" style="max-width:520px;margin:.8rem auto 0">30+ native integrations. JSDMCRM plugs into your existing workflow — no disruption.</p>
+            </div>
+            <div class="int-grid rev">
+                <div class="int-card">
+                    <div class="int-icon" style="background:#e7f3ff;color:#1877f2"><i class="fa-brands fa-facebook"></i></div>
+                    <div class="int-name">Facebook Leads</div>
+                </div>
+                <div class="int-card">
+                    <div class="int-icon" style="background:#fff0e8;color:#ff6b35"><i class="fa-brands fa-whatsapp" style="color:#25d366"></i></div>
+                    <div class="int-name">WhatsApp API</div>
+                </div>
+                <div class="int-card">
+                    <div class="int-icon" style="background:#fff8e1;color:#f9ab00"><i class="fa-brands fa-google" style="color:#4285f4"></i></div>
+                    <div class="int-name">Google Ads</div>
+                </div>
+                <div class="int-card">
+                    <div class="int-icon" style="background:#e8fdf0;color:#00b300"><i class="fa-solid fa-store"></i></div>
+                    <div class="int-name">Indiamart</div>
+                </div>
+                <div class="int-card">
+                    <div class="int-icon" style="background:#fce8f3;color:#db2777"><i class="fa-solid fa-tags"></i></div>
+                    <div class="int-name">Justdial</div>
+                </div>
+                <div class="int-card">
+                    <div class="int-icon" style="background:#e8effe;color:#2563eb"><i class="fa-solid fa-credit-card"></i></div>
+                    <div class="int-name">Razorpay</div>
+                </div>
+                <div class="int-card">
+                    <div class="int-icon" style="background:#f3f0fe;color:#7c3aed"><i class="fa-brands fa-instagram"></i></div>
+                    <div class="int-name">Instagram Leads</div>
+                </div>
+                <div class="int-card">
+                    <div class="int-icon" style="background:#fff4e6;color:#ff6c2f"><i class="fa-brands fa-mailchimp" style="color:#ff6c2f"></i></div>
+                    <div class="int-name">Email Marketing</div>
+                </div>
+                <div class="int-card">
+                    <div class="int-icon" style="background:#e0f7f4;color:#009688"><i class="fa-solid fa-map-location-dot"></i></div>
+                    <div class="int-name">Google Maps</div>
+                </div>
+                <div class="int-card">
+                    <div class="int-icon" style="background:#fef3c7;color:#d97706"><i class="fa-solid fa-sms"></i></div>
+                    <div class="int-name">Bulk SMS</div>
+                </div>
+                <div class="int-card">
+                    <div class="int-icon" style="background:#dcfce7;color:#16a34a"><i class="fa-brands fa-trade-federation" style="color:#1a9e3f"></i></div>
+                    <div class="int-name">TradeIndia</div>
+                </div>
+                <div class="int-card">
+                    <div class="int-icon" style="background:#fce7f3;color:#be185d"><i class="fa-solid fa-robot"></i></div>
+                    <div class="int-name">AI Chatbot</div>
+                </div>
+            </div>
+            <div class="int-cta rev">
+                <p>Don't see your tool? We build custom integrations.</p>
+                <a href="#" class="btn btn-outline"><i class="fa-solid fa-code"></i> Request Integration</a>
+            </div>
+        </div>
+    </section>
+    <!-- ════════ PRICING ════════ -->
+    <section class="pricing section" id="trial">
+        <div class="wrap">
+            <div class="tc rev">
+                <div class="eyebrow gold"><i class="fa-solid fa-tag"></i> Pricing</div>
+                <h2 class="h2">Simple, <span class="orange-grad">Transparent</span> Pricing</h2>
+                <p class="lead" style="max-width:500px;margin:.8rem auto 0">No hidden fees. No per-seat surprises. Choose your plan and scale freely.</p>
+            </div>
+
+            <div class="pricing-grid rev">
+                                <div class="pc rev-d1">
+                    <div class="pc-plan">Starter</div>
+                    <div class="pc-price">
+                        <span class="pc-curr">₹</span>
+                        <span class="pc-amt price-val" data-monthly="149" data-annual="119">1900.00</span>
+                        <span class="pc-per">/Year</span>
+                    </div>
+                    <p class="pc-desc">For small businesses or teams</p>
+                    <hr class="pc-div">
+                    <ul class="pc-feats">
+                                                
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Up to 1,000 students
+                        </li>
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Basic lead management
+                        </li>
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Email support
+                        </li>
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Standard reports
+                        </li>
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Workflow automation
+                        </li>
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Team collaboration
+                        </li>
+                                                                    </ul>
+
+                    <a href="https://edzhi.com/subscription/1" class="btn-pc btn-pc-outline">Trial</a>
+
+                </div>
+                                <div class="pc rev-d1">
+                    <div class="pc-plan">trial</div>
+                    <div class="pc-price">
+                        <span class="pc-curr">₹</span>
+                        <span class="pc-amt price-val" data-monthly="149" data-annual="119">3900.00</span>
+                        <span class="pc-per">/Year</span>
+                    </div>
+                    <p class="pc-desc">For growing teams</p>
+                    <hr class="pc-div">
+                    <ul class="pc-feats">
+                                                
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Up to 10,000 students
+                        </li>
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Advanced lead management
+                        </li>
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Advanced analytics
+                        </li>
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Priority support
+                        </li>
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Workflow automation
+                        </li>
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Team collaboration
+                        </li>
+                                                                    </ul>
+
+                    <a href="https://edzhi.com/subscription/2" class="btn-pc btn-pc-outline">Trial</a>
+
+                </div>
+                                <div class="pc rev-d1">
+                    <div class="pc-plan">Enterprise</div>
+                    <div class="pc-price">
+                        <span class="pc-curr">₹</span>
+                        <span class="pc-amt price-val" data-monthly="149" data-annual="119">4900.00</span>
+                        <span class="pc-per">/Year</span>
+                    </div>
+                    <p class="pc-desc">For large organizations</p>
+                    <hr class="pc-div">
+                    <ul class="pc-feats">
+                                                
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Unlimited students
+                        </li>
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Custom lead scoring
+                        </li>
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        24/7 phone support
+                        </li>
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Custom reporting
+                        </li>
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        Advanced automation
+                        </li>
+                                                <li class="pcf ">
+                                                        <i class="fa-solid fa-xmark no"></i>
+                                                        API access
+                        </li>
+                                                                    </ul>
+
+                    <a href="https://edzhi.com/subscription/3" class="btn-pc btn-pc-outline">Trial</a>
+
+                </div>
+                            </div>
+            <p class="price-footer">7-day free trial · No credit card required · Cancel anytime · <a href="#">Compare all features →</a></p>
+        </div>
+    </section>
+    <!-- ════════ COMPARE TABLE ════════ -->
+    <section class="compare section" id="compare">
+        <div class="wrap">
+            <div class="tc rev">
+                <div class="eyebrow"><i class="fa-solid fa-table-columns"></i> Comparison</div>
+                <h2 class="h2">JSDMCRM vs <span class="blue-grad">The Competition</span></h2>
+                <p class="lead" style="max-width:500px;margin:.8rem auto 0">See exactly how we stack up against traditional CRM + separate tool stacks.</p>
+            </div>
+            <table class="cmp-table rev">
+                <thead>
+                    <tr>
+                        <th style="width:32%">Feature</th>
+                        <th class="th-blue">JSDMCRM</th>
+                        <th>Zoho CRM</th>
+                        <th>Salesforce</th>
+                        <th>Custom Tools</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="cmp-cat">
+                        <td colspan="5">Core CRM</td>
+                    </tr>
+                    <tr>
+                        <td>Lead Management</td>
+                        <td class="td-blue"><i class="fa-solid fa-check cmp-yes"></i></td>
+                        <td><i class="fa-solid fa-check cmp-yes"></i></td>
+                        <td><i class="fa-solid fa-check cmp-yes"></i></td>
+                        <td><i class="fa-solid fa-xmark cmp-no"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Marketing Automation</td>
+                        <td class="td-blue"><i class="fa-solid fa-check cmp-yes"></i></td>
+                        <td><i class="fa-solid fa-check cmp-yes"></i></td>
+                        <td><i class="fa-solid fa-check cmp-yes"></i></td>
+                        <td><i class="fa-solid fa-xmark cmp-no"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Deal Pipeline (Kanban)</td>
+                        <td class="td-blue"><i class="fa-solid fa-check cmp-yes"></i></td>
+                        <td><i class="fa-solid fa-check cmp-yes"></i></td>
+                        <td><i class="fa-solid fa-check cmp-yes"></i></td>
+                        <td>Varies</td>
+                    </tr>
+                    <tr class="cmp-cat">
+                        <td colspan="5">Unique Strengths</td>
+                    </tr>
+                    <tr>
+                        <td>GPS Field Force Tracking</td>
+                        <td class="td-blue"><i class="fa-solid fa-check cmp-yes"></i></td>
+                        <td><i class="fa-solid fa-xmark cmp-no"></i></td>
+                        <td><i class="fa-solid fa-xmark cmp-no"></i></td>
+                        <td>Separate App</td>
+                    </tr>
+                    <tr>
+                        <td>HRMS & Payroll Module</td>
+                        <td class="td-blue"><i class="fa-solid fa-check cmp-yes"></i></td>
+                        <td><i class="fa-solid fa-xmark cmp-no"></i></td>
+                        <td><i class="fa-solid fa-xmark cmp-no"></i></td>
+                        <td>Separate App</td>
+                    </tr>
+                    <tr>
+                        <td>Integrated Invoicing</td>
+                        <td class="td-blue"><i class="fa-solid fa-check cmp-yes"></i></td>
+                        <td>Add-on</td>
+                        <td>Add-on</td>
+                        <td>Separate App</td>
+                    </tr>
+                    <tr>
+                        <td>WhatsApp Automation</td>
+                        <td class="td-blue"><i class="fa-solid fa-check cmp-yes"></i></td>
+                        <td>Add-on</td>
+                        <td><i class="fa-solid fa-xmark cmp-no"></i></td>
+                        <td>Varies</td>
+                    </tr>
+                    <tr class="cmp-cat">
+                        <td colspan="5">Pricing & Support</td>
+                    </tr>
+                    <tr>
+                        <td>Unlimited Users Plan</td>
+                        <td class="td-blue"><i class="fa-solid fa-check cmp-yes"></i></td>
+                        <td><i class="fa-solid fa-xmark cmp-no"></i></td>
+                        <td><i class="fa-solid fa-xmark cmp-no"></i></td>
+                        <td><i class="fa-solid fa-xmark cmp-no"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Starting Price (per user)</td>
+                        <td class="td-blue" style="font-weight:800;color:var(--blue)">₹149/mo</td>
+                        <td>₹800/mo</td>
+                        <td>₹2,500/mo</td>
+                        <td>₹500+/mo</td>
+                    </tr>
+                    <tr>
+                        <td>24×7 Support</td>
+                        <td class="td-blue"><i class="fa-solid fa-check cmp-yes"></i></td>
+                        <td>Paid Plan</td>
+                        <td>Paid Plan</td>
+                        <td><i class="fa-solid fa-xmark cmp-no"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Setup Time</td>
+                        <td class="td-blue" style="font-weight:700;color:var(--green)">5 Minutes</td>
+                        <td>Days</td>
+                        <td>Weeks</td>
+                        <td>Months</td>
+        </div>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- ════════ TESTIMONIALS ════════ -->
+    <section class="testi section">
+        <div class="wrap">
+            <div class="tc rev">
+                <div class="eyebrow gold"><i class="fa-solid fa-star"></i> Customer Stories</div>
+                <h2 class="h2">12,450 Businesses <span class="orange-grad">Can't Be Wrong</span></h2>
+                <p class="lead" style="max-width:480px;margin:.8rem auto 0">Real stories from real businesses across India who transformed their operations with JSDMCRM.</p>
+            </div>
+            <div class="testi-grid rev">
+                <div class="tc-card rev-d1">
+                    <div class="tc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="tc-quote">JSDMCRM completely transformed how we handle our 40-person field team. The GPS tracking alone saves us 3 hours every day. The helpdesk now shows full customer context — it's a game-changer.</p>
+                    <div class="tc-author">
+                        <div class="tc-av" style="background:#fde8e8;color:#c53030">RK</div>
+                        <div>
+                            <div class="tc-name">Rajesh Kumar</div>
+                            <div class="tc-role">Operations Head, BuildTech India</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tc-card rev-d2">
+                    <div class="tc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="tc-quote">We moved from 3 different apps to just JSDMCRM and saved ₹6,000/month. The WhatsApp automation cut our lead response time from 2 hours to under 5 minutes. Revenue jumped 38% in 3 months.</p>
+                    <div class="tc-author">
+                        <div class="tc-av" style="background:#e8f4fd;color:#1a55a3">PS</div>
+                        <div>
+                            <div class="tc-name">Priya Sharma</div>
+                            <div class="tc-role">Founder, PropSpace Realty</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tc-card rev-d3">
+                    <div class="tc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                    <p class="tc-quote">Set up took 20 minutes flat. Our travel agency manages 400+ leads a month now with zero data leakage. The invoicing module makes our finance team very happy. Highly recommended!</p>
+                    <div class="tc-author">
+                        <div class="tc-av" style="background:#fff4e6;color:#b7600a">AM</div>
+                        <div>
+                            <div class="tc-name">Aditya Mehta</div>
+                            <div class="tc-role">CEO, TravelBridge India</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-footer rev">
+                <div class="rating-badge">
+                    <span class="rb-score">4.9</span>
+                    <div class="rb-stars">
+                        <div class="rb-stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <div class="rb-count">Based on 12,450+ verified reviews</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ FAQ ════════ -->
+    <section class="faq section" id="faq">
+        <div class="wrap">
+            <div class="tc rev">
+                <div class="eyebrow"><i class="fa-solid fa-circle-question"></i> FAQ</div>
+                <h2 class="h2">Common <span class="blue-grad">Questions</span></h2>
+                <p class="lead" style="max-width:460px;margin:.8rem auto 0">Everything you need to know before you get started.</p>
+            </div>
+            <div class="faq-grid rev">
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><span class="faq-q-txt">Is there really no setup fee or hidden charges?</span>
+                        <div class="faq-arrow"><i class="fa-solid fa-plus"></i></div>
+                    </div>
+                    <div class="faq-a">Absolutely none. What you see on the pricing page is exactly what you pay. No onboarding fee, no setup cost, no surprise bills. The 7-day trial is completely free with full access.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><span class="faq-q-txt">How long does it take to set up JSDMCRM?</span>
+                        <div class="faq-arrow"><i class="fa-solid fa-plus"></i></div>
+                    </div>
+                    <div class="faq-a">Most businesses are fully operational within 30 minutes. Import your leads via Excel or CSV, add your team members, configure basic automation, and you're live. No IT team required.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><span class="faq-q-txt">Can I import data from my existing CRM?</span>
+                        <div class="faq-arrow"><i class="fa-solid fa-plus"></i></div>
+                    </div>
+                    <div class="faq-a">Yes. We support bulk import from Excel, CSV, and direct migration from Zoho CRM, Salesforce, HubSpot, and most other platforms. Our onboarding team helps with complex migrations for free.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><span class="faq-q-txt">What happens to my data if I cancel?</span>
+                        <div class="faq-arrow"><i class="fa-solid fa-plus"></i></div>
+                    </div>
+                    <div class="faq-a">Your data belongs to you. You can export everything in Excel or CSV format before you cancel. We retain your data for 30 days post-cancellation in case you change your mind.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><span class="faq-q-txt">Does the mobile app work offline?</span>
+                        <div class="faq-arrow"><i class="fa-solid fa-plus"></i></div>
+                    </div>
+                    <div class="faq-a">Yes, the field force mobile app has limited offline functionality — agents can log visits, take attendance, and update lead status. Data syncs automatically once connectivity is restored.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><span class="faq-q-txt">Is my data secure? Where is it stored?</span>
+                        <div class="faq-arrow"><i class="fa-solid fa-plus"></i></div>
+                    </div>
+                    <div class="faq-a">All data is stored on AWS India servers with AES-256 encryption at rest and TLS 1.3 in transit. We are ISO 27001 compliant with regular third-party security audits. Role-based access prevents unauthorized data views.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><span class="faq-q-txt">Can I upgrade or downgrade my plan anytime?</span>
+                        <div class="faq-arrow"><i class="fa-solid fa-plus"></i></div>
+                    </div>
+                    <div class="faq-a">Absolutely. Plans are month-to-month unless you choose annual billing. Upgrade anytime and the difference is prorated. Downgrade at the end of your billing cycle with no penalties.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><span class="faq-q-txt">What support channels are available?</span>
+                        <div class="faq-arrow"><i class="fa-solid fa-plus"></i></div>
+                    </div>
+                    <div class="faq-a">Starter plans get email + chat support (business hours). Professional and above get 24×7 priority support via chat, email, and phone. Enterprise plans include a dedicated account manager and Slack/WhatsApp support.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ CTA SECTION ════════ -->
+    <!-- <section class="cta-section">
+  <div class="wrap">
+    <div class="cta-inner">
+      <div class="eyebrow"><i class="fa-solid fa-rocket"></i> Get Started</div>
+      <h2>Ready to Transform Your Business?</h2>
+      <p>Join 12,450+ businesses that grow faster with JSDMCRM. Start your 7-day free trial today — no credit card required.</p>
+      <div class="cta-actions">
+        <a href="#" class="btn btn-white btn-lg"><i class="fa-solid fa-rocket"></i> Start Free Trial</a>
+        <a href="#" class="btn btn-outline btn-lg" style="color:#fff;border-color:rgba(255,255,255,.25)"><i class="fa-solid fa-calendar"></i> Schedule a Demo</a>
+      </div>
+      <div class="cta-trust">
+        <div class="cta-t-item"><i class="fa-solid fa-check"></i> 7-day free trial</div>
+        <div class="cta-t-item"><i class="fa-solid fa-check"></i> No credit card needed</div>
+        <div class="cta-t-item"><i class="fa-solid fa-check"></i> Cancel anytime</div>
+        <div class="cta-t-item"><i class="fa-solid fa-check"></i> Setup in 5 minutes</div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+    <!-- ════════ FOOTER ════════ -->
+    <footer>
+        <div class="wrap">
+            <div class="footer-main">
+                <div class="foot-brand">
+                    <div class="nav-logo" style="margin-bottom:.8rem">JSDM<span>C</span><em>R</em>M</div>
+                    <p>All-in-one business CRM combining lead management, field force GPS tracking, invoicing, helpdesk and AI automation.</p>
+                    <div class="foot-badge"><i class="fa-solid fa-shield-halved"></i> ISO 27001 Certified</div>
+                    <div class="foot-social" style="margin-top:1.5rem">
+                        <a class="fs-btn" href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a class="fs-btn" href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a class="fs-btn" href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a class="fs-btn" href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a class="fs-btn" href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="foot-col">
+                    <h5>CRM Features</h5>
+                    <ul>
+                        <li><a href="#">Lead Generation</a></li>
+                        <li><a href="#">Lead Distribution</a></li>
+                        <li><a href="#">Deal Pipeline</a></li>
+                        <li><a href="#">Marketing Automation</a></li>
+                        <li><a href="#">Quotes & Invoicing</a></li>
+                        <li><a href="#">Payment Gateway</a></li>
+                        <li><a href="#">Helpdesk Ticketing</a></li>
+                        <li><a href="#">AI Chatbot</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h5>Field Force</h5>
+                    <ul>
+                        <li><a href="#">GPS Employee Tracking</a></li>
+                        <li><a href="#">Field Service FSM</a></li>
+                        <li><a href="#">Geo Attendance</a></li>
+                        <li><a href="#">Beat Plan Scheduler</a></li>
+                        <li><a href="#">MR Reporting</a></li>
+                        <li><a href="#">HRMS & Payroll</a></li>
+                        <li><a href="#">Expense Management</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h5>Industries</h5>
+                    <ul>
+                        <li><a href="#">Real Estate CRM</a></li>
+                        <li><a href="#">Travel Agency</a></li>
+                        <li><a href="#">Insurance Agency</a></li>
+                        <li><a href="#">Education & Coaching</a></li>
+                        <li><a href="#">SaaS & Startups</a></li>
+                        <li><a href="#">Logistics</a></li>
+                        <li><a href="#">Manufacturing</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h5>Company</h5>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Blog & Resources</a></li>
+                        <li><a href="#">Become a Partner</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="fb-left">© 2026 JSDMCRM. All rights reserved. Made with ❤️ for Indian businesses.</div>
+                <div class="fb-right">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Refunds</a>
+                    <a href="#">Security</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        @keyframes pulse-green {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+
+            50% {
+                opacity: .5;
+                transform: scale(1.8)
+            }
+        }
+
+    </style>
+
+    <script>
+        // ── NAVBAR ──
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 30));
+
+        // ── HAMBURGER ──
+        const ham = document.getElementById('ham');
+        const mob = document.getElementById('mobMenu');
+        ham.addEventListener('click', () => {
+            mob.classList.toggle('open');
+            const s = ham.querySelectorAll('span');
+            if (mob.classList.contains('open')) {
+                s[0].style.cssText = 'transform:rotate(45deg) translate(4px,4px)';
+                s[1].style.opacity = '0';
+                s[2].style.cssText = 'transform:rotate(-45deg) translate(4px,-4px)';
+            } else {
+                s.forEach(x => x.style.cssText = '')
+            }
+        });
+
+        function closeMob() {
+            mob.classList.remove('open');
+            ham.querySelectorAll('span').forEach(x => x.style.cssText = '')
+        }
+
+        // ── FEATURE TABS ──
+        document.querySelectorAll('.fn-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.fn-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.feat-pane').forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                const pane = document.querySelector(`.feat-pane[data-panel="${btn.dataset.tab}"]`);
+                if (pane) pane.classList.add('active');
+            });
+        });
+
+        // ── FAQ ──
+        function toggleFaq(el) {
+            const wasOpen = el.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+            if (!wasOpen) el.classList.add('open');
+        }
+
+        // ── BILLING TOGGLE ──
+        let isAnnual = false;
+
+        function toggleBilling(el) {
+            isAnnual = !isAnnual;
+            el.classList.toggle('annual', isAnnual);
+            const labels = document.querySelectorAll('.toggle-lbl');
+            labels[0].classList.toggle('active', !isAnnual);
+            labels[1].classList.toggle('active', isAnnual);
+            document.querySelectorAll('.price-val').forEach(v => {
+                v.textContent = isAnnual ? v.dataset.annual : v.dataset.monthly;
+            });
+        }
+
+        // ── REVEAL ON SCROLL ──
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('vis');
+                    obs.unobserve(e.target)
+                }
+            });
+        }, {
+            threshold: .1
+            , rootMargin: '0px 0px -40px 0px'
+        });
+        document.querySelectorAll('.rev,.rev-l,.rev-r').forEach(el => obs.observe(el));
+
+        // ── COUNTER ANIMATION ──
+        function animateNum(el) {
+            const raw = parseFloat(el.dataset.target);
+            const suffix = el.dataset.suffix || '';
+            const isFloat = String(raw).includes('.');
+            const dur = 2000;
+            const start = performance.now();
+            (function tick(now) {
+                const p = Math.min((now - start) / dur, 1);
+                const e = 1 - Math.pow(1 - p, 4);
+                const v = raw * e;
+                el.textContent = (isFloat ? v.toFixed(1) : Math.floor(v).toLocaleString('en-IN')) + suffix;
+                if (p < 1) requestAnimationFrame(tick);
+                else el.textContent = (isFloat ? raw.toFixed(1) : raw.toLocaleString('en-IN')) + suffix;
+            })(start);
+        }
+        const statsObs = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                document.querySelectorAll('.stat-num[data-target]').forEach(animateNum);
+                statsObs.disconnect();
+            }
+        }, {
+            threshold: .4
+        });
+        const sb = document.querySelector('.stats-band');
+        if (sb) statsObs.observe(sb);
+
+    </script>
+</body>
+</html>

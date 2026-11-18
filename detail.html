@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SolveMonkey - Cars for Sale & Exchange</title>
+  <!-- Tailwind CSS CDN for instant modern styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              DEFAULT: '#FF5A36',
+              dark: '#E04826',
+              light: '#FFF2EE'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8F9FB; }
+    .custom-scroll::-webkit-scrollbar { width: 4px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #f1f1f1; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased">
+
+  <!-- ================= TOP HEADER ================= -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <!-- Logo -->
+        <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-black text-xl shadow-md shadow-brand/30">🐒</div>
+        <span class="font-extrabold text-xl tracking-tight text-slate-900">SOLVE<span class="text-brand">MONKEY</span></span>
+      </div>
+
+      <!-- Nav links -->
+      <nav class="hidden md:flex items-center space-x-7 text-sm font-semibold text-slate-600">
+        <a href="#" class="hover:text-brand transition">All Ads</a>
+        <a href="#" class="hover:text-brand transition flex items-center gap-1">Categories <span>▾</span></a>
+        <a href="#" class="hover:text-brand transition">About Us</a>
+        <a href="#" class="hover:text-brand transition">Contact</a>
+      </nav>
+
+      <!-- Action buttons -->
+      <div class="flex items-center space-x-4">
+        <button class="text-sm font-semibold text-slate-700 hover:text-brand px-3 py-1.5">Login</button>
+        <button class="bg-brand hover:bg-brand-dark text-white text-sm font-bold px-4 py-2 rounded-xl shadow-md shadow-brand/20 transition flex items-center gap-1.5">
+          <span>+</span> Post Your Ad
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= CATEGORY SUB-NAV (SCREENSHOT 2) ================= -->
+  <div class="bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 flex items-center space-x-8 overflow-x-auto text-sm font-medium py-3 text-slate-600">
+      <a href="#" class="hover:text-slate-900 shrink-0">Mobiles</a>
+      <a href="#" class="hover:text-slate-900 shrink-0">Bikes</a>
+      <a href="#" class="text-brand font-bold border-b-2 border-brand pb-3 -mb-3 shrink-0">Cars</a>
+      <a href="#" class="hover:text-slate-900 shrink-0">Properties</a>
+      <a href="#" class="hover:text-slate-900 shrink-0">Home & Furniture</a>
+      <a href="#" class="hover:text-slate-900 shrink-0">Electronics</a>
+    </div>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 py-6 space-y-8">
+
+    <!-- ================= HERO SECTION (WITH DUAL LOCATION & USPs) ================= -->
+    <section class="bg-gradient-to-r from-orange-50 via-white to-amber-50 rounded-3xl p-6 md:p-8 border border-orange-100/80 shadow-sm relative overflow-hidden">
+      <!-- Breadcrumb -->
+      <div class="text-xs font-semibold text-slate-400 mb-2">Home &gt; Cars &gt; <span class="text-brand">Cars for Sale & Exchange</span></div>
+      
+      <div class="max-w-3xl">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          Cars for Sale &amp; Exchange
+        </h1>
+        <p class="text-slate-600 text-sm mt-1">
+          Find the best verified deals on pre-owned cars. Buy directly, sell outright, or exchange with zero middleman.
+        </p>
+
+        <!-- USPs Micro-Badges (Point 5) -->
+        <div class="flex flex-wrap gap-2.5 mt-3 text-xs font-semibold text-slate-700">
+          <span class="inline-flex items-center gap-1.5 bg-white/90 border border-slate-200 px-3 py-1 rounded-full shadow-xs">
+            <span class="text-emerald-500 font-bold">✓</span> Owner-listed cars
+          </span>
+          <span class="inline-flex items-center gap-1.5 bg-white/90 border border-slate-200 px-3 py-1 rounded-full shadow-xs">
+            <span class="text-blue-500 font-bold">💬</span> Direct chat, no middleman
+          </span>
+          <span class="inline-flex items-center gap-1.5 bg-white/90 border border-slate-200 px-3 py-1 rounded-full shadow-xs">
+            <span class="text-purple-500 font-bold">🔄</span> Exchange across cities
+          </span>
+        </div>
+      </div>
+
+      <!-- SMART SEARCH BAR (Point 6: State + City Dropdown) -->
+      <div class="mt-6 bg-white rounded-2xl p-2.5 shadow-lg shadow-slate-200/60 border border-slate-200 flex flex-col md:flex-row items-center gap-2">
+        <!-- State Selector -->
+        <div class="w-full md:w-44 px-3 py-2 border-b md:border-b-0 md:border-r border-slate-200 text-left">
+          <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400">Select State</label>
+          <select class="w-full bg-transparent font-semibold text-slate-800 text-sm focus:outline-none cursor-pointer">
+            <option>Rajasthan</option>
+            <option>Delhi NCR</option>
+            <option>Maharashtra</option>
+            <option>Gujarat</option>
+          </select>
+        </div>
+
+        <!-- City Selector -->
+        <div class="w-full md:w-44 px-3 py-2 border-b md:border-b-0 md:border-r border-slate-200 text-left">
+          <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400">Select City</label>
+          <select class="w-full bg-transparent font-semibold text-slate-800 text-sm focus:outline-none cursor-pointer">
+            <option>Jaipur</option>
+            <option>Jodhpur</option>
+            <option>Udaipur</option>
+            <option>Kota</option>
+          </select>
+        </div>
+
+        <!-- Search Input -->
+        <div class="w-full flex-1 px-3 py-2 flex items-center gap-2">
+          <span class="text-slate-400">🔍</span>
+          <input type="text" placeholder="Search by brand, model or keyword (e.g. Swift, Creta)..." class="w-full text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none bg-transparent">
+        </div>
+
+        <!-- Submit Button -->
+        <button class="w-full md:w-auto bg-brand hover:bg-brand-dark text-white font-bold text-sm px-7 py-3.5 rounded-xl shadow-md shadow-brand/30 transition shrink-0">
+          Search
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= FESTIVE SEASON SLIDER BANNER (Point 7) ================= -->
+    <section class="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 rounded-2xl p-4 md:p-5 text-white shadow-md flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <span class="text-3xl bg-white/20 p-2.5 rounded-xl backdrop-blur-sm">🎁</span>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white text-orange-600 font-extrabold text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full">Festive Special</span>
+            <span class="text-xs text-orange-100 font-medium">Limited Period Deals</span>
+          </div>
+          <h3 class="text-lg md:text-xl font-black mt-0.5">Festive Exchange Utsav — Free 32-Point Check + ₹15,000 Extra Swap Value!</h3>
+        </div>
+      </div>
+      <button class="bg-white text-slate-900 hover:bg-orange-50 font-bold text-xs md:text-sm px-5 py-2.5 rounded-xl shrink-0 shadow transition">
+        Claim Festive Deal →
+      </button>
+    </section>
+
+    <!-- ================= MAIN CONTENT: FILTERS (LEFT) + LISTINGS (RIGHT) ================= -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+      <!-- LEFT SIDEBAR FILTERS (Point 1, 2, 3) -->
+      <aside class="lg:col-span-1 bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-6 h-fit sticky top-20">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h2 class="font-bold text-base text-slate-900 flex items-center gap-1.5">
+            <span>⚙️</span> Filters
+          </h2>
+          <button class="text-xs font-semibold text-brand hover:underline">Clear All</button>
+        </div>
+
+        <!-- 1. Listing Type -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2.5">Listing Type</label>
+          <div class="grid grid-cols-4 gap-1.5 p-1 bg-slate-100 rounded-xl text-xs font-semibold text-center">
+            <button class="py-1.5 rounded-lg bg-brand text-white shadow-xs">All</button>
+            <button class="py-1.5 rounded-lg text-slate-600 hover:text-slate-900">Sell</button>
+            <button class="py-1.5 rounded-lg text-slate-600 hover:text-slate-900">Swap</button>
+            <button class="py-1.5 rounded-lg text-slate-600 hover:text-slate-900">Rent</button>
+          </div>
+        </div>
+
+        <!-- 2. Price Range Slider -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2">Price Range</label>
+          <input type="range" class="w-full accent-brand cursor-pointer" min="100000" max="3500000" value="1500000">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-600 mt-1">
+            <span>₹ 1 Lakh</span>
+            <span>₹ 35+ Lakh</span>
+          </div>
+        </div>
+
+        <!-- 3. Popular Brands (Point 2 + Screenshot 3) -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2.5">Popular Brands</label>
+          <div class="grid grid-cols-3 gap-2">
+            <div class="border border-brand bg-brand-light/30 rounded-xl p-2 text-center cursor-pointer hover:border-brand transition">
+              <span class="block text-[11px] font-bold text-slate-800 mt-1">Maruti</span>
+            </div>
+            <div class="border border-slate-200 rounded-xl p-2 text-center cursor-pointer hover:border-brand hover:bg-orange-50/20 transition">
+              <span class="block text-[11px] font-bold text-slate-800 mt-1">Hyundai</span>
+            </div>
+            <div class="border border-slate-200 rounded-xl p-2 text-center cursor-pointer hover:border-brand hover:bg-orange-50/20 transition">
+              <span class="block text-[11px] font-bold text-slate-800 mt-1">Mahindra</span>
+            </div>
+            <div class="border border-slate-200 rounded-xl p-2 text-center cursor-pointer hover:border-brand hover:bg-orange-50/20 transition">
+              <span class="block text-[11px] font-bold text-slate-800 mt-1">Toyota</span>
+            </div>
+            <div class="border border-slate-200 rounded-xl p-2 text-center cursor-pointer hover:border-brand hover:bg-orange-50/20 transition">
+              <span class="block text-[11px] font-bold text-slate-800 mt-1">Tata</span>
+            </div>
+            <div class="border border-slate-200 rounded-xl p-2 text-center cursor-pointer hover:border-brand hover:bg-orange-50/20 transition">
+              <span class="block text-[11px] font-bold text-slate-800 mt-1">Honda</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Variant Filter (Point 2) -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2">Variant</label>
+          <div class="space-y-1.5 text-xs text-slate-700 font-medium">
+            <label class="flex items-center justify-between hover:text-slate-900 cursor-pointer">
+              <span class="flex items-center gap-2"><input type="checkbox" class="accent-brand rounded"> VXI / VDI</span>
+              <span class="text-slate-400 text-[11px]">(64)</span>
+            </label>
+            <label class="flex items-center justify-between hover:text-slate-900 cursor-pointer">
+              <span class="flex items-center gap-2"><input type="checkbox" class="accent-brand rounded"> ZXI / ZXI+</span>
+              <span class="text-slate-400 text-[11px]">(48)</span>
+            </label>
+            <label class="flex items-center justify-between hover:text-slate-900 cursor-pointer">
+              <span class="flex items-center gap-2"><input type="checkbox" class="accent-brand rounded"> SX / SX(O)</span>
+              <span class="text-slate-400 text-[11px]">(32)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 5. Model Year With Counts (Point 1: No min-max, exact count list) -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2">Model Year</label>
+          <div class="space-y-1.5 text-xs text-slate-700 font-medium max-h-36 overflow-y-auto custom-scroll pr-1">
+            <label class="flex items-center justify-between hover:text-slate-900 cursor-pointer">
+              <span class="flex items-center gap-2"><input type="checkbox" class="accent-brand rounded"> 2024</span>
+              <span class="text-slate-400 text-[11px]">(18)</span>
+            </label>
+            <label class="flex items-center justify-between hover:text-slate-900 cursor-pointer">
+              <span class="flex items-center gap-2"><input type="checkbox" class="accent-brand rounded"> 2023</span>
+              <span class="text-slate-400 text-[11px]">(45)</span>
+            </label>
+            <label class="flex items-center justify-between hover:text-slate-900 cursor-pointer">
+              <span class="flex items-center gap-2"><input type="checkbox" class="accent-brand rounded"> 2022</span>
+              <span class="text-slate-400 text-[11px]">(82)</span>
+            </label>
+            <label class="flex items-center justify-between hover:text-slate-900 cursor-pointer">
+              <span class="flex items-center gap-2"><input type="checkbox" class="accent-brand rounded" checked> 2021</span>
+              <span class="text-slate-400 text-[11px]">(114)</span>
+            </label>
+            <label class="flex items-center justify-between hover:text-slate-900 cursor-pointer">
+              <span class="flex items-center gap-2"><input type="checkbox" class="accent-brand rounded"> 2020</span>
+              <span class="text-slate-400 text-[11px]">(78)</span>
+            </label>
+            <label class="flex items-center justify-between hover:text-slate-900 cursor-pointer">
+              <span class="flex items-center gap-2"><input type="checkbox" class="accent-brand rounded" checked> 2019</span>
+              <span class="text-slate-400 text-[11px]">(52)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 6. Owners (Point 3: Replaced condition with 1st, 2nd, 3rd owners) -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2">Owners</label>
+          <div class="space-y-1.5 text-xs text-slate-700 font-medium">
+            <label class="flex items-center justify-between hover:text-slate-900 cursor-pointer">
+              <span class="flex items-center gap-2"><input type="checkbox" class="accent-brand rounded" checked> 1st Owner</span>
+              <span class="text-slate-400 text-[11px]">(186)</span>
+            </label>
+            <label class="flex items-center justify-between hover:text-slate-900 cursor-pointer">
+              <span class="flex items-center gap-2"><input type="checkbox" class="accent-brand rounded"> 2nd Owner</span>
+              <span class="text-slate-400 text-[11px]">(94)</span>
+            </label>
+            <label class="flex items-center justify-between hover:text-slate-900 cursor-pointer">
+              <span class="flex items-center gap-2"><input type="checkbox" class="accent-brand rounded"> 3rd Owner &amp; Above</span>
+              <span class="text-slate-400 text-[11px]">(32)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 7. Fuel Type -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2">Fuel Type</label>
+          <div class="grid grid-cols-2 gap-1.5 text-xs text-slate-700 font-medium">
+            <label class="flex items-center gap-1.5"><input type="checkbox" class="accent-brand rounded" checked> Petrol</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" class="accent-brand rounded"> Diesel</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" class="accent-brand rounded"> CNG</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" class="accent-brand rounded"> Electric</label>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT SIDE: PRODUCT LISTINGS GRID (Point 4) -->
+      <section class="lg:col-span-3 space-y-5">
+        <!-- Top count & sort strip -->
+        <div class="flex items-center justify-between bg-white p-3.5 rounded-2xl border border-slate-200">
+          <div>
+            <span class="font-extrabold text-slate-900 text-base">432</span>
+            <span class="text-sm font-semibold text-slate-500">Cars Found</span>
+          </div>
+
+          <div class="flex items-center space-x-3 text-xs font-semibold">
+            <span class="text-slate-400 hidden sm:inline">Sort by:</span>
+            <select class="bg-slate-100 border-0 rounded-lg px-3 py-1.5 text-slate-800 font-bold focus:outline-none cursor-pointer">
+              <option>Latest First</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Lowest KM Driven</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+
+          <!-- Card 1 (Maruti Swift VXi 2019 + Negotiable Badge) -->
+          <div class="bg-white rounded-2xl overflow-hidden border border-slate-200/90 hover:shadow-xl hover:-translate-y-1 transition duration-300 group flex flex-col">
+            <div class="relative h-44 bg-slate-100 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=600&q=80" alt="Car" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <span class="absolute top-3 left-3 bg-brand text-white font-bold text-[10px] uppercase px-2.5 py-1 rounded-md shadow">Sell</span>
+              <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm text-slate-600 hover:text-red-500 flex items-center justify-center shadow transition">♡</button>
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between">
+              <div>
+                <!-- Car Title with Year (Point 4) -->
+                <h3 class="font-bold text-slate-900 text-base group-hover:text-brand transition">
+                  Maruti Suzuki Swift VXi (2019)
+                </h3>
+                <!-- Price + Negotiable Badge (Point 4) -->
+                <div class="flex items-center gap-2 mt-1.5">
+                  <span class="text-lg font-extrabold text-slate-900">₹ 4,80,000</span>
+                  <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                    Negotiable
+                  </span>
+                </div>
+                <!-- Specs row -->
+                <div class="grid grid-cols-2 gap-y-1 gap-x-2 text-[11px] font-semibold text-slate-500 mt-3 pt-3 border-t border-slate-100">
+                  <div class="flex items-center gap-1.5">🗓️ 2019</div>
+                  <div class="flex items-center gap-1.5">🛣️ 32,000 km</div>
+                  <div class="flex items-center gap-1.5">⛽ Petrol</div>
+                  <div class="flex items-center gap-1.5">⚙️ Manual</div>
+                </div>
+              </div>
+              <div class="text-[11px] text-slate-400 font-medium mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between">
+                <span>📍 Jaipur, Rajasthan</span>
+                <span>2 days ago</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 (Hyundai Creta 2022 Exchange) -->
+          <div class="bg-white rounded-2xl overflow-hidden border border-slate-200/90 hover:shadow-xl hover:-translate-y-1 transition duration-300 group flex flex-col">
+            <div class="relative h-44 bg-slate-100 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=600&q=80" alt="Car" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <span class="absolute top-3 left-3 bg-purple-600 text-white font-bold text-[10px] uppercase px-2.5 py-1 rounded-md shadow">Exchange</span>
+              <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm text-slate-600 hover:text-red-500 flex items-center justify-center shadow transition">♡</button>
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-bold text-slate-900 text-base group-hover:text-brand transition">
+                  Hyundai Creta SX(O) (2022)
+                </h3>
+                <div class="flex items-center gap-2 mt-1.5">
+                  <span class="text-lg font-extrabold text-slate-900">₹ 12,50,000</span>
+                  <span class="text-[10px] font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full">
+                    Fixed Price
+                  </span>
+                </div>
+                <div class="grid grid-cols-2 gap-y-1 gap-x-2 text-[11px] font-semibold text-slate-500 mt-3 pt-3 border-t border-slate-100">
+                  <div class="flex items-center gap-1.5">🗓️ 2022</div>
+                  <div class="flex items-center gap-1.5">🛣️ 18,000 km</div>
+                  <div class="flex items-center gap-1.5">⛽ Diesel</div>
+                  <div class="flex items-center gap-1.5">⚙️ Automatic</div>
+                </div>
+              </div>
+              <div class="text-[11px] text-slate-400 font-medium mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between">
+                <span>📍 Jaipur, Rajasthan</span>
+                <span>Yesterday</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 (Tata Nexon 2021) -->
+          <div class="bg-white rounded-2xl overflow-hidden border border-slate-200/90 hover:shadow-xl hover:-translate-y-1 transition duration-300 group flex flex-col">
+            <div class="relative h-44 bg-slate-100 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80" alt="Car" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <span class="absolute top-3 left-3 bg-brand text-white font-bold text-[10px] uppercase px-2.5 py-1 rounded-md shadow">Sell</span>
+              <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm text-slate-600 hover:text-red-500 flex items-center justify-center shadow transition">♡</button>
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-bold text-slate-900 text-base group-hover:text-brand transition">
+                  Tata Nexon XZ+ (2021)
+                </h3>
+                <div class="flex items-center gap-2 mt-1.5">
+                  <span class="text-lg font-extrabold text-slate-900">₹ 8,75,000</span>
+                  <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                    Negotiable
+                  </span>
+                </div>
+                <div class="grid grid-cols-2 gap-y-1 gap-x-2 text-[11px] font-semibold text-slate-500 mt-3 pt-3 border-t border-slate-100">
+                  <div class="flex items-center gap-1.5">🗓️ 2021</div>
+                  <div class="flex items-center gap-1.5">🛣️ 24,000 km</div>
+                  <div class="flex items-center gap-1.5">⛽ Petrol</div>
+                  <div class="flex items-center gap-1.5">⚙️ Manual</div>
+                </div>
+              </div>
+              <div class="text-[11px] text-slate-400 font-medium mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between">
+                <span>📍 Jaipur, Rajasthan</span>
+                <span>3 days ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex items-center justify-center space-x-2 pt-6">
+          <button class="w-9 h-9 rounded-xl border border-slate-200 bg-white text-slate-600 font-bold hover:bg-slate-50">‹</button>
+          <button class="w-9 h-9 rounded-xl bg-brand text-white font-bold shadow-md shadow-brand/20">1</button>
+          <button class="w-9 h-9 rounded-xl border border-slate-200 bg-white text-slate-600 font-bold hover:bg-slate-50">2</button>
+          <button class="w-9 h-9 rounded-xl border border-slate-200 bg-white text-slate-600 font-bold hover:bg-slate-50">3</button>
+          <button class="w-9 h-9 rounded-xl border border-slate-200 bg-white text-slate-600 font-bold hover:bg-slate-50">›</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= HOW EXCHANGE WORKS SECTION (Point 7 + Screenshot 5) ================= -->
+    <section class="bg-gradient-to-b from-stone-50 to-white rounded-3xl p-6 md:p-8 border border-slate-200">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-6">
+        <div>
+          <span class="text-xs font-bold text-brand uppercase tracking-wider">Exchange</span>
+          <h2 class="text-2xl font-black text-slate-900 mt-0.5">How exchange works</h2>
+        </div>
+        <p class="text-xs md:text-sm text-slate-500 mt-1 md:mt-0">Swap, top-up or sell outright — the choice is yours at every step.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Step 1 -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div class="w-10 h-10 rounded-xl bg-orange-50 text-brand flex items-center justify-center font-bold text-lg mb-3">🚗</div>
+          <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Step 1</span>
+          <h4 class="font-bold text-base text-slate-900 mt-1">Offer what you own</h4>
+          <p class="text-xs text-slate-500 mt-1">A car, bike, gadget or even property ready for swap.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold text-lg mb-3">📍</div>
+          <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Step 2</span>
+          <h4 class="font-bold text-base text-slate-900 mt-1">Match with a listing</h4>
+          <p class="text-xs text-slate-500 mt-1">Anywhere in India, not just restricted to your city.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg mb-3">✓</div>
+          <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Step 3</span>
+          <h4 class="font-bold text-base text-slate-900 mt-1">Agree &amp; complete</h4>
+          <p class="text-xs text-slate-500 mt-1">Chat directly, inspect vehicle, then meet to finish deal.</p>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-5 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <span class="text-xs text-slate-600 font-medium">Example swap: <strong class="text-slate-900">Maruti Suzuki Swift Dzire VDI Optional (2020)</strong></span>
+        <button class="bg-brand hover:bg-brand-dark text-white font-bold text-xs md:text-sm px-6 py-3 rounded-xl shadow-md shadow-brand/20 transition">
+          List your car →
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= SOLVEMONKEY ASSURED BADGES (Point 8 + Screenshot 6) ================= -->
+    <section>
+      <div class="flex items-center gap-2 mb-4">
+        <h3 class="text-lg font-black text-slate-900">SolveMonkey Assured</h3>
+        <span class="text-xs font-semibold text-brand cursor-pointer hover:underline">What's this?</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- 1 -->
+        <div class="bg-slate-900 text-white p-5 rounded-2xl flex flex-col justify-between hover:bg-slate-800 transition">
+          <div class="flex items-start gap-3">
+            <span class="text-2xl">⭐</span>
+            <div>
+              <h4 class="font-bold text-sm">32 Points Quality Checks</h4>
+              <p class="text-[11px] text-slate-400 mt-1">Engine, chassis, transmission &amp; full RTO background scan.</p>
+            </div>
+          </div>
+          <a href="#" class="text-emerald-400 font-bold text-xs mt-4 inline-block hover:underline">Learn more →</a>
+        </div>
+
+        <!-- 2 -->
+        <div class="bg-slate-900 text-white p-5 rounded-2xl flex flex-col justify-between hover:bg-slate-800 transition">
+          <div class="flex items-start gap-3">
+            <span class="text-2xl">🔄</span>
+            <div>
+              <h4 class="font-bold text-sm">Instant Fair Exchange</h4>
+              <p class="text-[11px] text-slate-400 mt-1">Algorithm-backed direct vehicle swap valuation.</p>
+            </div>
+          </div>
+          <a href="#" class="text-emerald-400 font-bold text-xs mt-4 inline-block hover:underline">Learn more →</a>
+        </div>
+
+        <!-- 3 -->
+        <div class="bg-slate-900 text-white p-5 rounded-2xl flex flex-col justify-between hover:bg-slate-800 transition">
+          <div class="flex items-start gap-3">
+            <span class="text-2xl">🛡️</span>
+            <div>
+              <h4 class="font-bold text-sm">Zero Broker Commission</h4>
+              <p class="text-[11px] text-slate-400 mt-1">100% direct buyer-to-seller deal. Save thousands.</p>
+            </div>
+          </div>
+          <a href="#" class="text-emerald-400 font-bold text-xs mt-4 inline-block hover:underline">Learn more →</a>
+        </div>
+
+        <!-- 4 -->
+        <div class="bg-slate-900 text-white p-5 rounded-2xl flex flex-col justify-between hover:bg-slate-800 transition">
+          <div class="flex items-start gap-3">
+            <span class="text-2xl">📍</span>
+            <div>
+              <h4 class="font-bold text-sm">Doorstep RC Transfer</h4>
+              <p class="text-[11px] text-slate-400 mt-1">Hassle-free paperwork assistance at your home.</p>
+            </div>
+          </div>
+          <a href="#" class="text-emerald-400 font-bold text-xs mt-4 inline-block hover:underline">Learn more →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BEST SELLING / FEATURED COCKPIT SHOWCASE (Point 8 + Screenshot 4) ================= -->
+    <section class="relative rounded-3xl overflow-hidden shadow-xl">
+      <!-- Cockpit View Image -->
+      <img src="https://images.unsplash.com/photo-1541348263662-e0c8243a1b3f?auto=format&fit=crop&w=1200&q=80" alt="Car Interior" class="w-full h-80 md:h-96 object-cover">
+      
+      <!-- Gradient Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 md:p-8 text-white">
+        <div>
+          <span class="bg-brand text-white font-extrabold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full shadow">
+            Featured • Exchange Ready
+          </span>
+          <h3 class="text-2xl md:text-3xl font-black mt-2">Maruti Suzuki Swift Dzire (2020)</h3>
+          
+          <div class="flex flex-wrap gap-3 text-xs font-semibold text-slate-300 mt-2 tracking-wide uppercase">
+            <span>VDI Optional</span> • <span>48,000 km</span> • <span>Petrol</span> • <span>Jaipur</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between mt-5 pt-4 border-t border-white/20">
+          <div>
+            <span class="text-xs text-slate-300 block">Offer Price</span>
+            <span class="text-2xl md:text-3xl font-extrabold text-white">₹ 5,70,000</span>
+          </div>
+          <button class="bg-brand hover:bg-brand-dark text-white font-bold text-sm px-6 py-3 rounded-xl shadow-lg transition">
+            View Car Details →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TESTIMONIALS (Point 8) ================= -->
+    <section>
+      <div class="text-center max-w-xl mx-auto mb-6">
+        <h3 class="text-2xl font-black text-slate-900">What Our Users Say</h3>
+        <p class="text-xs text-slate-500 mt-1">Real experiences from genuine buyers and sellers on SolveMonkey</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+          <div class="text-amber-400 text-sm">★★★★★</div>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">"Exchanged my 2018 i20 for a Creta within 3 days. Completely direct deal, saved around ₹25,000 on middlemen!"</p>
+          <div class="flex items-center gap-2.5 mt-4 pt-3 border-t border-slate-100">
+            <div class="w-8 h-8 rounded-full bg-slate-200 font-bold text-xs flex items-center justify-center">RS</div>
+            <div>
+              <div class="text-xs font-bold text-slate-900">Rahul Sharma</div>
+              <div class="text-[10px] text-slate-400">Jaipur • Verified Owner</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+          <div class="text-amber-400 text-sm">★★★★★</div>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">"Listed my Swift VXi on Monday, had 4 test drive requests by Tuesday, sold it at full expected price without bargaining."</p>
+          <div class="flex items-center gap-2.5 mt-4 pt-3 border-t border-slate-100">
+            <div class="w-8 h-8 rounded-full bg-slate-200 font-bold text-xs flex items-center justify-center">AK</div>
+            <div>
+              <div class="text-xs font-bold text-slate-900">Ankit Khandelwal</div>
+              <div class="text-[10px] text-slate-400">Kota • Seller</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+          <div class="text-amber-400 text-sm">★★★★★</div>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">"Cross-city car swap feature is game changer! Swapped my bike + cash for a neat hatchback smoothly."</p>
+          <div class="flex items-center gap-2.5 mt-4 pt-3 border-t border-slate-100">
+            <div class="w-8 h-8 rounded-full bg-slate-200 font-bold text-xs flex items-center justify-center">VS</div>
+            <div>
+              <div class="text-xs font-bold text-slate-900">Vikas Soni</div>
+              <div class="text-[10px] text-slate-400">Jodhpur • Exchange Deal</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ SECTION (Point 9) ================= -->
+    <section class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm">
+      <div class="text-center max-w-xl mx-auto mb-6">
+        <h3 class="text-2xl font-black text-slate-900">Frequently Asked Questions</h3>
+        <p class="text-xs text-slate-500 mt-1">Everything you need to know about buying, selling and exchanging cars</p>
+      </div>
+
+      <div class="space-y-3 max-w-3xl mx-auto text-sm">
+        <details class="group bg-slate-50 p-4 rounded-xl cursor-pointer">
+          <summary class="font-bold text-slate-800 list-none flex justify-between items-center">
+            <span>How does the car exchange process work on SolveMonkey?</span>
+            <span class="group-open:rotate-180 transition text-brand font-extrabold">▼</span>
+          </summary>
+          <p class="text-xs text-slate-600 mt-2.5 leading-relaxed">
+            You simply list your existing vehicle and mark it as 'Exchange Ready'. When you browse other cars on the platform, you can offer your car in swap directly to the other owner, with or without cash adjustment.
+          </p>
+        </details>
+
+        <details class="group bg-slate-50 p-4 rounded-xl cursor-pointer">
+          <summary class="font-bold text-slate-800 list-none flex justify-between items-center">
+            <span>Can I negotiate directly with the vehicle owner?</span>
+            <span class="group-open:rotate-180 transition text-brand font-extrabold">▼</span>
+          </summary>
+          <p class="text-xs text-slate-600 mt-2.5 leading-relaxed">
+            Yes! All listings with the 'Negotiable' tag allow you to chat directly via WhatsApp or on-site instant messaging to discuss and finalize the best price.
+          </p>
+        </details>
+
+        <details class="group bg-slate-50 p-4 rounded-xl cursor-pointer">
+          <summary class="font-bold text-slate-800 list-none flex justify-between items-center">
+            <span>Are there any hidden brokerage or commission fees?</span>
+            <span class="group-open:rotate-180 transition text-brand font-extrabold">▼</span>
+          </summary>
+          <p class="text-xs text-slate-600 mt-2.5 leading-relaxed">
+            No. SolveMonkey does not charge any brokerage or cut from buyers or sellers. Direct communication is 100% free.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ================= MULTI FEATURED CARS SPOTLIGHT (UPGRADED) ================= -->
+<section class="space-y-4">
+  <!-- Section Header with Controls -->
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-2">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="bg-amber-100 text-amber-800 text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full tracking-wider flex items-center gap-1">
+          <span>★</span> Handpicked Spotlight
+        </span>
+        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+          ✓ 100% Inspected
+        </span>
+      </div>
+      <h3 class="text-2xl font-black text-slate-900 mt-1">Featured &amp; Exchange-Ready Cars</h3>
+      <p class="text-xs text-slate-500">Top-condition cars with verified interior cockpit scans and genuine owners</p>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="flex items-center gap-2">
+      <button class="w-9 h-9 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold flex items-center justify-center transition shadow-xs">
+        ‹
+      </button>
+      <button class="w-9 h-9 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold flex items-center justify-center transition shadow-xs">
+        ›
+      </button>
+      <a href="#" class="text-xs font-bold text-brand hover:underline ml-2">View All (28) →</a>
+    </div>
+  </div>
+
+  <!-- Featured Grid (3 Cards on Desktop, Horizontal Scroll on Mobile) -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <!-- FEATURED CAR 1 (Swift Dzire - Cockpit View) -->
+    <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition duration-300 flex flex-col group">
+      <!-- Image Container with Cockpit Preview -->
+      <div class="relative h-52 bg-slate-900 overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1541348263662-e0c8243a1b3f?auto=format&fit=crop&w=700&q=80" alt="Maruti Swift Dzire Interior" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-95">
+        
+        <!-- Top Tags -->
+        <div class="absolute top-3 left-3 flex items-center gap-1.5">
+          <span class="bg-brand text-white font-extrabold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-lg shadow-md">
+            Featured • Exchange Ready
+          </span>
+        </div>
+        <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md text-white hover:text-red-400 flex items-center justify-center transition">
+          ♡
+        </button>
+
+        <!-- Cockpit Badge at Bottom of Image -->
+        <div class="absolute bottom-2.5 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1.5">
+          <span>📷</span> 360° Cockpit View
+        </div>
+      </div>
+
+      <!-- Card Details -->
+      <div class="p-5 flex-1 flex flex-col justify-between">
+        <div>
+          <div class="text-[10px] font-bold uppercase tracking-widest text-slate-400">VDI Optional • 1st Owner</div>
+          <h4 class="font-extrabold text-slate-900 text-lg group-hover:text-brand transition mt-0.5">
+            Maruti Suzuki Swift Dzire (2020)
+          </h4>
+
+          <!-- Price & Negotiable tag -->
+          <div class="flex items-center gap-2 mt-2">
+            <span class="text-xl font-black text-slate-900">₹ 5,70,000</span>
+            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+              Negotiable
+            </span>
+          </div>
+
+          <!-- Specs pills -->
+          <div class="grid grid-cols-2 gap-2 text-xs font-semibold text-slate-600 mt-4 pt-3 border-t border-slate-100">
+            <div class="flex items-center gap-1.5 bg-slate-50 p-1.5 rounded-lg">🛣️ 48,000 km</div>
+            <div class="flex items-center gap-1.5 bg-slate-50 p-1.5 rounded-lg">⛽ Diesel</div>
+            <div class="flex items-center gap-1.5 bg-slate-50 p-1.5 rounded-lg">⚙️ Manual</div>
+            <div class="flex items-center gap-1.5 bg-slate-50 p-1.5 rounded-lg">📍 Jaipur, RJ</div>
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <button class="mt-5 w-full bg-brand hover:bg-brand-dark text-white font-bold text-xs py-3 rounded-xl shadow-md shadow-brand/20 transition flex items-center justify-center gap-1.5">
+          <span>View Car Details</span> <span>→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- FEATURED CAR 2 (Hyundai Creta) -->
+    <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition duration-300 flex flex-col group">
+      <div class="relative h-52 bg-slate-900 overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=700&q=80" alt="Hyundai Creta" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-95">
+        
+        <div class="absolute top-3 left-3 flex items-center gap-1.5">
+          <span class="bg-purple-600 text-white font-extrabold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-lg shadow-md">
+            Featured • Swap Or Buy
+          </span>
+        </div>
+        <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md text-white hover:text-red-400 flex items-center justify-center transition">
+          ♡
+        </button>
+        <div class="absolute bottom-2.5 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1.5">
+          <span>📷</span> 360° Cockpit View
+        </div>
+      </div>
+
+      <div class="p-5 flex-1 flex flex-col justify-between">
+        <div>
+          <div class="text-[10px] font-bold uppercase tracking-widest text-slate-400">SX(O) Turbo • Sunroof</div>
+          <h4 class="font-extrabold text-slate-900 text-lg group-hover:text-brand transition mt-0.5">
+            Hyundai Creta 1.5 SX (2022)
+          </h4>
+
+          <div class="flex items-center gap-2 mt-2">
+            <span class="text-xl font-black text-slate-900">₹ 12,80,000</span>
+            <span class="text-[10px] font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full">
+              Fixed Price
+            </span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-xs font-semibold text-slate-600 mt-4 pt-3 border-t border-slate-100">
+            <div class="flex items-center gap-1.5 bg-slate-50 p-1.5 rounded-lg">🛣️ 19,000 km</div>
+            <div class="flex items-center gap-1.5 bg-slate-50 p-1.5 rounded-lg">⛽ Petrol</div>
+            <div class="flex items-center gap-1.5 bg-slate-50 p-1.5 rounded-lg">⚙️ Automatic</div>
+            <div class="flex items-center gap-1.5 bg-slate-50 p-1.5 rounded-lg">📍 Jaipur, RJ</div>
+          </div>
+        </div>
+
+        <button class="mt-5 w-full bg-brand hover:bg-brand-dark text-white font-bold text-xs py-3 rounded-xl shadow-md shadow-brand/20 transition flex items-center justify-center gap-1.5">
+          <span>View Car Details</span> <span>→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- FEATURED CAR 3 (Kia Seltos / Thar) -->
+    <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition duration-300 flex flex-col group">
+      <div class="relative h-52 bg-slate-900 overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=700&q=80" alt="Kia Seltos" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-95">
+        
+        <div class="absolute top-3 left-3 flex items-center gap-1.5">
+          <span class="bg-brand text-white font-extrabold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-lg shadow-md">
+            Featured • Exchange Ready
+          </span>
+        </div>
+        <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md text-white hover:text-red-400 flex items-center justify-center transition">
+          ♡
+        </button>
+        <div class="absolute bottom-2.5 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1.5">
+          <span>📷</span> 360° Cockpit View
+        </div>
+      </div>
+
+      <div class="p-5 flex-1 flex flex-col justify-between">
+        <div>
+          <div class="text-[10px] font-bold uppercase tracking-widest text-slate-400">HTX Plus • Diesel</div>
+          <h4 class="font-extrabold text-slate-900 text-lg group-hover:text-brand transition mt-0.5">
+            Kia Seltos HTX (2022)
+          </h4>
+
+          <div class="flex items-center gap-2 mt-2">
+            <span class="text-xl font-black text-slate-900">₹ 14,80,000</span>
+            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+              Negotiable
+            </span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-xs font-semibold text-slate-600 mt-4 pt-3 border-t border-slate-100">
+            <div class="flex items-center gap-1.5 bg-slate-50 p-1.5 rounded-lg">🛣️ 22,000 km</div>
+            <div class="flex items-center gap-1.5 bg-slate-50 p-1.5 rounded-lg">⛽ Diesel</div>
+            <div class="flex items-center gap-1.5 bg-slate-50 p-1.5 rounded-lg">⚙️ Automatic</div>
+            <div class="flex items-center gap-1.5 bg-slate-50 p-1.5 rounded-lg">📍 Jaipur, RJ</div>
+          </div>
+        </div>
+
+        <button class="mt-5 w-full bg-brand hover:bg-brand-dark text-white font-bold text-xs py-3 rounded-xl shadow-md shadow-brand/20 transition flex items-center justify-center gap-1.5">
+          <span>View Car Details</span> <span>→</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= SECTION 1: FEATURED & EXCHANGE SPOTLIGHT (COCKPIT BANNER SLIDER) ================= -->
+<section class="space-y-3">
+  <div class="flex items-center justify-between">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="text-brand font-black text-xs uppercase tracking-wider">Spotlight</span>
+        <span class="text-[11px] font-bold bg-orange-100 text-brand px-2 py-0.5 rounded-full">Top Inspected Swaps</span>
+      </div>
+      <h3 class="text-2xl font-black text-slate-900">Featured &amp; Exchange Ready</h3>
+    </div>
+
+    <!-- Slider Pagination Controls -->
+    <div class="flex items-center gap-2">
+      <span class="text-xs font-bold text-slate-400">1 / 4</span>
+      <button class="w-8 h-8 rounded-full border border-slate-200 bg-white hover:bg-slate-100 flex items-center justify-center font-bold text-slate-700 shadow-xs">‹</button>
+      <button class="w-8 h-8 rounded-full border border-slate-200 bg-white hover:bg-slate-100 flex items-center justify-center font-bold text-slate-700 shadow-xs">›</button>
+    </div>
+  </div>
+
+  <!-- Big Cockpit Banner Card -->
+  <div class="relative rounded-3xl overflow-hidden shadow-xl min-h-[340px] md:min-h-[380px] flex flex-col justify-end">
+    <!-- Real Cockpit High-Resolution Image -->
+    <img src="https://images.unsplash.com/photo-1541348263662-e0c8243a1b3f?auto=format&fit=crop&w=1600&q=80" alt="Car Cockpit View" class="absolute inset-0 w-full h-full object-cover">
+    
+    <!-- Smooth Multi-stop Dark Gradient for Perfect Text Readability -->
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent"></div>
+
+    <!-- Content Over Image -->
+    <div class="relative z-10 p-6 md:p-8 text-white space-y-4">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="bg-brand text-white font-extrabold text-[11px] uppercase tracking-wider px-3 py-1 rounded-lg shadow-md">
+          Featured • Exchange Ready
+        </span>
+        <span class="bg-white/20 backdrop-blur-md text-white font-semibold text-[11px] px-3 py-1 rounded-lg">
+          📷 360° Inspected Cockpit
+        </span>
+      </div>
+
+      <div>
+        <h2 class="text-2xl md:text-4xl font-black tracking-tight text-white drop-shadow-sm">
+          Maruti Suzuki Swift Dzire (2020)
+        </h2>
+        <p class="text-slate-300 font-bold text-xs md:text-sm mt-1 uppercase tracking-wider">
+          VDI OPTIONAL &nbsp;•&nbsp; 48,000 KM &nbsp;•&nbsp; PETROL &nbsp;•&nbsp; JAIPUR
+        </p>
+      </div>
+
+      <div class="pt-4 border-t border-white/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs text-slate-300 font-medium block">Offer Price</span>
+          <div class="flex items-center gap-2">
+            <span class="text-2xl md:text-3xl font-black text-white">₹ 5,70,000</span>
+            <span class="text-[10px] font-bold text-emerald-300 bg-emerald-950/60 border border-emerald-500/40 px-2 py-0.5 rounded-full">
+              Negotiable
+            </span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white font-bold text-xs md:text-sm px-5 py-3 rounded-xl border border-white/20 transition">
+            💬 Chat with Owner
+          </button>
+          <button class="bg-brand hover:bg-brand-dark text-white font-bold text-xs md:text-sm px-7 py-3 rounded-xl shadow-lg shadow-brand/40 transition">
+            View Car Details →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= SECTION 2: BEST VALUED CARS (4-CARD GRID) ================= -->
+<section class="space-y-4 pt-4">
+  <div class="flex items-center justify-between">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="text-emerald-600 font-black text-xs uppercase tracking-wider">Best Value</span>
+        <span class="text-[11px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">Priced Below Market Rate</span>
+      </div>
+      <h3 class="text-2xl font-black text-slate-900 mt-0.5">Top Valued Deals</h3>
+    </div>
+    <a href="#" class="text-xs font-bold text-brand hover:underline">Explore All Deals →</a>
+  </div>
+
+  <!-- 4-Card Horizontal Deal Strip -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+    <!-- Value Deal 1 -->
+    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col group">
+      <div class="relative h-36 bg-slate-100 overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=500&q=80" alt="Honda City" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+        <span class="absolute top-2.5 left-2.5 bg-emerald-600 text-white font-bold text-[9px] uppercase px-2 py-0.5 rounded shadow">
+          ₹ 45,000 Below Market
+        </span>
+      </div>
+      <div class="p-3.5 flex-1 flex flex-col justify-between">
+        <div>
+          <h4 class="font-bold text-slate-900 text-sm group-hover:text-brand transition">Honda City VX (2019)</h4>
+          <div class="text-[11px] text-slate-500 font-medium mt-1">38,000 km • Petrol • Manual</div>
+          <div class="text-base font-extrabold text-slate-900 mt-2">₹ 6,45,000</div>
+        </div>
+        <div class="mt-3 pt-2 border-t border-slate-100 text-[10px] text-slate-400 flex justify-between">
+          <span>📍 Jaipur</span>
+          <span class="text-brand font-bold">Great Price ⚡</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Value Deal 2 -->
+    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col group">
+      <div class="relative h-36 bg-slate-100 overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=500&q=80" alt="Hyundai i20" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+        <span class="absolute top-2.5 left-2.5 bg-emerald-600 text-white font-bold text-[9px] uppercase px-2 py-0.5 rounded shadow">
+          ₹ 30,000 Below Market
+        </span>
+      </div>
+      <div class="p-3.5 flex-1 flex flex-col justify-between">
+        <div>
+          <h4 class="font-bold text-slate-900 text-sm group-hover:text-brand transition">Hyundai i20 Sportz (2021)</h4>
+          <div class="text-[11px] text-slate-500 font-medium mt-1">28,000 km • Petrol • Manual</div>
+          <div class="text-base font-extrabold text-slate-900 mt-2">₹ 5,80,000</div>
+        </div>
+        <div class="mt-3 pt-2 border-t border-slate-100 text-[10px] text-slate-400 flex justify-between">
+          <span>📍 Jodhpur</span>
+          <span class="text-brand font-bold">High Demand 🔥</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Value Deal 3 -->
+    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col group">
+      <div class="relative h-36 bg-slate-100 overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=500&q=80" alt="Baleno" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+        <span class="absolute top-2.5 left-2.5 bg-emerald-600 text-white font-bold text-[9px] uppercase px-2 py-0.5 rounded shadow">
+          ₹ 25,000 Below Market
+        </span>
+      </div>
+      <div class="p-3.5 flex-1 flex flex-col justify-between">
+        <div>
+          <h4 class="font-bold text-slate-900 text-sm group-hover:text-brand transition">Maruti Baleno Zeta (2020)</h4>
+          <div class="text-[11px] text-slate-500 font-medium mt-1">31,000 km • Petrol • Auto</div>
+          <div class="text-base font-extrabold text-slate-900 mt-2">₹ 6,10,000</div>
+        </div>
+        <div class="mt-3 pt-2 border-t border-slate-100 text-[10px] text-slate-400 flex justify-between">
+          <span>📍 Kota</span>
+          <span class="text-brand font-bold">1st Owner ✓</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Value Deal 4 -->
+    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col group">
+      <div class="relative h-36 bg-slate-100 overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=500&q=80" alt="Tiago" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+        <span class="absolute top-2.5 left-2.5 bg-emerald-600 text-white font-bold text-[9px] uppercase px-2 py-0.5 rounded shadow">
+          ₹ 35,000 Below Market
+        </span>
+      </div>
+      <div class="p-3.5 flex-1 flex flex-col justify-between">
+        <div>
+          <h4 class="font-bold text-slate-900 text-sm group-hover:text-brand transition">Tata Tiago XZ+ (2022)</h4>
+          <div class="text-[11px] text-slate-500 font-medium mt-1">16,000 km • CNG/Petrol • Man</div>
+          <div class="text-base font-extrabold text-slate-900 mt-2">₹ 4,95,000</div>
+        </div>
+        <div class="mt-3 pt-2 border-t border-slate-100 text-[10px] text-slate-400 flex justify-between">
+          <span>📍 Jaipur</span>
+          <span class="text-brand font-bold">CNG Verified ⚡</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-900 text-slate-400 text-xs py-8 mt-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-2">
+        <span class="font-extrabold text-white text-base">SOLVE<span class="text-brand">MONKEY</span></span>
+        <span>© 2025 All rights reserved.</span>
+      </div>
+      <div class="flex space-x-6 font-medium">
+        <a href="#" class="hover:text-white">Privacy Policy</a>
+        <a href="#" class="hover:text-white">Terms of Service</a>
+        <a href="#" class="hover:text-white">Safety Tips</a>
+        <a href="#" class="hover:text-white">Help Center</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

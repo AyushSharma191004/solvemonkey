@@ -1,0 +1,3250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cars for Sale & Exchange – Solve Monkey</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&family=Open+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ============================================================
+   SOLVE MONKEY – CARS CATEGORY PAGE (v2: premium redesign)
+   Uses the same theme variables as the main site
+   ============================================================ */
+      :root {
+        --main-color-one: #f76631;
+        --main-color-two: #98298a;
+        --main-color-three: #fcda69;
+        --heading-color: #333333;
+        --secondary-color: #fba260;
+        --bg-light-one: #f5f9fe;
+        --bg-light-two: #fef8f3;
+        --bg-dark-one: #040a1b;
+        --bg-dark-two: #22253f;
+        --paragraph-color: #667085;
+        --paragraph-color-two: #475467;
+        --paragraph-color-three: #d0d5dd;
+        --paragraph-color-four: #344054;
+        --heading-font: "Ubuntu", sans-serif;
+        --body-font: "Open Sans", sans-serif;
+        --hero-color-icon-blue: #0284c7;
+        --hero-color-icon-teal: #0d9488;
+        --hero-font-family:
+          "Plus Jakarta Sans", var(--body-font), -apple-system,
+          BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        --green: #16a34a;
+        --green-soft: #e7f8ee;
+        --amber: #f59e0b;
+        --purple: #8b5cf6;
+        --red: #ef4444;
+        --line: #e6e9f0;
+        --r: 16px;
+        --shadow: 0 4px 20px rgba(4, 10, 27, 0.08);
+        --grad: linear-gradient(135deg, #f76631, #fba260);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: var(--body-font);
+        color: var(--paragraph-color-two);
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: var(--heading-font);
+      }
+      body {
+        background: var(--bg-light-one);
+        font-size: 14px;
+      }
+      a {
+        text-decoration: none;
+      }
+      button {
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      img {
+        display: block;
+      }
+
+      /* ---------- TOP BAR & HEADER ---------- */
+      .topbar {
+        background: var(--bg-dark-one);
+        color: var(--paragraph-color-three);
+        font-size: 12px;
+      }
+      .topbar .container {
+        display: flex;
+        justify-content: space-between;
+        height: 34px;
+        align-items: center;
+      }
+      .topbar b {
+        color: #fff;
+      }
+      .topbar a {
+        margin-left: 18px;
+        color: var(--paragraph-color-three);
+      }
+      .topbar a:hover {
+        color: #fff;
+      }
+      header {
+        background: #fff;
+        box-shadow: 0 2px 12px rgba(4, 10, 27, 0.07);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        height: 68px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--heading-font);
+        font-weight: 700;
+        font-size: 20px;
+        color: var(--heading-color);
+      }
+      .logo-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: var(--grad);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 19px;
+      }
+      .logo em {
+        font-style: normal;
+        color: var(--main-color-one);
+      }
+      nav.mainnav {
+        display: flex;
+        gap: 22px;
+        font-weight: 600;
+        font-size: 13.5px;
+        color: var(--heading-color);
+      }
+      nav.mainnav a.active {
+        color: var(--main-color-one);
+        border-bottom: 2px solid var(--main-color-one);
+        padding: 6px 2px;
+      }
+      .searchbox {
+        flex: 1;
+        max-width: 400px;
+        display: flex;
+        border: 1.5px solid var(--line);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .searchbox input {
+        flex: 1;
+        border: 0;
+        outline: 0;
+        padding: 10px 14px;
+        font-size: 13px;
+      }
+      .searchbox button {
+        background: var(--main-color-one);
+        color: #fff;
+        border: 0;
+        padding: 0 20px;
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .hdr-actions {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-left: auto;
+      }
+      .icon-btn {
+        position: relative;
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        border: 1.5px solid var(--line);
+        background: #fff;
+        font-size: 16px;
+      }
+      .icon-btn .dot {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: var(--red);
+        color: #fff;
+        font-size: 9px;
+        font-weight: 700;
+        min-width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn-login {
+        border: 1.5px solid var(--main-color-one);
+        color: var(--main-color-one);
+        background: #fff;
+        padding: 9px 20px;
+        border-radius: 11px;
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .btn-post {
+        background: var(--grad);
+        color: #fff;
+        border: 0;
+        padding: 10px 20px;
+        border-radius: 11px;
+        font-weight: 700;
+        font-size: 13px;
+        box-shadow: 0 4px 14px rgba(247, 102, 49, 0.35);
+      }
+
+      /* ---------- HERO ---------- */
+      .hero {
+        background: linear-gradient(135deg, var(--bg-light-two), #ffefe2);
+        border-bottom: 1px solid #ffe3ce;
+        padding: 26px 0 0;
+      }
+      .crumbs {
+        font-size: 12.5px;
+        color: var(--paragraph-color);
+        margin-bottom: 10px;
+      }
+      .crumbs a:hover {
+        color: var(--main-color-one);
+      }
+      .crumbs span {
+        margin: 0 6px;
+      }
+      .hero-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .hero h1 {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--heading-color);
+        line-height: 1.2;
+      }
+      .hero h1 em {
+        font-style: normal;
+        color: var(--main-color-one);
+      }
+      .hero p {
+        color: var(--paragraph-color);
+        margin-top: 6px;
+        font-size: 14px;
+      }
+      .hero-art {
+        max-width: 400px;
+        width: 36%;
+      }
+      .hero-art img {
+        width: 100%;
+        height: auto;
+      }
+      .hero-points {
+        display: flex;
+        gap: 26px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+      .hero-points span {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--paragraph-color-four);
+      }
+      .hp-ic {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #fff;
+        border: 1px solid #ffe0cb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+      }
+      .searchbar {
+        display: flex;
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 8px 30px rgba(247, 102, 49, 0.14);
+        overflow: hidden;
+        margin: 22px 0 0;
+        border: 1px solid #ffe0cb;
+      }
+      .sb-field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 16px;
+        border-right: 1px solid var(--line);
+        font-size: 13.5px;
+        font-weight: 600;
+        color: var(--heading-color);
+        white-space: nowrap;
+        min-width: 160px;
+      }
+      .sb-field select {
+        border: 0;
+        outline: 0;
+        font-family: inherit;
+        font-weight: 600;
+        color: var(--heading-color);
+        background: transparent;
+        font-size: 13.5px;
+        flex: 1;
+        cursor: pointer;
+      }
+      .sb-input {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 16px;
+        color: var(--paragraph-color);
+      }
+      .sb-input input {
+        flex: 1;
+        border: 0;
+        outline: 0;
+        padding: 14px 0;
+        font-size: 14px;
+        color: var(--heading-color);
+      }
+      .searchbar .go {
+        background: var(--grad);
+        color: #fff;
+        border: 0;
+        padding: 0 42px;
+        font-weight: 800;
+        font-size: 15px;
+      }
+
+      /* ---------- CATEGORY QUICK NAV ---------- */
+      .quickcats {
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+      }
+      .quickcats .container {
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+      }
+      .qcat {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 15px 22px;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--paragraph-color);
+        white-space: nowrap;
+        border-bottom: 3px solid transparent;
+        font-family: var(--hero-font-family);
+      }
+      .qcat .qi {
+        width: 30px;
+        height: 30px;
+        border-radius: 9px;
+        background: var(--bg-light-one);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+      }
+      .qcat:hover {
+        color: var(--main-color-one);
+      }
+      .qcat.active {
+        color: var(--main-color-one);
+        border-bottom-color: var(--main-color-one);
+      }
+      .qcat.active .qi {
+        background: var(--main-color-one);
+        color: #fff;
+      }
+
+      /* ---------- FESTIVE BANNER CAROUSEL ---------- */
+      .festive {
+        padding: 22px 0 4px;
+      }
+      .banner-track {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 14px 40px rgba(4, 10, 27, 0.18);
+      }
+      .banner-slide {
+        display: none;
+        position: relative;
+        min-height: 210px;
+        align-items: center;
+      }
+      .banner-slide.on {
+        display: flex;
+      }
+      .banner-slide .content {
+        position: relative;
+        z-index: 2;
+        padding: 38px 46px;
+        max-width: 60%;
+      }
+      .bs1 {
+        background: radial-gradient(
+          1200px 300px at 80% 20%,
+          #ff7a3d,
+          #c81e1e 60%,
+          #8b0a0a
+        );
+      }
+      .bs2 {
+        background: radial-gradient(
+          1200px 300px at 80% 20%,
+          #fba260,
+          #f76631 60%,
+          #c2410c
+        );
+      }
+      .bs3 {
+        background: radial-gradient(
+          1200px 300px at 80% 20%,
+          #4c1d95,
+          #22253f 60%,
+          #040a1b
+        );
+      }
+      .banner-slide::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.35),
+          transparent 65%
+        );
+      }
+      .banner-kicker {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 2.5px;
+        background: rgba(255, 255, 255, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: #fff;
+        padding: 5px 13px;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        backdrop-filter: blur(4px);
+      }
+      .banner-slide h3 {
+        color: #fff;
+        font-family: var(--hero-font-family);
+        font-size: clamp(24px, 3.4vw, 38px);
+        font-weight: 800;
+        line-height: 1.15;
+      }
+      .banner-sub {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 15px;
+        margin: 10px 0 20px;
+        font-weight: 600;
+      }
+      .banner-sub b {
+        color: var(--main-color-three);
+      }
+      .banner-cta {
+        display: inline-block;
+        background: var(--main-color-three);
+        color: var(--bg-dark-one);
+        border: 0;
+        padding: 12px 26px;
+        border-radius: 11px;
+        font-weight: 800;
+        font-size: 13.5px;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+      }
+      .banner-img {
+        position: absolute;
+        right: 3%;
+        bottom: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+        z-index: 1;
+      }
+      .banner-img img {
+        max-height: 190px;
+        width: auto;
+        filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.35));
+      }
+      .banner-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 0;
+        background: rgba(255, 255, 255, 0.94);
+        font-size: 18px;
+        color: var(--heading-color);
+        z-index: 5;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .banner-arrow.l {
+        left: 14px;
+      }
+      .banner-arrow.r {
+        right: 14px;
+      }
+      .banner-dots {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+        padding: 12px 0 2px;
+      }
+      .banner-dots i {
+        width: 8px;
+        height: 8px;
+        border-radius: 5px;
+        background: #ffd9bf;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .banner-dots i.on {
+        width: 22px;
+        background: var(--main-color-one);
+      }
+
+      /* ---------- LISTING LAYOUT ---------- */
+      .listing {
+        display: grid;
+        grid-template-columns: 272px 1fr;
+        gap: 24px;
+        padding: 22px 0 10px;
+      }
+
+      /* ---------- FILTERS ---------- */
+      .filters-card {
+        background: #fff;
+        border-radius: var(--r);
+        box-shadow: var(--shadow);
+        padding: 20px;
+        position: sticky;
+        top: 90px;
+        align-self: start;
+      }
+      .f-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+      .f-head b {
+        font-size: 15px;
+        color: var(--heading-color);
+        font-family: var(--heading-font);
+      }
+      .f-head a {
+        font-size: 12px;
+        color: var(--main-color-one);
+        font-weight: 700;
+      }
+      .f-group {
+        margin-bottom: 20px;
+      }
+      .f-group > b {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: var(--heading-color);
+        font-weight: 700;
+        margin-bottom: 10px;
+        font-family: var(--heading-font);
+      }
+      .f-group > b a {
+        font-size: 11px;
+        color: var(--main-color-one);
+        font-weight: 700;
+      }
+      .pills {
+        display: flex;
+        background: var(--bg-light-one);
+        border-radius: 10px;
+        padding: 4px;
+        gap: 4px;
+      }
+      .pills button {
+        flex: 1;
+        border: 0;
+        background: transparent;
+        padding: 8px 4px;
+        border-radius: 8px;
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--paragraph-color);
+      }
+      .pills button.on {
+        background: var(--main-color-one);
+        color: #fff;
+        box-shadow: 0 3px 8px rgba(247, 102, 49, 0.3);
+      }
+      .range-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--main-color-one);
+        margin-bottom: 2px;
+      }
+      .range-track {
+        height: 5px;
+        background: #ffe0cb;
+        border-radius: 4px;
+        margin: 6px 2px 12px;
+        position: relative;
+      }
+      .range-track i {
+        position: absolute;
+        left: 4%;
+        right: 8%;
+        top: 0;
+        bottom: 0;
+        background: var(--main-color-one);
+        border-radius: 4px;
+      }
+      .range-track b {
+        position: absolute;
+        top: -5px;
+        width: 14px;
+        height: 14px;
+        background: #fff;
+        border: 3px solid var(--main-color-one);
+        border-radius: 50%;
+      }
+      .range-track b:first-of-type {
+        left: 4%;
+      }
+      .range-track b:last-of-type {
+        right: 8%;
+      }
+      .minmax {
+        display: flex;
+        gap: 8px;
+      }
+      .minmax input {
+        flex: 1;
+        border: 1.5px solid var(--line);
+        border-radius: 9px;
+        padding: 9px 10px;
+        font-size: 12.5px;
+        outline: 0;
+        width: 50%;
+        color: var(--heading-color);
+      }
+      .minmax input:focus {
+        border-color: var(--main-color-one);
+      }
+      .check {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 5px 0;
+        font-size: 13px;
+        cursor: pointer;
+      }
+      .check input {
+        accent-color: var(--main-color-one);
+        width: 15px;
+        height: 15px;
+      }
+      .check em {
+        margin-left: auto;
+        font-style: normal;
+        color: var(--paragraph-color);
+        font-size: 11.5px;
+      }
+      .showmore {
+        color: var(--main-color-one);
+        font-size: 12.5px;
+        font-weight: 700;
+        background: none;
+        border: 0;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-top: 4px;
+      }
+      .apply {
+        width: 100%;
+        background: var(--grad);
+        color: #fff;
+        border: 0;
+        border-radius: 11px;
+        padding: 12px;
+        font-weight: 800;
+        font-size: 13.5px;
+        box-shadow: 0 4px 12px rgba(247, 102, 49, 0.3);
+      }
+      .fsel {
+        width: 100%;
+        border: 1.5px solid var(--line);
+        border-radius: 9px;
+        padding: 9px 10px;
+        font-size: 12.5px;
+        outline: 0;
+        background: #fff;
+        color: var(--heading-color);
+        font-family: inherit;
+      }
+      /* Popular brand logo grid */
+      .brand-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 9px;
+      }
+      .brand-tile {
+        border: 1.5px solid var(--line);
+        border-radius: 11px;
+        padding: 10px 6px 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.2s;
+        background: #fff;
+      }
+      .brand-tile:hover {
+        border-color: var(--main-color-one);
+        box-shadow: 0 4px 12px rgba(247, 102, 49, 0.15);
+      }
+      .brand-tile.on {
+        border-color: var(--main-color-one);
+        background: var(--bg-light-two);
+      }
+      .brand-tile img {
+        width: 38px;
+        height: 38px;
+        object-fit: contain;
+        margin: 0 auto 5px;
+      }
+      .brand-fb {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--bg-light-one);
+        color: var(--heading-color);
+        font-weight: 800;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 5px;
+        font-family: var(--heading-font);
+      }
+      .brand-tile small {
+        font-size: 10.5px;
+        font-weight: 700;
+        color: var(--paragraph-color-four);
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* ---------- RESULTS ---------- */
+      .res-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .res-head h2 {
+        font-size: 20px;
+        color: var(--heading-color);
+      }
+      .res-head h2 span {
+        color: var(--main-color-one);
+      }
+      .res-tools {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .sortsel {
+        border: 1.5px solid var(--line);
+        border-radius: 10px;
+        padding: 9px 12px;
+        font-size: 12.5px;
+        font-family: inherit;
+        outline: 0;
+        background: #fff;
+        color: var(--heading-color);
+        font-weight: 600;
+      }
+      .view-toggle {
+        display: flex;
+        border: 1.5px solid var(--line);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .view-toggle button {
+        border: 0;
+        background: #fff;
+        padding: 9px 13px;
+        font-size: 14px;
+        color: var(--paragraph-color);
+      }
+      .view-toggle button.on {
+        background: var(--main-color-one);
+        color: #fff;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+        gap: 18px;
+      }
+      .ad-card {
+        background: #fff;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: 0.25s;
+        border: 1px solid transparent;
+      }
+      .ad-card:hover {
+        transform: translateY(-4px);
+        border-color: #ffd9bf;
+      }
+      .ad-card .ph {
+        position: relative;
+        aspect-ratio: 16/10;
+        background: var(--bg-dark-two);
+      }
+      .ad-card .ph > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: #fff;
+        font-weight: 800;
+        font-size: 10.5px;
+        padding: 4px 11px;
+        border-radius: 7px;
+        letter-spacing: 0.5px;
+        font-family: var(--hero-font-family);
+      }
+      .badge.sell {
+        background: var(--main-color-one);
+      }
+      .badge.exchange {
+        background: var(--purple);
+      }
+      .badge.rent {
+        background: var(--amber);
+      }
+      .heart {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 0;
+        background: rgba(255, 255, 255, 0.92);
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #b6bece;
+      }
+      .heart.on {
+        color: var(--red);
+      }
+      .ad-card .body {
+        padding: 14px 15px;
+      }
+      .ad-card h3 {
+        font-size: 14.5px;
+        font-weight: 700;
+        color: var(--heading-color);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .ad-card .price {
+        display: flex;
+        align-items: center;
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--main-color-one);
+        margin: 7px 0 8px;
+        font-family: var(--heading-font);
+      }
+      .neg-tag {
+        font-size: 9.5px;
+        font-weight: 800;
+        color: var(--green);
+        background: var(--green-soft);
+        border: 1px solid #bbe7cc;
+        padding: 2px 8px;
+        border-radius: 6px;
+        margin-left: 9px;
+        letter-spacing: 0.3px;
+      }
+      .fix-tag {
+        font-size: 9.5px;
+        font-weight: 800;
+        color: var(--paragraph-color);
+        background: var(--bg-light-one);
+        border: 1px solid var(--line);
+        padding: 2px 8px;
+        border-radius: 6px;
+        margin-left: 9px;
+      }
+      .ad-card .specs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 12px;
+        font-size: 11.5px;
+        color: var(--paragraph-color);
+      }
+      .ad-card .loc {
+        display: flex;
+        justify-content: space-between;
+        font-size: 11px;
+        color: var(--paragraph-color);
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px dashed var(--line);
+      }
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin: 34px 0 10px;
+      }
+      .pagination button {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        border: 1.5px solid var(--line);
+        background: #fff;
+        font-weight: 700;
+        color: var(--heading-color);
+        font-size: 13.5px;
+      }
+      .pagination button.on {
+        background: var(--main-color-one);
+        border-color: var(--main-color-one);
+        color: #fff;
+        box-shadow: 0 4px 10px rgba(247, 102, 49, 0.3);
+      }
+      .pagination button:hover:not(.on) {
+        border-color: var(--main-color-one);
+        color: var(--main-color-one);
+      }
+
+      /* ══════════ SECTION COMMONS ══════════ */
+      .section {
+        padding: 52px 0;
+      }
+      .sec-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 20px;
+        margin-bottom: 26px;
+        flex-wrap: wrap;
+      }
+      .eyebrow {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 2.5px;
+        color: var(--main-color-one);
+        font-family: var(--hero-font-family);
+      }
+      .sec-head h2 {
+        font-size: 26px;
+        color: var(--heading-color);
+        margin-top: 6px;
+        line-height: 1.25;
+      }
+      .sec-head p {
+        color: var(--paragraph-color);
+        font-size: 13.5px;
+        margin-top: 6px;
+        max-width: 460px;
+      }
+      .pill-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 800;
+        padding: 4px 11px;
+        border-radius: 8px;
+        margin-left: 10px;
+        vertical-align: middle;
+        font-family: var(--hero-font-family);
+      }
+      .pill-green {
+        background: var(--green-soft);
+        color: var(--green);
+      }
+
+      /* ══════════ HOW EXCHANGE WORKS ══════════ */
+      .how {
+        background: #fff;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+        position: relative;
+        margin-top: 8px;
+      }
+      .step {
+        background: var(--bg-light-two);
+        border: 1px solid #ffe3ce;
+        border-radius: 18px;
+        padding: 26px 24px;
+        position: relative;
+        transition: 0.25s;
+      }
+      .step:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(247, 102, 49, 0.14);
+      }
+      .step-num {
+        position: absolute;
+        top: -14px;
+        left: 24px;
+        background: var(--main-color-one);
+        color: #fff;
+        font-weight: 800;
+        font-size: 12px;
+        padding: 4px 14px;
+        border-radius: 20px;
+        letter-spacing: 1.5px;
+        box-shadow: 0 4px 10px rgba(247, 102, 49, 0.35);
+        font-family: var(--hero-font-family);
+      }
+      .step-ic {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: #fff;
+        border: 1px solid #ffe3ce;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin: 8px 0 16px;
+      }
+      .step h3 {
+        font-size: 16.5px;
+        color: var(--heading-color);
+        margin-bottom: 6px;
+      }
+      .step p {
+        font-size: 13px;
+        color: var(--paragraph-color);
+        line-height: 1.6;
+      }
+      .swap-demo {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        background: var(--bg-light-one);
+        border: 1px dashed #f0c9ae;
+        border-radius: 18px;
+        padding: 18px 24px;
+        margin-top: 34px;
+        flex-wrap: wrap;
+      }
+      .swap-item {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        background: #fff;
+        border-radius: 14px;
+        padding: 12px 18px;
+        box-shadow: var(--shadow);
+        flex: 1;
+        min-width: 220px;
+      }
+      .swap-item img {
+        width: 66px;
+        height: 48px;
+        object-fit: cover;
+        border-radius: 9px;
+        background: var(--bg-dark-two);
+      }
+      .swap-item b {
+        display: block;
+        font-size: 13px;
+        color: var(--heading-color);
+      }
+      .swap-item small {
+        color: var(--paragraph-color);
+        font-size: 11.5px;
+      }
+      .swap-arrow {
+        text-align: center;
+        color: var(--main-color-one);
+        font-weight: 800;
+        font-size: 13px;
+        white-space: nowrap;
+      }
+      .swap-arrow span {
+        display: block;
+        font-size: 22px;
+      }
+      .demo-label {
+        width: 100%;
+        font-size: 12px;
+        color: var(--paragraph-color);
+        margin-bottom: 2px;
+      }
+      .demo-label b {
+        color: var(--heading-color);
+      }
+      .list-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--grad);
+        color: #fff;
+        border: 0;
+        padding: 13px 26px;
+        border-radius: 12px;
+        font-weight: 800;
+        font-size: 14px;
+        box-shadow: 0 6px 18px rgba(247, 102, 49, 0.4);
+        margin-left: auto;
+      }
+      .trust-row {
+        display: flex;
+        justify-content: center;
+        gap: 36px;
+        flex-wrap: wrap;
+        margin-top: 30px;
+      }
+      .trust-row span {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--paragraph-color-four);
+      }
+      .trust-row i {
+        font-style: normal;
+        font-size: 16px;
+      }
+
+      /* ══════════ SPOTLIGHT CAROUSEL ══════════ */
+      .spotlight-card {
+        position: relative;
+        border-radius: 22px;
+        overflow: hidden;
+        background: var(--bg-dark-one);
+        min-height: 400px;
+        display: flex;
+        align-items: flex-end;
+        box-shadow: 0 20px 50px rgba(4, 10, 27, 0.35);
+      }
+      .spot-slide {
+        display: none;
+        width: 100%;
+        position: relative;
+      }
+      .spot-slide.on {
+        display: block;
+      }
+      .spot-slide::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(4, 10, 27, 0.05) 30%,
+          rgba(4, 10, 27, 0.88) 78%
+        );
+      }
+      .spot-inner {
+        position: relative;
+        z-index: 2;
+        padding: 40px;
+        width: 100%;
+      }
+      .spot-badges {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+      }
+      .spot-badge {
+        background: var(--main-color-one);
+        color: #fff;
+        font-weight: 800;
+        font-size: 11px;
+        letter-spacing: 1.2px;
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-family: var(--hero-font-family);
+      }
+      .spot-badge.dark {
+        background: rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(6px);
+        font-weight: 600;
+        letter-spacing: 0;
+      }
+      .spot-inner h3 {
+        color: #fff;
+        font-size: clamp(22px, 3.2vw, 34px);
+        font-weight: 800;
+        font-family: var(--hero-font-family);
+      }
+      .spot-specs {
+        color: var(--paragraph-color-three);
+        font-size: 13.5px;
+        margin: 10px 0 18px;
+        letter-spacing: 0.6px;
+      }
+      .spot-foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 18px;
+        flex-wrap: wrap;
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
+        padding-top: 20px;
+      }
+      .spot-price small {
+        color: var(--paragraph-color-three);
+        font-size: 11.5px;
+        display: block;
+        margin-bottom: 2px;
+      }
+      .spot-price b {
+        color: #fff;
+        font-size: clamp(24px, 3vw, 32px);
+        font-weight: 800;
+        font-family: var(--heading-font);
+      }
+      .neg {
+        font-size: 11px;
+        font-weight: 800;
+        color: #4ade80;
+        background: rgba(74, 222, 128, 0.14);
+        border: 1px solid rgba(74, 222, 128, 0.4);
+        padding: 3px 10px;
+        border-radius: 7px;
+        margin-left: 10px;
+        vertical-align: middle;
+      }
+      .spot-ctas {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .btn-chat-o {
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: #fff;
+        padding: 13px 24px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 13.5px;
+        backdrop-filter: blur(4px);
+      }
+      .btn-view {
+        background: var(--grad);
+        color: #fff;
+        border: 0;
+        padding: 13px 26px;
+        border-radius: 12px;
+        font-weight: 800;
+        font-size: 13.5px;
+        box-shadow: 0 8px 24px rgba(247, 102, 49, 0.5);
+      }
+      .spot-nav {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .spot-count {
+        font-size: 12.5px;
+        color: var(--paragraph-color);
+        font-weight: 700;
+        margin-right: 6px;
+      }
+      .spot-nav button {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1.5px solid var(--line);
+        background: #fff;
+        font-size: 16px;
+        color: var(--heading-color);
+      }
+      .spot-nav button:hover {
+        border-color: var(--main-color-one);
+        color: var(--main-color-one);
+      }
+      .spot-dots {
+        display: flex;
+        gap: 6px;
+        margin-top: 16px;
+        justify-content: center;
+      }
+      .spot-dots i {
+        width: 8px;
+        height: 8px;
+        border-radius: 5px;
+        background: #ffd9bf;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .spot-dots i.on {
+        width: 24px;
+        background: var(--main-color-one);
+      }
+
+      /* ══════════ BEST VALUE DEALS ══════════ */
+      .value-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(262px, 1fr));
+        gap: 20px;
+      }
+      .deal-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--line);
+        transition: 0.25s;
+      }
+      .deal-card:hover {
+        transform: translateY(-4px);
+        border-color: #bbe7cc;
+        box-shadow: 0 14px 34px rgba(4, 10, 27, 0.12);
+      }
+      .deal-card .ph {
+        position: relative;
+        aspect-ratio: 16/10;
+        background: var(--bg-dark-two);
+      }
+      .deal-card .ph img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .below-tag {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: var(--green);
+        color: #fff;
+        font-size: 10.5px;
+        font-weight: 800;
+        padding: 5px 11px;
+        border-radius: 7px;
+        letter-spacing: 0.4px;
+        font-family: var(--hero-font-family);
+      }
+      .deal-card .body {
+        padding: 15px 16px;
+      }
+      .deal-card h3 {
+        font-size: 14.5px;
+        color: var(--heading-color);
+      }
+      .deal-card .specs {
+        font-size: 11.5px;
+        color: var(--paragraph-color);
+        margin: 5px 0 9px;
+      }
+      .deal-card .price {
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--heading-color);
+        font-family: var(--heading-font);
+      }
+      .deal-card .price s {
+        font-size: 12px;
+        color: var(--paragraph-color);
+        font-weight: 500;
+        margin-left: 7px;
+      }
+      .deal-foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 12px;
+        padding-top: 11px;
+        border-top: 1px dashed var(--line);
+        font-size: 11.5px;
+      }
+      .deal-foot .pl {
+        color: var(--paragraph-color);
+      }
+      .deal-tag {
+        font-weight: 800;
+      }
+      .deal-tag.gold {
+        color: #d97706;
+      }
+      .deal-tag.red {
+        color: var(--red);
+      }
+      .deal-tag.green {
+        color: var(--green);
+      }
+      .deal-tag.blue {
+        color: #2563eb;
+      }
+      .explore-link {
+        color: var(--main-color-one);
+        font-weight: 800;
+        font-size: 13.5px;
+        white-space: nowrap;
+      }
+      .explore-link:hover {
+        text-decoration: underline;
+      }
+
+      /* ══════════ SOLVEMONKEY ASSURED (NEW) ══════════ */
+      .assured {
+        background: var(--bg-dark-one);
+        position: relative;
+        overflow: hidden;
+      }
+      .assured::before {
+        content: "";
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(247, 102, 49, 0.18),
+          transparent 65%
+        );
+        top: -260px;
+        right: -160px;
+      }
+      .assured .sec-head h2 {
+        color: #fff;
+      }
+      .assured .eyebrow {
+        color: var(--main-color-three);
+      }
+      .whats-this {
+        font-size: 12px;
+        color: var(--paragraph-color-three);
+        font-weight: 600;
+        margin-left: 10px;
+      }
+      .whats-this:hover {
+        color: var(--main-color-three);
+      }
+      .assured-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 18px;
+        position: relative;
+        z-index: 2;
+      }
+      .a-card {
+        background: var(--bg-dark-two);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 16px;
+        padding: 24px 22px;
+        transition: 0.25s;
+      }
+      .a-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(247, 102, 49, 0.5);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+      }
+      .a-ic {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        background: rgba(247, 102, 49, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        margin-bottom: 15px;
+      }
+      .a-card h3 {
+        color: #fff;
+        font-size: 15.5px;
+        margin-bottom: 7px;
+      }
+      .a-card p {
+        color: var(--paragraph-color-three);
+        font-size: 12.5px;
+        line-height: 1.65;
+      }
+      .a-card a {
+        display: inline-block;
+        margin-top: 14px;
+        color: #4ade80;
+        font-weight: 800;
+        font-size: 12.5px;
+      }
+      .a-card a:hover {
+        text-decoration: underline;
+      }
+
+      /* ══════════ TESTIMONIALS ══════════ */
+      .testi {
+        background: linear-gradient(
+          180deg,
+          var(--bg-light-one) 0%,
+          var(--bg-light-two) 100%
+        );
+      }
+      .rating-summary {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: #fff;
+        border: 1px solid #ffe3ce;
+        border-radius: 16px;
+        padding: 14px 22px;
+        box-shadow: var(--shadow);
+      }
+      .rating-summary .big {
+        font-size: 34px;
+        font-weight: 800;
+        color: var(--heading-color);
+        line-height: 1;
+        font-family: var(--heading-font);
+      }
+      .stars {
+        color: var(--amber);
+        font-size: 15px;
+        letter-spacing: 2px;
+      }
+      .rating-summary small {
+        color: var(--paragraph-color);
+        font-size: 11.5px;
+        display: block;
+      }
+      .testi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 26px;
+      }
+      .t-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--line);
+        position: relative;
+      }
+      .t-card::before {
+        content: "“";
+        position: absolute;
+        top: 8px;
+        right: 20px;
+        font-size: 64px;
+        color: #ffe3ce;
+        font-family: Georgia, serif;
+        line-height: 1;
+      }
+      .t-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 13px;
+      }
+      .t-av {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          var(--bg-dark-one),
+          var(--bg-dark-two)
+        );
+        color: #fff;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+      .t-head b {
+        display: block;
+        font-size: 14px;
+        color: var(--heading-color);
+      }
+      .t-head small {
+        color: var(--paragraph-color);
+        font-size: 11.5px;
+      }
+      .t-verified {
+        margin-left: auto;
+        font-size: 10px;
+        font-weight: 800;
+        background: var(--green-soft);
+        color: var(--green);
+        padding: 3px 9px;
+        border-radius: 6px;
+        white-space: nowrap;
+      }
+      .t-card .stars {
+        font-size: 13px;
+        margin-bottom: 10px;
+      }
+      .t-card p {
+        font-size: 13px;
+        line-height: 1.75;
+        color: var(--paragraph-color-two);
+      }
+      .t-swap {
+        font-size: 11px;
+        color: var(--paragraph-color);
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px dashed var(--line);
+      }
+      .t-swap b {
+        color: var(--main-color-one);
+      }
+
+      /* ══════════ FAQ ══════════ */
+      .faq-wrap {
+        max-width: 820px;
+        margin: 0 auto;
+      }
+      .faq-item {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        margin-bottom: 12px;
+        overflow: hidden;
+        transition: 0.2s;
+      }
+      .faq-item.open {
+        border-color: #ffd9bf;
+        box-shadow: var(--shadow);
+      }
+      .faq-q {
+        width: 100%;
+        background: none;
+        border: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 18px 22px;
+        font-size: 14.5px;
+        font-weight: 700;
+        color: var(--heading-color);
+        text-align: left;
+        font-family: var(--heading-font);
+      }
+      .faq-q span {
+        flex: 1;
+      }
+      .faq-ic {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--bg-light-two);
+        color: var(--main-color-one);
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 16px;
+        transition: 0.3s;
+      }
+      .faq-item.open .faq-ic {
+        transform: rotate(45deg);
+        background: var(--main-color-one);
+        color: #fff;
+      }
+      .faq-a {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s ease;
+      }
+      .faq-a p {
+        padding: 0 22px 20px;
+        font-size: 13.5px;
+        line-height: 1.8;
+        color: var(--paragraph-color);
+      }
+      .faq-cta {
+        text-align: center;
+        margin-top: 28px;
+        color: var(--paragraph-color);
+        font-size: 13.5px;
+      }
+      .faq-cta a {
+        color: var(--main-color-one);
+        font-weight: 800;
+      }
+
+      /* ---------- FOOTER ---------- */
+      footer {
+        background: var(--bg-dark-one);
+        color: var(--paragraph-color-three);
+        margin-top: 20px;
+      }
+      .foot-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr 1fr;
+        gap: 30px;
+        padding: 46px 0 30px;
+      }
+      footer h4 {
+        color: #fff;
+        font-size: 14px;
+        margin-bottom: 14px;
+        font-family: var(--heading-font);
+      }
+      footer a {
+        display: block;
+        font-size: 12.8px;
+        padding: 4px 0;
+        color: var(--paragraph-color-three);
+      }
+      footer a:hover {
+        color: var(--main-color-one);
+      }
+      footer p {
+        font-size: 12.5px;
+        line-height: 1.7;
+        max-width: 280px;
+        margin-top: 10px;
+      }
+      .foot-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 16px 0;
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      /* ---------- MOBILE ---------- */
+      @media (max-width: 992px) {
+        nav.mainnav,
+        .searchbox,
+        .topbar .left span.hidem {
+          display: none;
+        }
+        .listing {
+          grid-template-columns: 1fr;
+        }
+        .filters-card {
+          position: fixed;
+          inset: 0 auto 0 0;
+          width: 300px;
+          z-index: 300;
+          border-radius: 0;
+          overflow-y: auto;
+          transform: translateX(-105%);
+          transition: 0.3s;
+        }
+        .filters-card.open {
+          transform: none;
+        }
+        .f-toggle {
+          display: flex !important;
+          align-items: center;
+          gap: 8px;
+          background: #fff;
+          border: 1.5px solid var(--line);
+          border-radius: 10px;
+          padding: 9px 16px;
+          font-weight: 700;
+          font-size: 13px;
+          color: var(--heading-color);
+        }
+        .hero-art {
+          display: none;
+        }
+        .steps {
+          grid-template-columns: 1fr;
+        }
+        .list-cta {
+          margin: 0 auto;
+        }
+        .foot-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .spot-inner {
+          padding: 24px;
+        }
+        .sec-head h2 {
+          font-size: 22px;
+        }
+        .banner-slide .content {
+          max-width: 100%;
+          padding: 26px;
+        }
+        .banner-img {
+          display: none;
+        }
+      }
+      .f-toggle {
+        display: none;
+      }
+    </style>
+    <base target="_blank" />
+  </head>
+  <body>
+    <!-- ════════════════════════════════════════════════════════════
+     IMAGE GUIDE (bas itna yaad rakhein):
+     Listing cards  → images/car-1.jpg … car-9.jpg
+     Banner slides  → images/banner-1.png … banner-3.png (right side product image)
+     Brand logos    → images/brand-maruti.png … brand-honda.png
+     Spotlight      → images/spot-1.jpg … spot-3.jpg
+     Deal cards     → images/deal-1.jpg … deal-4.jpg
+     Swap demo      → images/swap-old.jpg , images/swap-new.jpg
+     Missing image  → automatic professional placeholder (kabhi toota hua nahi dikhega)
+     ════════════════════════════════════════════════════════════ -->
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div class="container">
+        <div>
+          <span>📍</span> <b>Jaipur, Rajasthan</b>
+          <span class="hidem" style="opacity: 0.5">|</span>
+          <span class="hidem">India's Trusted Exchange Marketplace</span>
+        </div>
+        <div><a href="#">Help & Support</a><a href="#">Download App</a></div>
+      </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+      <div class="container header-inner">
+        <a class="logo" href="#"
+          ><span class="logo-mark">🐵</span><span>SOLVE<em>MONKEY</em></span></a
+        >
+        <nav class="mainnav">
+          <a href="#">All Ads</a><a href="#" class="active">Cars</a
+          ><a href="#">Categories ▾</a><a href="#">About Us</a
+          ><a href="#">Contact</a>
+        </nav>
+        <div class="searchbox">
+          <input
+            placeholder="Search for mobiles, furniture, bikes, laptops..."
+          />
+          <button>Search</button>
+        </div>
+        <div class="hdr-actions">
+          <button class="icon-btn">🔔<span class="dot">3</span></button>
+          <button class="btn-login">Login</button>
+          <button class="btn-post">+ Post Your Ad</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="container">
+        <div class="crumbs">
+          <a href="#">Home</a><span>›</span><a href="#">Cars</a><span>›</span
+          ><b style="color: var(--heading-color)">Cars</b>
+        </div>
+        <div class="hero-flex">
+          <div>
+            <h1>Cars for <em>Sale & Exchange</em></h1>
+            <p>
+              Find the best deals on new and pre-owned cars. Buy, sell or
+              exchange with genuine users near you.
+            </p>
+            <!-- Trust points (new) -->
+            <div class="hero-points">
+              <span
+                ><i class="hp-ic" style="color: var(--hero-color-icon-blue)"
+                  >🚗</i
+                >
+                Owner-listed cars</span
+              >
+              <span
+                ><i class="hp-ic" style="color: var(--hero-color-icon-teal)"
+                  >💬</i
+                >
+                Direct chat, no middleman</span
+              >
+              <span
+                ><i class="hp-ic" style="color: var(--main-color-one)">🔁</i>
+                Exchange across cities</span
+              >
+            </div>
+          </div>
+          <div class="hero-art">
+            <img
+              src="images/hero-cars.png"
+              alt=""
+              onerror="this.parentElement.style.display = 'none'"
+            />
+          </div>
+        </div>
+
+        <!-- Search: Select State + Select City + keyword (new) -->
+        <div class="searchbar">
+          <div class="sb-field">
+            🗺
+            <select>
+              <option>Select State</option>
+              <option>Rajasthan</option>
+              <option>Delhi</option>
+              <option>Maharashtra</option>
+              <option>Gujarat</option>
+            </select>
+          </div>
+          <div class="sb-field">
+            📍
+            <select>
+              <option>Select City</option>
+              <option>Jaipur</option>
+              <option>Jodhpur</option>
+              <option>Kota</option>
+              <option>Udaipur</option>
+            </select>
+          </div>
+          <div class="sb-input">
+            🔎 <input placeholder="Search by brand, model or keyword..." />
+          </div>
+          <button class="go">Search</button>
+        </div>
+      </div>
+
+      <!-- CATEGORY QUICK NAV (new) -->
+      <div class="quickcats" style="margin-top: 20px">
+        <div class="container">
+          <a class="qcat" href="#"><span class="qi">📱</span> Mobiles</a>
+          <a class="qcat" href="#"><span class="qi">🏍</span> Bikes</a>
+          <a class="qcat active" href="#"><span class="qi">🚗</span> Cars</a>
+          <a class="qcat" href="#"><span class="qi">🏠</span> Properties</a>
+          <a class="qcat" href="#"
+            ><span class="qi">🛋</span> Home & Furniture</a
+          >
+          <a class="qcat" href="#"><span class="qi">💻</span> Electronics</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- FESTIVE BANNER CAROUSEL (new – like Cashify) -->
+      <div class="festive">
+        <div class="banner-track" id="bannerTrack">
+          <!-- SLIDE 1 : Diwali Sale -->
+          <div class="banner-slide bs1 on">
+            <div class="content">
+              <span class="banner-kicker">🪔 DIWALI SALE · LIVE NOW</span>
+              <h3>Festive wali feel,<br />best wali deals</h3>
+              <p class="banner-sub">
+                Up to <b>60% OFF</b> on exchange top-ups + zero commission week
+              </p>
+              <a class="banner-cta" href="#">Grab The Deal →</a>
+            </div>
+            <div class="banner-img">
+              <img
+                src="images/banner-1.png"
+                alt=""
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+          </div>
+          <!-- SLIDE 2 : Festive Drive -->
+          <div class="banner-slide bs2">
+            <div class="content">
+              <span class="banner-kicker">🚗 FESTIVE DRIVE</span>
+              <h3>Bigger savings on<br />your next car</h3>
+              <p class="banner-sub">
+                Verified cars priced <b>below market</b> in your city
+              </p>
+              <a class="banner-cta" href="#">Explore Deals →</a>
+            </div>
+            <div class="banner-img">
+              <img
+                src="images/banner-2.png"
+                alt=""
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+          </div>
+          <!-- SLIDE 3 : Assured Upgrade -->
+          <div class="banner-slide bs3">
+            <div class="content">
+              <span class="banner-kicker">✨ SOLVEMONKEY ASSURED</span>
+              <h3>Old car do,<br />upgrade car lo</h3>
+              <p class="banner-sub">
+                32-point inspected cars with <b>doorstep RC transfer</b>
+              </p>
+              <a class="banner-cta" href="#">View Assured Cars →</a>
+            </div>
+            <div class="banner-img">
+              <img
+                src="images/banner-3.png"
+                alt=""
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+          </div>
+          <button class="banner-arrow l" onclick="bannerMove(-1)">‹</button>
+          <button class="banner-arrow r" onclick="bannerMove(1)">›</button>
+        </div>
+        <div class="banner-dots" id="bannerDots">
+          <i class="on" onclick="bannerGo(0)"></i><i onclick="bannerGo(1)"></i
+          ><i onclick="bannerGo(2)"></i>
+        </div>
+      </div>
+
+      <!-- ════════ LISTING + FILTERS ════════ -->
+      <div class="listing">
+        <!-- FILTERS -->
+        <aside>
+          <button
+            class="f-toggle"
+            onclick="
+              document.querySelector('.filters-card').classList.toggle('open')
+            "
+          >
+            ☰ Filters
+          </button>
+          <div class="filters-card">
+            <div class="f-head"><b>Filters</b><a href="#">Clear All</a></div>
+
+            <div class="f-group">
+              <b>Listing Type</b>
+              <div class="pills">
+                <button class="on">All</button><button>Sell</button
+                ><button>Exchange</button><button>Rent</button>
+              </div>
+            </div>
+
+            <div>
+
+<div class="mb-3">
+    <label style="display:block; font-size:14px; font-weight:700; color:#475569; margin-bottom:12px;">
+        PRICE RANGE
+    </label>
+
+    <input type="range"
+           class="form-range"
+           min="100000"
+           max="3500000"
+           value="1500000"
+           style="accent-color:#ff5733; cursor:pointer;width:100%">
+
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2px; font-size:13px; font-weight:700; color:#475569;">
+        <span>₹ 1 Lakh</span>
+        <span>₹ 35+ Lakh</span>
+    </div>
+</div>
+
+              <div class="minmax">
+                <input placeholder="₹ Min" /><input placeholder="₹ Max" />
+              </div>
+            </div>
+
+            <!-- Popular brands with logos (new) -->
+            <div class="f-group">
+              <b>Popular Brands <a href="#">See All</a></b>
+              <div class="brand-grid">
+                <div class="brand-tile">
+                  <img
+                    src="https://placehold.co/100x60/f5f5f5/333?text=MARUTI"
+                    alt=""
+                    onerror="
+                      this.outerHTML = '<div class=&quot;brand-fb&quot;>M</div>'
+                    "
+                  /><small>Maruti Suzuki</small>
+                </div>
+                <div class="brand-tile">
+                  <img
+                    src="https://placehold.co/100x60/f5f5f5/333?text=HYUNDAI"
+                    alt=""
+                    onerror="
+                      this.outerHTML = '<div class=&quot;brand-fb&quot;>H</div>'
+                    "
+                  /><small>Hyundai</small>
+                </div>
+                <div class="brand-tile">
+                  <img
+                    src="https://placehold.co/100x60/f5f5f5/333?text=MAHINDRA"
+                    alt=""
+                    onerror="
+                      this.outerHTML = '<div class=&quot;brand-fb&quot;>M</div>'
+                    "
+                  /><small>Mahindra</small>
+                </div>
+                <div class="brand-tile">
+                  <img
+                    src="https://placehold.co/100x60/f5f5f5/333?text=TOYOTA"
+                    alt=""
+                    onerror="
+                      this.outerHTML = '<div class=&quot;brand-fb&quot;>T</div>'
+                    "
+                  /><small>Toyota</small>
+                </div>
+                <div class="brand-tile">
+                  <img
+                    src="https://placehold.co/100x60/f5f5f5/333?text=TATA"
+                    alt=""
+                    onerror="
+                      this.outerHTML = '<div class=&quot;brand-fb&quot;>T</div>'
+                    "
+                  /><small>Tata</small>
+                </div>
+                <div class="brand-tile">
+                  <img
+                    src="https://placehold.co/100x60/f5f5f5/333?text=HONDA"
+                    alt=""
+                    onerror="
+                      this.outerHTML = '<div class=&quot;brand-fb&quot;>H</div>'
+                    "
+                  /><small>Honda</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Variant (new) -->
+            <div class="f-group">
+              <b>Variant</b>
+              <label class="check"
+                ><input type="checkbox" /> VXI <em>(120)</em></label
+              >
+              <label class="check"
+                ><input type="checkbox" /> ZXI <em>(58)</em></label
+              >
+              <label class="check"
+                ><input type="checkbox" /> LXI <em>(76)</em></label
+              >
+              <label class="check"
+                ><input type="checkbox" /> ZXI+ <em>(68)</em></label
+              >
+              <label class="check"
+                ><input type="checkbox" /> ZXI AMT <em>(54)</em></label
+              >
+              <button class="showmore">Show More ▾</button>
+            </div>
+
+            <!-- Model Year checkboxes (updated) -->
+            <div class="f-group">
+              <b>Model Year</b>
+              <label class="check"
+                ><input type="checkbox" /> 2024 <em>(320)</em></label
+              >
+              <label class="check"
+                ><input type="checkbox" /> 2023 <em>(58)</em></label
+              >
+              <label class="check"
+                ><input type="checkbox" /> 2022 <em>(76)</em></label
+              >
+              <label class="check"
+                ><input type="checkbox" /> 2021 <em>(64)</em></label
+              >
+              <label class="check"
+                ><input type="checkbox" /> 2020 <em>(54)</em></label
+              >
+              <button class="showmore">Show More ▾</button>
+            </div>
+
+            <div class="f-group">
+              <b>Fuel Type</b>
+              <label class="check"
+                ><input type="checkbox" /> Petrol <em>(210)</em></label
+              >
+              <label class="check"
+                ><input type="checkbox" /> Diesel <em>(142)</em></label
+              >
+              <label class="check"
+                ><input type="checkbox" /> CNG <em>(34)</em></label
+              >
+              <label class="check"
+                ><input type="checkbox" /> Electric <em>(18)</em></label
+              >
+            </div>
+
+            <div class="f-group">
+              <b>Transmission</b>
+              <label class="check"
+                ><input type="checkbox" /> Manual <em>(260)</em></label
+              >
+              <label class="check"
+                ><input type="checkbox" /> Automatic <em>(144)</em></label
+              >
+            </div>
+
+            <!-- Owners (updated - replaces Condition) -->
+            <div class="f-group">
+              <b>Owners</b>
+              <label class="check"
+                ><input type="checkbox" /> 1st Owner <em>(28)</em></label
+              >
+              <label class="check"
+                ><input type="checkbox" /> 2nd Owner <em>(23)</em></label
+              >
+              <label class="check"
+                ><input type="checkbox" /> 3rd Owner <em>(40)</em></label
+              >
+            </div>
+
+            <button class="apply">Apply Filters</button>
+          </div>
+        </aside>
+
+        <!-- RESULTS -->
+        <div>
+          <div class="res-head">
+            <h2><span>432</span> Cars Found</h2>
+            <div class="res-tools">
+              <select class="sortsel">
+                <option>Sort by: Latest First</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+                <option>Most Viewed</option>
+              </select>
+              <div class="view-toggle">
+                <button class="on">▦</button><button>☰</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid">
+            <!-- CARD 1 -->
+            <a class="ad-card" href="#"
+              ><div class="ph">
+                <img
+                  src="images/car-1.jpg"
+                  alt=""
+                  onerror="
+                    this.onerror = null;
+                    this.src =
+                      'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22480%22 height=%22300%22><rect width=%22480%22 height=%22300%22 fill=%22%2322253F%22/><text x=%22240%22 y=%22160%22 fill=%22%23F76631%22 font-size=%2218%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>CAR PHOTO</text></svg>';
+                  "
+                />
+                <span class="badge sell">SELL</span
+                ><button class="heart">♡</button>
+              </div>
+              <div class="body">
+                <h3>Maruti Suzuki Swift VXI (2019)</h3>
+                <div class="price">
+                  ₹ 4,80,000 <span class="neg-tag">NEGOTIABLE</span>
+                </div>
+                <div class="specs">
+                  <span>📅 2019</span><span>🛣 32,000 km</span
+                  ><span>⛽ Petrol</span><span>⚙️ Manual</span>
+                </div>
+                <div class="loc">
+                  <span>📍 Jaipur, Rajasthan</span><span>12 May 2025</span>
+                </div>
+              </div></a
+            >
+            <!-- CARD 2 -->
+            <a class="ad-card" href="#"
+              ><div class="ph">
+                <img
+                  src="images/car-2.jpg"
+                  alt=""
+                  onerror="
+                    this.onerror = null;
+                    this.src =
+                      'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22480%22 height=%22300%22><rect width=%22480%22 height=%22300%22 fill=%22%2322253F%22/><text x=%22240%22 y=%22160%22 fill=%22%23F76631%22 font-size=%2218%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>CAR PHOTO</text></svg>';
+                  "
+                />
+                <span class="badge exchange">EXCHANGE</span
+                ><button class="heart">♡</button>
+              </div>
+              <div class="body">
+                <h3>Hyundai Creta SX(O) (2022)</h3>
+                <div class="price">
+                  ₹ 12,50,000 <span class="fix-tag">FIXED PRICE</span>
+                </div>
+                <div class="specs">
+                  <span>📅 2022</span><span>🛣 18,000 km</span
+                  ><span>⛽ Diesel</span><span>⚙️ Automatic</span>
+                </div>
+                <div class="loc">
+                  <span>📍 Jaipur, Rajasthan</span><span>11 May 2025</span>
+                </div>
+              </div></a
+            >
+            <!-- CARD 3 -->
+            <a class="ad-card" href="#"
+              ><div class="ph">
+                <img
+                  src="images/car-3.jpg"
+                  alt=""
+                  onerror="
+                    this.onerror = null;
+                    this.src =
+                      'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22480%22 height=%22300%22><rect width=%22480%22 height=%22300%22 fill=%22%2322253F%22/><text x=%22240%22 y=%22160%22 fill=%22%23F76631%22 font-size=%2218%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>CAR PHOTO</text></svg>';
+                  "
+                />
+                <span class="badge sell">SELL</span
+                ><button class="heart">♡</button>
+              </div>
+              <div class="body">
+                <h3>Tata Nexon XZ+ (2022)</h3>
+                <div class="price">
+                  ₹ 8,75,000 <span class="neg-tag">NEGOTIABLE</span>
+                </div>
+                <div class="specs">
+                  <span>📅 2022</span><span>🛣 24,000 km</span
+                  ><span>⛽ Petrol</span><span>⚙️ Manual</span>
+                </div>
+                <div class="loc">
+                  <span>📍 Jaipur, Rajasthan</span><span>10 May 2025</span>
+                </div>
+              </div></a
+            >
+            <!-- CARD 4 -->
+            <a class="ad-card" href="#"
+              ><div class="ph">
+                <img
+                  src="images/car-4.jpg"
+                  alt=""
+                  onerror="
+                    this.onerror = null;
+                    this.src =
+                      'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22480%22 height=%22300%22><rect width=%22480%22 height=%22300%22 fill=%22%2322253F%22/><text x=%22240%22 y=%22160%22 fill=%22%23F76631%22 font-size=%2218%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>CAR PHOTO</text></svg>';
+                  "
+                />
+                <span class="badge rent">RENT</span
+                ><button class="heart">♡</button>
+              </div>
+              <div class="body">
+                <h3>Toyota Fortuner 4x4 (2020)</h3>
+                <div class="price">
+                  ₹ 28,00,000 <span class="neg-tag">NEGOTIABLE</span>
+                </div>
+                <div class="specs">
+                  <span>📅 2020</span><span>🛣 45,000 km</span
+                  ><span>⛽ Diesel</span><span>⚙️ Automatic</span>
+                </div>
+                <div class="loc">
+                  <span>📍 Jaipur, Rajasthan</span><span>09 May 2025</span>
+                </div>
+              </div></a
+            >
+            <!-- CARD 5 -->
+            <a class="ad-card" href="#"
+              ><div class="ph">
+                <img
+                  src="images/car-5.jpg"
+                  alt=""
+                  onerror="
+                    this.onerror = null;
+                    this.src =
+                      'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22480%22 height=%22300%22><rect width=%22480%22 height=%22300%22 fill=%22%2322253F%22/><text x=%22240%22 y=%22160%22 fill=%22%23F76631%22 font-size=%2218%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>CAR PHOTO</text></svg>';
+                  "
+                />
+                <span class="badge sell">SELL</span
+                ><button class="heart">♡</button>
+              </div>
+              <div class="body">
+                <h3>Hyundai i20 Asta (2022)</h3>
+                <div class="price">
+                  ₹ 6,45,000 <span class="neg-tag">NEGOTIABLE</span>
+                </div>
+                <div class="specs">
+                  <span>📅 2022</span><span>🛣 28,000 km</span
+                  ><span>⛽ Petrol</span><span>⚙️ Manual</span>
+                </div>
+                <div class="loc">
+                  <span>📍 Jaipur, Rajasthan</span><span>08 May 2025</span>
+                </div>
+              </div></a
+            >
+            <!-- CARD 6 -->
+            <a class="ad-card" href="#"
+              ><div class="ph">
+                <img
+                  src="images/car-6.jpg"
+                  alt=""
+                  onerror="
+                    this.onerror = null;
+                    this.src =
+                      'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22480%22 height=%22300%22><rect width=%22480%22 height=%22300%22 fill=%22%2322253F%22/><text x=%22240%22 y=%22160%22 fill=%22%23F76631%22 font-size=%2218%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>CAR PHOTO</text></svg>';
+                  "
+                />
+                <span class="badge exchange">EXCHANGE</span
+                ><button class="heart">♡</button>
+              </div>
+              <div class="body">
+                <h3>Maruti Suzuki Baleno Zeta (2021)</h3>
+                <div class="price">
+                  ₹ 7,20,000 <span class="neg-tag">NEGOTIABLE</span>
+                </div>
+                <div class="specs">
+                  <span>📅 2021</span><span>🛣 36,000 km</span
+                  ><span>⛽ Petrol</span><span>⚙️ Automatic</span>
+                </div>
+                <div class="loc">
+                  <span>📍 Jaipur, Rajasthan</span><span>07 May 2025</span>
+                </div>
+              </div></a
+            >
+            <!-- CARD 7 -->
+            <a class="ad-card" href="#"
+              ><div class="ph">
+                <img
+                  src="images/car-7.jpg"
+                  alt=""
+                  onerror="
+                    this.onerror = null;
+                    this.src =
+                      'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22480%22 height=%22300%22><rect width=%22480%22 height=%22300%22 fill=%22%2322253F%22/><text x=%22240%22 y=%22160%22 fill=%22%23F76631%22 font-size=%2218%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>CAR PHOTO</text></svg>';
+                  "
+                />
+                <span class="badge sell">SELL</span
+                ><button class="heart">♡</button>
+              </div>
+              <div class="body">
+                <h3>Mahindra XUV700 AX7 (2022)</h3>
+                <div class="price">
+                  ₹ 22,50,000 <span class="fix-tag">FIXED PRICE</span>
+                </div>
+                <div class="specs">
+                  <span>📅 2022</span><span>🛣 30,000 km</span
+                  ><span>⛽ Diesel</span><span>⚙️ Automatic</span>
+                </div>
+                <div class="loc">
+                  <span>📍 Jaipur, Rajasthan</span><span>06 May 2025</span>
+                </div>
+              </div></a
+            >
+            <!-- CARD 8 -->
+            <a class="ad-card" href="#"
+              ><div class="ph">
+                <img
+                  src="images/car-8.jpg"
+                  alt=""
+                  onerror="
+                    this.onerror = null;
+                    this.src =
+                      'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22480%22 height=%22300%22><rect width=%22480%22 height=%22300%22 fill=%22%2322253F%22/><text x=%22240%22 y=%22160%22 fill=%22%23F76631%22 font-size=%2218%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>CAR PHOTO</text></svg>';
+                  "
+                />
+                <span class="badge sell">SELL</span
+                ><button class="heart">♡</button>
+              </div>
+              <div class="body">
+                <h3>Honda City VX (2021)</h3>
+                <div class="price">
+                  ₹ 10,25,000 <span class="neg-tag">NEGOTIABLE</span>
+                </div>
+                <div class="specs">
+                  <span>📅 2021</span><span>🛣 40,000 km</span
+                  ><span>⛽ Petrol</span><span>⚙️ Automatic</span>
+                </div>
+                <div class="loc">
+                  <span>📍 Jaipur, Rajasthan</span><span>05 May 2025</span>
+                </div>
+              </div></a
+            >
+            <!-- CARD 9 -->
+            <a class="ad-card" href="#"
+              ><div class="ph">
+                <img
+                  src="images/car-9.jpg"
+                  alt=""
+                  onerror="
+                    this.onerror = null;
+                    this.src =
+                      'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22480%22 height=%22300%22><rect width=%22480%22 height=%22300%22 fill=%22%2322253F%22/><text x=%22240%22 y=%22160%22 fill=%22%23F76631%22 font-size=%2218%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>CAR PHOTO</text></svg>';
+                  "
+                />
+                <span class="badge exchange">EXCHANGE</span
+                ><button class="heart">♡</button>
+              </div>
+              <div class="body">
+                <h3>Kia Seltos HTX (2022)</h3>
+                <div class="price">
+                  ₹ 14,80,000 <span class="neg-tag">NEGOTIABLE</span>
+                </div>
+                <div class="specs">
+                  <span>📅 2022</span><span>🛣 22,000 km</span
+                  ><span>⛽ Petrol</span><span>⚙️ Automatic</span>
+                </div>
+                <div class="loc">
+                  <span>📍 Jaipur, Rajasthan</span><span>04 May 2025</span>
+                </div>
+              </div></a
+            >
+          </div>
+
+          <div class="pagination">
+            <button>‹</button><button class="on">1</button><button>2</button
+            ><button>3</button><button>4</button><button>5</button
+            ><button>›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ HOW EXCHANGE WORKS (same as before) ══════════ -->
+    <div class="section how">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <div class="eyebrow">EXCHANGE</div>
+            <h2>How Exchange Works</h2>
+            <p>
+              Swap, top-up or sell outright — the choice is yours at every step.
+              No middlemen, no hidden charges.
+            </p>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <span class="step-num">STEP 1</span>
+            <div class="step-ic">🚗</div>
+            <h3>Offer what you own</h3>
+            <p>
+              List your car, bike, gadget or even property. Free listing, 2
+              minute mein ad live — photos aur basic details ke saath.
+            </p>
+          </div>
+          <div class="step">
+            <span class="step-num">STEP 2</span>
+            <div class="step-ic">🤝</div>
+            <h3>Match with a listing</h3>
+            <p>
+              Apni city ya poore India mein exchange-ready listings dekhein.
+              Value difference ke saath direct owner se chat karein.
+            </p>
+          </div>
+          <div class="step">
+            <span class="step-num">STEP 3</span>
+            <div class="step-ic">✅</div>
+            <h3>Agree & complete</h3>
+            <p>
+              Price aur top-up pe baat pakki karein, documents verify karein,
+              mil kar deal complete karein. As simple as that.
+            </p>
+          </div>
+        </div>
+        <div class="swap-demo">
+          <div class="demo-label">
+            💡 <b>Example swap:</b> Aise kaam karta hai Solve Monkey exchange
+          </div>
+          <div class="swap-item">
+            <img
+              src="images/swap-old.jpg"
+              alt=""
+              onerror="
+                this.src =
+                  'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22132%22 height=%2296%22><rect width=%22132%22 height=%2296%22 fill=%22%2322253F%22/><text x=%2266%22 y=%2255%22 fill=%22%23F76631%22 font-size=%2211%22 font-family=%22Arial%22 text-anchor=%22middle%22>YOUR CAR</text></svg>'
+              "
+            />
+            <div>
+              <b>Your car: Swift VDI (2020)</b
+              ><small>Market value ≈ ₹3,20,000</small>
+            </div>
+          </div>
+          <div class="swap-arrow">TOP-UP ₹2,30,000<span>➜</span></div>
+          <div class="swap-item">
+            <img
+              src="images/swap-new.jpg"
+              alt=""
+              onerror="
+                this.src =
+                  'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22132%22 height=%2296%22><rect width=%22132%22 height=%2296%22 fill=%22%2322253F%22/><text x=%2266%22 y=%2255%22 fill=%22%23F76631%22 font-size=%2211%22 font-family=%22Arial%22 text-anchor=%22middle%22>NEW CAR</text></svg>'
+              "
+            />
+            <div>
+              <b>Upgrade to: Creta SX (2022)</b
+              ><small>Listed at ₹5,50,000</small>
+            </div>
+          </div>
+          <button class="list-cta">List Your Car →</button>
+        </div>
+        <div class="trust-row">
+          <span><i>🆓</i> 100% Free Listing</span>
+          <span><i>💬</i> Direct Owner Chat</span>
+          <span><i>🛡</i> Verified Users Only</span>
+          <span><i>📄</i> Zero Commission</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ FEATURED & EXCHANGE READY (same) ══════════ -->
+    <!-- <div class="section" style="background: #fff">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <div class="eyebrow">
+              SPOTLIGHT<span class="pill-tag pill-green"
+                >🏅 Top Inspected Swaps</span
+              >
+            </div>
+            <h2>Featured & Exchange Ready</h2>
+            <p>
+              360° inspected cars jo turant swap ya upgrade ke liye ready hain —
+              purani gadi do, nayi gadi lo.
+            </p>
+          </div>
+          <div class="spot-nav">
+            <span class="spot-count" id="spotCount">1 / 3</span>
+            <button onclick="spotMove(-1)">‹</button>
+            <button onclick="spotMove(1)">›</button>
+          </div>
+        </div>
+        <div class="spotlight-card" id="spotCard">
+          <div class="spot-slide on">
+            <img
+              class="bgimg"
+              src="images/spot-1.jpg"
+              alt=""
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                inset: 0;
+              "
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%221280%22 height=%22520%22><rect width=%221280%22 height=%22520%22 fill=%22%23040A1B%22/><text x=%22640%22 y=%22270%22 fill=%22%23F76631%22 font-size=%2226%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>FEATURED CAR PHOTO</text></svg>';
+              "
+            />
+            <div class="spot-inner">
+              <div class="spot-badges">
+                <span class="spot-badge">FEATURED • EXCHANGE READY</span
+                ><span class="spot-badge dark">🎥 360° Inspected Cockpit</span>
+              </div>
+              <h3>Maruti Suzuki Swift Dzire (2020)</h3>
+              <div class="spot-specs">
+                VDI OPTIONAL • 48,000 KM • PETROL • JAIPUR
+              </div>
+              <div class="spot-foot">
+                <div class="spot-price">
+                  <small>OFFER PRICE</small><b>₹ 5,70,000</b
+                  ><span class="neg">Negotiable</span>
+                </div>
+                <div class="spot-ctas">
+                  <button class="btn-chat-o">💬 Chat with Owner</button
+                  ><button class="btn-view">View Car Details →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="spot-slide">
+            <img
+              class="bgimg"
+              src="images/spot-2.jpg"
+              alt=""
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                inset: 0;
+              "
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%221280%22 height=%22520%22><rect width=%221280%22 height=%22520%22 fill=%22%23040A1B%22/><text x=%22640%22 y=%22270%22 fill=%22%23F76631%22 font-size=%2226%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>FEATURED CAR PHOTO</text></svg>';
+              "
+            />
+            <div class="spot-inner">
+              <div class="spot-badges">
+                <span class="spot-badge">FEATURED • EXCHANGE READY</span
+                ><span class="spot-badge dark">🎥 360° Inspected Cockpit</span>
+              </div>
+              <h3>Hyundai Creta SX(O) (2022)</h3>
+              <div class="spot-specs">
+                DIESEL • 18,000 KM • AUTOMATIC • JAIPUR
+              </div>
+              <div class="spot-foot">
+                <div class="spot-price">
+                  <small>OFFER PRICE</small><b>₹ 12,50,000</b
+                  ><span class="neg">Negotiable</span>
+                </div>
+                <div class="spot-ctas">
+                  <button class="btn-chat-o">💬 Chat with Owner</button
+                  ><button class="btn-view">View Car Details →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="spot-slide">
+            <img
+              class="bgimg"
+              src="images/spot-3.jpg"
+              alt=""
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                inset: 0;
+              "
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%221280%22 height=%22520%22><rect width=%221280%22 height=%22520%22 fill=%22%23040A1B%22/><text x=%22640%22 y=%22270%22 fill=%22%23F76631%22 font-size=%2226%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>FEATURED CAR PHOTO</text></svg>';
+              "
+            />
+            <div class="spot-inner">
+              <div class="spot-badges">
+                <span class="spot-badge">FEATURED • EXCHANGE READY</span
+                ><span class="spot-badge dark">🎥 360° Inspected Cockpit</span>
+              </div>
+              <h3>Kia Seltos HTX (2022)</h3>
+              <div class="spot-specs">
+                PETROL • 22,000 KM • AUTOMATIC • JAIPUR
+              </div>
+              <div class="spot-foot">
+                <div class="spot-price">
+                  <small>OFFER PRICE</small><b>₹ 14,80,000</b
+                  ><span class="neg">Negotiable</span>
+                </div>
+                <div class="spot-ctas">
+                  <button class="btn-chat-o">💬 Chat with Owner</button
+                  ><button class="btn-view">View Car Details →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spot-dots" id="spotDots">
+          <i class="on" onclick="spotGo(0)"></i><i onclick="spotGo(1)"></i
+          ><i onclick="spotGo(2)"></i>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- ══════════ SOLVEMONKEY ASSURED (NEW SECTION) ══════════ -->
+    <div class="section assured">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <div class="eyebrow" style="color: var(--main-color-three)">
+              TRUST & ASSURANCE
+            </div>
+            <h2>
+              SolveMonkey Assured
+              <a class="whats-this" href="#">What's this?</a>
+            </h2>
+          </div>
+          <p style="color: var(--paragraph-color-three)">
+            Har assured listing pe aapko milta hai — quality, fairness aur
+            complete peace of mind.
+          </p>
+        </div>
+        <div class="assured-grid">
+          <div class="a-card">
+            <div class="a-ic">⭐</div>
+            <h3>32 Points Quality Checks</h3>
+            <p>
+              Engine, chassis, transmission & full RTO background scan — har
+              assured car ka complete health report.
+            </p>
+            <a href="#">Learn more →</a>
+          </div>
+          <div class="a-card">
+            <div class="a-ic">🔄</div>
+            <h3>Instant Fair Exchange</h3>
+            <p>
+              Algorithm-backed direct vehicle swap valuation — aapki purani gadi
+              ka sahi price, turant.
+            </p>
+            <a href="#">Learn more →</a>
+          </div>
+          <div class="a-card">
+            <div class="a-ic">🛡</div>
+            <h3>Zero Broker Commission</h3>
+            <p>
+              100% direct buyer-to-seller deal. No middlemen, no hidden fees —
+              save thousands on every deal.
+            </p>
+            <a href="#">Learn more →</a>
+          </div>
+          <div class="a-card">
+            <div class="a-ic">📍</div>
+            <h3>Doorstep RC Transfer</h3>
+            <p>
+              Hassle-free paperwork assistance at your home — RC transfer,
+              insurance & documentation done for you.
+            </p>
+            <a href="#">Learn more →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ TOP VALUED DEALS (same) ══════════ -->
+    <div class="section">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <div class="eyebrow">
+              BEST VALUE<span class="pill-tag pill-green"
+                >💰 Priced Below Market Rate</span
+              >
+            </div>
+            <h2>Top Valued Deals</h2>
+            <p>
+              Budget-conscious buyers ke liye — market se sasti, verified deals.
+              Jaldi karein, aise price drops bahut din nahi tikte.
+            </p>
+          </div>
+          <a class="explore-link" href="#">Explore All Deals →</a>
+        </div>
+        <div class="value-grid">
+          <a class="deal-card" href="#"
+            ><div class="ph">
+              <img
+                src="images/deal-1.jpg"
+                alt=""
+                onerror="
+                  this.onerror = null;
+                  this.src =
+                    'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22480%22 height=%22300%22><rect width=%22480%22 height=%22300%22 fill=%22%2322253F%22/><text x=%22240%22 y=%22160%22 fill=%22%23F76631%22 font-size=%2218%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>DEAL CAR PHOTO</text></svg>';
+                "
+              />
+              <span class="below-tag">₹45,000 BELOW MARKET</span>
+            </div>
+            <div class="body">
+              <h3>Honda City VX (2019)</h3>
+              <div class="specs">38,000 km • Petrol • Manual</div>
+              <div class="price">₹ 6,45,000 <s>₹ 6,90,000</s></div>
+              <div class="deal-foot">
+                <span class="pl">📍 Jaipur</span
+                ><span class="deal-tag gold">⚡ Great Price</span>
+              </div>
+            </div></a
+          >
+          <a class="deal-card" href="#"
+            ><div class="ph">
+              <img
+                src="images/deal-2.jpg"
+                alt=""
+                onerror="
+                  this.onerror = null;
+                  this.src =
+                    'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22480%22 height=%22300%22><rect width=%22480%22 height=%22300%22 fill=%22%2322253F%22/><text x=%22240%22 y=%22160%22 fill=%22%23F76631%22 font-size=%2218%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>DEAL CAR PHOTO</text></svg>';
+                "
+              />
+              <span class="below-tag">₹30,000 BELOW MARKET</span>
+            </div>
+            <div class="body">
+              <h3>Hyundai i20 Sportz (2021)</h3>
+              <div class="specs">28,000 km • Petrol • Manual</div>
+              <div class="price">₹ 5,80,000 <s>₹ 6,10,000</s></div>
+              <div class="deal-foot">
+                <span class="pl">📍 Jodhpur</span
+                ><span class="deal-tag red">🔥 High Demand</span>
+              </div>
+            </div></a
+          >
+          <a class="deal-card" href="#"
+            ><div class="ph">
+              <img
+                src="images/deal-3.jpg"
+                alt=""
+                onerror="
+                  this.onerror = null;
+                  this.src =
+                    'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22480%22 height=%22300%22><rect width=%22480%22 height=%22300%22 fill=%22%2322253F%22/><text x=%22240%22 y=%22160%22 fill=%22%23F76631%22 font-size=%2218%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>DEAL CAR PHOTO</text></svg>';
+                "
+              />
+              <span class="below-tag">₹25,000 BELOW MARKET</span>
+            </div>
+            <div class="body">
+              <h3>Maruti Baleno Zeta (2020)</h3>
+              <div class="specs">31,000 km • Petrol • Auto</div>
+              <div class="price">₹ 6,10,000 <s>₹ 6,35,000</s></div>
+              <div class="deal-foot">
+                <span class="pl">📍 Kota</span
+                ><span class="deal-tag green">✔ 1st Owner</span>
+              </div>
+            </div></a
+          >
+          <a class="deal-card" href="#"
+            ><div class="ph">
+              <img
+                src="images/deal-4.jpg"
+                alt=""
+                onerror="
+                  this.onerror = null;
+                  this.src =
+                    'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22480%22 height=%22300%22><rect width=%22480%22 height=%22300%22 fill=%22%2322253F%22/><text x=%22240%22 y=%22160%22 fill=%22%23F76631%22 font-size=%2218%22 font-family=%22Arial%22 text-anchor=%22middle%22 font-weight=%22bold%22>DEAL CAR PHOTO</text></svg>';
+                "
+              />
+              <span class="below-tag">₹35,000 BELOW MARKET</span>
+            </div>
+            <div class="body">
+              <h3>Tata Tiago XZ+ (2022)</h3>
+              <div class="specs">16,000 km • CNG/Petrol • Man</div>
+              <div class="price">₹ 4,95,000 <s>₹ 5,30,000</s></div>
+              <div class="deal-foot">
+                <span class="pl">📍 Jaipur</span
+                ><span class="deal-tag blue">⚡ CNG Verified</span>
+              </div>
+            </div></a
+          >
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- ══════════ TESTIMONIALS (same) ══════════ -->
+    <!-- <div class="section testi">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <div class="eyebrow">TESTIMONIALS</div>
+            <h2>What Our Swappers Say</h2>
+            <p>
+              Thousands of users across India apni purani car se nayi car tak
+              pahunch chuke hain — bina middlemen ke.
+            </p>
+          </div>
+          <div class="rating-summary">
+            <span class="big">4.8</span>
+            <div>
+              <div class="stars">★★★★★</div>
+              <small>2,400+ verified reviews</small>
+            </div>
+          </div>
+        </div>
+        <div class="testi-grid">
+          <div class="t-card">
+            <div class="t-head">
+              <div class="t-av">A</div>
+              <div><b>Amit Verma</b><small>Jaipur, Rajasthan</small></div>
+              <span class="t-verified">✔ VERIFIED SWAP</span>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>
+              "Maine apni 2018 WagonR top-up ke saath exchange ki aur sirf ₹1.8L
+              extra de kar 2021 Baleno le li. Poore process mein 4 din lage — RC
+              transfer tak sab Solve Monkey pe hi hua. Highly recommended!"
+            </p>
+            <div class="t-swap">Swapped: <b>WagonR → Baleno</b> · Feb 2025</div>
+          </div>
+          <div class="t-card">
+            <div class="t-head">
+              <div class="t-av">P</div>
+              <div><b>Priya Sharma</b><small>Delhi NCR</small></div>
+              <span class="t-verified">✔ VERIFIED BUYER</span>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>
+              "Deal card pe '₹45,000 below market' likha tha — sach mein tha!
+              Car 360° inspected thi, report bhi mil gayi. Pehli baar kisi
+              platform pe itna transparent experience mila."
+            </p>
+            <div class="t-swap">
+              Bought: <b>Honda City VX (2019)</b> · Mar 2025
+            </div>
+          </div>
+          <div class="t-card">
+            <div class="t-head">
+              <div class="t-av">R</div>
+              <div><b>Rohit Meena</b><small>Kota, Rajasthan</small></div>
+              <span class="t-verified">✔ VERIFIED SELLER</span>
+            </div>
+            <div class="stars">★★★★☆</div>
+            <p>
+              "Listing bilkul free thi aur 2 din mein hi 6 genuine buyers se
+              baat hui. Koi agent nahi, koi commission nahi — seedha buyer se
+              deal. Ab family ki second car bhi yahin se bechunga."
+            </p>
+            <div class="t-swap">Sold: <b>Tata Tiago XZ+</b> · Apr 2025</div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- ══════════ FAQ (same) ══════════ -->
+    <!-- <div class="section" style="background: #fff">
+      <div class="container">
+        <div
+          class="sec-head"
+          style="justify-content: center; text-align: center"
+        >
+          <div style="width: 100%">
+            <div class="eyebrow">FAQ</div>
+            <h2>Frequently Asked Questions</h2>
+            <p style="margin: 8px auto 0">
+              Cars buy, sell ya exchange karne se pehle jo sabse zyada pucha
+              jata hai.
+            </p>
+          </div>
+        </div>
+        <div class="faq-wrap">
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>How does car exchange work on Solve Monkey?</span
+              ><i class="faq-ic">+</i>
+            </button>
+            <div class="faq-a">
+              <p>
+                List your car with the "Exchange" type or make an offer on any
+                Exchange-Ready listing. Both parties agree on values and the
+                top-up amount, then complete the deal directly with the owner —
+                usually within a few days.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>Are the listings verified?</span><i class="faq-ic">+</i>
+            </button>
+            <div class="faq-a">
+              <p>
+                Listings with the "SolveMonkey Assured" badge have passed a
+                32-point quality check and full RTO background scan. The
+                inspection report is available for download on the ad detail
+                page.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>Can I negotiate the price?</span><i class="faq-ic">+</i>
+            </button>
+            <div class="faq-a">
+              <p>
+                Yes — listings marked "Negotiable" are open to offers. Use the
+                built-in chat to discuss price and exchange value directly with
+                the owner. "Fixed Price" listings are already priced at their
+                best value.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>Is RC transfer assistance available?</span
+              ><i class="faq-ic">+</i>
+            </button>
+            <div class="faq-a">
+              <p>
+                Yes. Assured listings include doorstep RC transfer assistance —
+                our team helps with paperwork at your home. RC transfer
+                typically completes in 7–15 working days at the RTO.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>Is listing free? Any commission?</span
+              ><i class="faq-ic">+</i>
+            </button>
+            <div class="faq-a">
+              <p>
+                Basic listing is 100% free and we take zero commission on deals
+                between users. Optional paid boosts (Featured, Spotlight) are
+                available if you want more visibility for your ad.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>How do I stay safe from fraud?</span><i class="faq-ic">+</i>
+            </button>
+            <div class="faq-a">
+              <p>
+                Deal only with verified users, verify RC and insurance before
+                meeting, take a test drive, and pay only after checking all
+                documents in person. Use the "Report Ad" button if anything
+                looks suspicious — we review within 24 hours.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-cta">
+          Still have questions? <a href="#">Talk to Help & Support →</a>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container">
+        <div class="foot-grid">
+          <div>
+            <a class="logo" href="#" style="color: #fff"
+              ><span class="logo-mark">🐵</span
+              ><span
+                >SOLVE<em
+                  style="color: var(--main-color-one); font-style: normal"
+                  >MONKEY</em
+                ></span
+              ></a
+            >
+            <p>
+              One-Stop Destination to Exchange, Sell, and Buy — cars, mobiles,
+              bikes, plots, services & more, with genuine users near you.
+            </p>
+          </div>
+          <div>
+            <h4>Categories</h4>
+            <a href="#">Cars</a><a href="#">Bikes</a><a href="#">Mobiles</a
+            ><a href="#">Computers & Laptops</a><a href="#">Plots & Property</a>
+          </div>
+          <div>
+            <h4>Company</h4>
+            <a href="#">About Us</a><a href="#">Contact</a
+            ><a href="#">Company Offer</a><a href="#">Careers</a>
+          </div>
+          <div>
+            <h4>Help & Support</h4>
+            <a href="#">FAQs</a><a href="#">Safety Tips</a
+            ><a href="#">Terms & Privacy</a
+            ><a href="#">747-C Ghatgate, Jaipur 302003</a
+            ><a href="#">+91 77422 24765</a>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2025 Solve Monkey. All rights reserved.</span
+          ><span>Made with ❤ in Jaipur, India</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      /* ── Festive banner carousel (Cashify-style) ── */
+      let bIdx = 0;
+      const bSlides = document.querySelectorAll(".banner-slide");
+      const bDots = document.querySelectorAll("#bannerDots i");
+      function bRender() {
+        bSlides.forEach((s, i) => s.classList.toggle("on", i === bIdx));
+        bDots.forEach((d, i) => d.classList.toggle("on", i === bIdx));
+      }
+      function bannerMove(d) {
+        bIdx = (bIdx + d + bSlides.length) % bSlides.length;
+        bRender();
+      }
+      function bannerGo(i) {
+        bIdx = i;
+        bRender();
+      }
+      setInterval(() => bannerMove(1), 5000);
+
+      /* ── Wishlist hearts ── */
+      document.querySelectorAll(".heart").forEach((h) =>
+        h.addEventListener("click", (e) => {
+          e.preventDefault();
+          h.classList.toggle("on");
+          h.textContent = h.classList.contains("on") ? "♥" : "♡";
+        }),
+      );
+
+      /* ── Listing type pills ── */
+      document.querySelectorAll(".pills").forEach((p) => {
+        p.querySelectorAll("button").forEach((b) =>
+          b.addEventListener("click", () => {
+            p.querySelectorAll("button").forEach((x) =>
+              x.classList.remove("on"),
+            );
+            b.classList.add("on");
+          }),
+        );
+      });
+
+      /* ── Popular brand tiles select ── */
+      document
+        .querySelectorAll(".brand-tile")
+        .forEach((t) =>
+          t.addEventListener("click", () => t.classList.toggle("on")),
+        );
+
+      /* ── Spotlight carousel ── */
+      let spotIdx = 0;
+      const slides = document.querySelectorAll(".spot-slide");
+      const dots = document.querySelectorAll("#spotDots i");
+      function spotRender() {
+        slides.forEach((s, i) => s.classList.toggle("on", i === spotIdx));
+        dots.forEach((d, i) => d.classList.toggle("on", i === spotIdx));
+        document.getElementById("spotCount").textContent =
+          spotIdx + 1 + " / " + slides.length;
+      }
+      function spotMove(d) {
+        spotIdx = (spotIdx + d + slides.length) % slides.length;
+        spotRender();
+      }
+      function spotGo(i) {
+        spotIdx = i;
+        spotRender();
+      }
+      setInterval(() => spotMove(1), 6000);
+
+      /* ── FAQ accordion ── */
+      document.querySelectorAll(".faq-q").forEach((q) => {
+        q.addEventListener("click", () => {
+          const item = q.parentElement,
+            a = item.querySelector(".faq-a");
+          const wasOpen = item.classList.contains("open");
+          document.querySelectorAll(".faq-item").forEach((x) => {
+            x.classList.remove("open");
+            x.querySelector(".faq-a").style.maxHeight = null;
+          });
+          if (!wasOpen) {
+            item.classList.add("open");
+            a.style.maxHeight = a.scrollHeight + "px";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
